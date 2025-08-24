@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hazem Hassan — Senior ML Engineer</title>
+  <meta name="description" content="Portfolio of Hazem Hassan, Senior Machine Learning Engineer (Computer Vision • NLP • MLOps)." />
+  <meta property="og:title" content="Hazem Hassan — Senior ML Engineer" />
+  <meta property="og:description" content="Senior ML Engineer with 9+ years building real-world AI systems across Computer Vision, NLP, Speech & MLOps." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;          /* slate-950 */
+      --panel: #0f172a;       /* slate-900 */
+      --muted: #94a3b8;       /* slate-400 */
+      --text: #e2e8f0;        /* slate-200 */
+      --brand: #22d3ee;       /* cyan-400 */
+      --accent: #a78bfa;      /* violet-400 */
+      --chip: #0b2840;        /* cyan-900-ish */
+      --border: #1f2937;      /* slate-800 */
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: rgba(15,23,42,0.75); border-bottom: 1px solid var(--border); }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-links a { margin-left: 18px; font-weight: 600; color: var(--text); opacity: 0.9; }
+    .nav-links a:hover { color: white; opacity: 1; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--brand), var(--accent)); color: #0b1220; border: none; padding: 12px 16px; border-radius: 12px; font-weight: 700; box-shadow: 0 8px 20px rgba(34,211,238,0.25); }
+    .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; }
+    .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: center; gap: 36px; padding: 48px 0; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+    h1 { font-size: clamp(28px, 3.4vw, 48px); line-height: 1.1; margin: 12px 0 10px; }
+    .subtitle { font-size: 18px; color: var(--muted); max-width: 60ch; }
+    .grid { display: grid; gap: 16px; }
+    .section { margin: 56px 0; }
+    .section h2 { font-size: 26px; margin: 0 0 12px; }
+    .panel { background: linear-gradient(180deg, rgba(31,41,55,0.6), rgba(15,23,42,0.6)); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { font-size: 13px; padding: 8px 12px; border-radius: 999px; background: var(--chip); color: #c3e3ef; border: 1px solid #12344a; }
+    .xp { display: grid; gap: 14px; }
+    .xp-item { display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: start; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: #0d1629; }
+    .xp-item h3 { margin: 0; font-size: 18px; }
+    .xp-item .where { color: var(--muted); font-weight: 600; }
+    .xp-item ul { margin: 10px 0 0 18px; }
+    .xp-item li { margin: 6px 0; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .card { border: 1px solid var(--border); padding: 18px; border-radius: 14px; background: #0d1629; }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .muted { color: var(--muted); }
+    footer { margin: 60px 0 24px; color: var(--muted); font-size: 14px; text-align: center; }
+    .contact { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .contact a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #0d1629; color: var(--text); }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .xp-item { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hazem Hassan",
+    "jobTitle": "Senior Machine Learning Engineer",
+    "email": "mailto:hazem.mamdouh.fekry@gmail.com",
+    "telephone": "+201000912694",
+    "address": {"@type":"PostalAddress","addressCountry":"EG","addressLocality":"Cairo"},
+    "sameAs": [
+      "https://linkedin.com/in/hmamdouh"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:0.4px;">
+          <span style="font-size:18px;color:white;">Hazem Hassan</span>
+          <span class="badge">Senior ML Engineer</span>
+        </div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#publications">Publications</a>
+          <a href="#awards">Awards</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="badge">Computer Vision • NLP • Speech • MLOps</div>
+        <h1>Building reliable, real‑time AI systems — from idea to production.</h1>
+        <p class="subtitle">Senior Machine Learning Engineer (9+ years) delivering CV/NLP/ASR products, V‑LLMs, and MLOps pipelines for startups and enterprise — from edge inference on Jetson to cloud‑scale services.</p>
+        <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">
+          <a class="btn" href="#contact">Get in touch</a>
+          <a class="btn secondary" href="assets/hhassan_CV.pdf" download>Download CV (PDF)</a>
+          <a class="btn secondary" href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="panel" style="padding:12px;border-radius:12px;">
+            <div class="muted" style="font-size:12px;">Current</div>
+            <div style="font-weight:700;">Senior ML Engineer — Beyond Limits</div>
+            <div class="muted" style="font-size:13px;">Mar 2024 → Present</div>
+          </div>
+          <div class="panel" style="padding:12px;border-radius:12px;">
+            <div class="muted" style="font-size:12px;">Based in</div>
+            <div style="font-weight:700;">Cairo, Egypt</div>
+            <div class="muted" style="font-size:13px;">Open to relocation (KSA/UAE)</div>
+          </div>
+          <div class="panel" style="padding:12px;border-radius:12px;grid-column:span 2;">
+            <div class="muted" style="font-size:12px;">Focus</div>
+            <div style="font-weight:600;">Real‑time CV (tracking, action detection), V‑LLMs (open‑vocab detection, segmentation, VQA), scalable ML APIs & MLOps.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About</h2>
+      <div class="panel">
+        <p>Senior Machine Learning Engineer with a track record of delivering <strong>production‑grade AI</strong> across computer vision, NLP, speech recognition, and identity verification. Experienced leading technical teams and translating business needs into robust AI products.</p>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="panel">
+        <div class="two-col">
+          <div>
+            <h3>Programming & Tools</h3>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">SQL</span>
+              <span class="chip">NoSQL</span>
+              <span class="chip">FastAPI</span>
+              <span class="chip">Flask</span>
+              <span class="chip">Django</span>
+              <span class="chip">Pandas</span>
+              <span class="chip">Scikit‑learn</span>
+              <span class="chip">OpenCV</span>
+            </div>
+            <h3 style="margin-top:18px;">ML / DL</h3>
+            <div class="chips">
+              <span class="chip">PyTorch</span>
+              <span class="chip">TensorFlow</span>
+              <span class="chip">Transformers</span>
+              <span class="chip">CLIP</span>
+              <span class="chip">Diffusion Models</span>
+              <span class="chip">KALDI</span>
+              <span class="chip">K2</span>
+              <span class="chip">LLMs</span>
+              <span class="chip">V‑LLMs</span>
+            </div>
+          </div>
+          <div>
+            <h3>Cloud & DevOps</h3>
+            <div class="chips">
+              <span class="chip">GCP</span>
+              <span class="chip">AWS</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Kubernetes</span>
+              <span class="chip">CI/CD</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">SaaS / SDKs</span>
+            </div>
+            <h3 style="margin-top:18px;">Domains</h3>
+            <div class="chips">
+              <span class="chip">OCR</span>
+              <span class="chip">Speech Recognition</span>
+              <span class="chip">Identity Verification</span>
+              <span class="chip">Face Matching</span>
+              <span class="chip">Image Processing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+      <div class="xp">
+        <div class="xp-item">
+          <div class="where">03/2024 – Present<br/>EMEA Team</div>
+          <div>
+            <h3>Senior ML Engineer — Beyond Limits</h3>
+            <ul>
+              <li>Designed & deployed real‑time ML pipelines on <strong>edge devices (Jetson)</strong> for people tracking and counting.</li>
+              <li>Developed <strong>spatio‑temporal action detection</strong>, multi‑camera tracking, and violence detection in CCTV streams.</li>
+              <li>Built <strong>V‑LLM</strong> workflows: open‑vocabulary detection, text‑prompt segmentation, and visual Q&A.</li>
+              <li>Led end‑to‑end ML optimization improving inference efficiency and deployment robustness.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="xp-item">
+          <div class="where">10/2022 – 02/2024<br/>Giza, Egypt</div>
+          <div>
+            <h3>Technical Lead — IDefy</h3>
+            <ul>
+              <li>Owned the product lifecycle for digital identity solutions (SaaS, SDKs, Web/Mobile).</li>
+              <li>Managed cross‑functional team (Backend, ML, UI/UX, Mobile, DevOps) for 3 production deployments.</li>
+              <li>Built APIs for Document OCR, Face Matching, Liveness Detection & Identity Verification.</li>
+              <li>Drove architecture, roadmap, testing, and production release.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="xp-item">
+          <div class="where">01/2021 – 10/2022<br/>Giza, Egypt</div>
+          <div>
+            <h3>Senior ML Engineer (CV) — RDI</h3>
+            <ul>
+              <li>Led CV/OCR team delivering <strong>Sotoor Arabic OCR</strong> with state‑of‑the‑art accuracy.</li>
+              <li>Developed layout analysis, line segmentation, font detection, text recognition & document correction modules.</li>
+              <li>Adapted <strong>K2 Toolkit</strong> (from speech) for text recognition tasks.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="xp-item">
+          <div class="where">2017 – 2021<br/>Giza, Egypt</div>
+          <div>
+            <h3>ML Researcher — RDI</h3>
+            <ul>
+              <li>Focused on Arabic NLP, speech recognition, OCR & building foundational AI pipelines with <strong>KALDI</strong>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Selected Projects</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Fashion Try‑On Recommendation App (2025–Present)</h3>
+          <p class="muted">AI platform combining V‑LLMs, text‑prompt segmentation, and diffusion‑based avatar generation. Outfit recommendations blend mood, climate, occasion & preferences and render on photorealistic avatars. Fine‑tuned domain‑specific segmentation/detection models for personalization & fit accuracy.</p>
+        </div>
+        <div class="card">
+          <h3>Post‑Operative Infections Prediction (2022–2023)</h3>
+          <p class="muted">Predictive model on real patient outcomes using ensemble models & imputation. Achieved <strong>82% Sensitivity</strong> and <strong>91% Specificity</strong>; contributed to Newcastle University PhD work.</p>
+        </div>
+        <div class="card">
+          <h3>Valorant Game Overlay (2022)</h3>
+          <p class="muted">Real‑time multi‑threaded system extracting gameplay data for esports overlays (object detection & color analysis) with <strong>50–72 ms</strong> response latency.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications" class="section">
+      <h2>Publications</h2>
+      <div class="panel">
+        <ul>
+          <li><strong>Arabic Multi‑Genre Broadcast Speech Recognition</strong>, IEEE ASRU 2019 — <a href="https://swshon.github.io/pdf/ali_asru2019_mgb5.pdf" target="_blank" rel="noopener">Paper</a></li>
+          <li><strong>Developing an AI predictive model for post‑operative infection</strong> (2023) — <a href="https://www.researchgate.net/publication/376090553_Developing_an_AI-predictive_model_for_predicting_the_likelihood_of_post-operative_infection_in_surgical_patients" target="_blank" rel="noopener">Paper</a></li>
+          <li><strong>Data Preparation and Handling for Written Quran Script Verification</strong> (2016) — <a href="https://www.researchgate.net/publication/308994154_Data_Preparation_and_Handling_for_Written_Quran_Script_Verification" target="_blank" rel="noopener">Paper</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="awards" class="section">
+      <h2>Awards</h2>
+      <div class="panel">
+        <ul>
+          <li><strong>1st Place</strong> — Multi‑Genre Broadcast Challenge (MGB‑5), 2019</li>
+          <li><strong>1st Place</strong> — ICFHR2018 RASM (Recognition of Historical Arabic Scientific Manuscripts)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="volunteer" class="section">
+      <h2>Volunteer</h2>
+      <div class="panel">
+        <p><strong>Project Mentor & Judge</strong> — Information Technology Institute (Nov 2021 – Jan 2022). Mentored a Math Formula Detection & Recognition CV project; provided guidance on state‑of‑the‑art algorithms.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="panel">
+        <div class="contact">
+          <a href="mailto:hazem.mamdouh.fekry@gmail.com">📧 Email</a>
+          <a href="tel:+201000912694">📱 Phone</a>
+          <a href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">🔗 LinkedIn</a>
+        </div>
+        <p class="muted" style="margin-top:10px;">Available for roles in <strong>UAE</strong> & <strong>KSA</strong> (relocation supported).</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Hazem Hassan — Built with ❤️ and vanilla HTML/CSS.</div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
