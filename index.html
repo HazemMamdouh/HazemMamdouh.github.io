@@ -4,477 +4,350 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hazem Hassan — Senior Machine Learning Engineer</title>
-  <meta name="description" content="Portfolio of Hazem Hassan — Senior Machine Learning Engineer. Computer Vision • GenAI • LLMs • Edge AI • MLOps." />
+  <meta name="description" content="Hazem Hassan — Senior ML Engineer / AI Technical Lead. 9+ years shipping production Computer Vision, OCR, Edge AI, Video Analytics, LLM Multi-RAG, and Diffusion systems." />
   <meta property="og:title" content="Hazem Hassan — Senior Machine Learning Engineer" />
-  <meta property="og:description" content="Senior ML Engineer (9+ years) shipping production AI across CV, GenAI, LLM Multi-RAG, and real-time edge deployments." />
+  <meta property="og:description" content="Senior ML Engineer (9+ years) shipping production AI across CV, GenAI, LLM Multi-RAG, and real-time edge deployments. A portfolio rendered as the ML telemetry console he builds." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#07090C" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #000;
-      --panel: rgba(10,10,10,0.85);
-      --muted: #a1a1aa; /* zinc-400 */
-      --text: #ffffff;
-      --border: rgba(255,255,255,0.10);
-      --border-strong: rgba(255,255,255,0.18);
-      --glow: rgba(255,255,255,0.12);
-      --shadow: 0 12px 35px rgba(0,0,0,0.65);
-      --radius: 18px;
+      /* ---- Console palette: monochrome carbon + a single phosphor signal ---- */
+      --void:      #07090C;
+      --carbon:    #0E1116;
+      --carbon-2:  #12161D;
+      --carbon-3:  #171C24;
+      --line:      rgba(255,255,255,0.08);
+      --line-2:    rgba(255,255,255,0.14);
+      --ink:       #EEF2F5;
+      --ink-dim:   #99A2AD;
+      --ink-faint: #5C6571;
+      /* instrument-only accent — phosphor mint (oscilloscope / IR readout) */
+      --signal:    #67E8CF;
+      --signal-2:  #44C9B3;
+      --signal-dim:rgba(103,232,207,0.16);
+      --signal-glow:rgba(103,232,207,0.40);
+
+      --r-lg: 18px;
+      --r-md: 14px;
+      --r-sm: 10px;
+      --shadow: 0 18px 50px rgba(0,0,0,0.55);
+      --maxw: 1140px;
+
+      --f-display: "Space Grotesk", system-ui, sans-serif;
+      --f-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, sans-serif;
-      color: var(--text);
-      background: var(--bg);
+      font-family: var(--f-body);
+      color: var(--ink);
+      background: var(--void);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
-    /* Futuristic animated background (monochrome) */
-    .bg {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
+    /* ---------- Ambient console background ---------- */
+    .bg { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
     .bg::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
+      content: ""; position: absolute; inset: -30%;
       background:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.10), transparent 55%),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.07), transparent 50%),
-        radial-gradient(circle at 30% 85%, rgba(255,255,255,0.06), transparent 55%),
-        radial-gradient(circle at 75% 90%, rgba(255,255,255,0.08), transparent 60%);
-      filter: blur(18px);
-      animation: drift 18s ease-in-out infinite alternate;
+        radial-gradient(closest-side at 18% 8%, rgba(103,232,207,0.10), transparent 70%),
+        radial-gradient(closest-side at 82% 0%, rgba(255,255,255,0.05), transparent 70%),
+        radial-gradient(closest-side at 60% 95%, rgba(103,232,207,0.06), transparent 70%);
+      filter: blur(10px);
     }
-    .bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity: 0.08;
-      mask-image: radial-gradient(circle at 50% 20%, rgba(0,0,0,1), rgba(0,0,0,0.2) 55%, rgba(0,0,0,0) 75%);
+    .grid-overlay {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at 50% 22%, #000 0%, rgba(0,0,0,0.35) 55%, transparent 78%);
+      -webkit-mask-image: radial-gradient(circle at 50% 22%, #000 0%, rgba(0,0,0,0.35) 55%, transparent 78%);
     }
 
-    @keyframes drift {
-      0% { transform: translate3d(-1%, -1%, 0) scale(1.02); }
-      100% { transform: translate3d(1.5%, 1.2%, 0) scale(1.06); }
-    }
+    a { color: var(--ink); text-decoration: none; }
+    ::selection { background: var(--signal-dim); color: #fff; }
 
-    a { color: var(--text); text-decoration: none; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
 
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 22px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(0,0,0,0.72);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 240px;
-    }
-
-    .logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.03));
-      border: 1px solid var(--border);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo::after {
-      content: "";
-      position: absolute;
-      inset: -60%;
-      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 55%);
-      transform: translate3d(-10%, -10%, 0);
-      animation: logoGlow 6.5s ease-in-out infinite;
-    }
-
-    @keyframes logoGlow {
-      0%, 100% { transform: translate3d(-10%, -10%, 0); opacity: 0.9; }
-      50% { transform: translate3d(10%, 8%, 0); opacity: 0.55; }
-    }
-
-    .brand-title {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.05;
-    }
-
-    .brand-title strong { font-weight: 800; letter-spacing: 0.2px; }
-    .brand-title span { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a {
-      font-weight: 700;
-      color: rgba(255,255,255,0.88);
-      font-size: 13px;
-      letter-spacing: 0.02em;
-      padding: 10px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: 180ms ease;
-    }
-
-    .nav-links a:hover {
-      color: rgba(255,255,255,1);
-      border-color: var(--border);
-      background: rgba(255,255,255,0.04);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.18fr 0.82fr;
-      gap: 28px;
-      align-items: center;
-      padding: 46px 0 10px;
-    }
-    .avatar{
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 10px 26px rgba(0,0,0,0.55);
-      transition: transform 220ms ease, filter 220ms ease;
-    }
-
-    .avatar:hover{
-      transform: translateY(-1px) scale(1.03);
-      filter: brightness(1.05);
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: rgba(255,255,255,0.80);
-      font-weight: 800;
-      font-size: 12px;
-      letter-spacing: 0.08em;
+    .mono { font-family: var(--f-mono); }
+    .eyebrow {
+      font-family: var(--f-mono);
+      font-size: 11.5px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      width: fit-content;
+      color: var(--signal);
+      display: inline-flex; align-items: center; gap: 9px;
+      margin: 0 0 14px;
+    }
+    .eyebrow::before {
+      content: ""; width: 7px; height: 7px; border-radius: 2px;
+      background: var(--signal); box-shadow: 0 0 10px var(--signal-glow);
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      position: sticky; top: 0; z-index: 80;
+      backdrop-filter: blur(12px);
+      background: rgba(7,9,12,0.74);
+      border-bottom: 1px solid var(--line);
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 14px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .brand img {
+      width: 38px; height: 38px; border-radius: 11px; object-fit: cover;
+      border: 1px solid var(--line-2);
       box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset;
     }
+    .brand .id { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand .id strong { font-family: var(--f-display); font-weight: 600; font-size: 15px; letter-spacing: 0.2px; }
+    .brand .id span { font-family: var(--f-mono); color: var(--ink-dim); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; }
 
-    h1 {
-      margin: 14px 0 12px;
-      font-size: clamp(28px, 3.4vw, 52px);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em;
+      color: var(--ink-dim); padding: 8px 11px; border-radius: 999px;
+      border: 1px solid transparent; transition: 160ms ease;
     }
+    .nav-links a:hover { color: var(--ink); background: rgba(255,255,255,0.04); }
+    .nav-links a.active { color: var(--signal); }
+    .nav-toggle { display: none; }
 
-    .subtitle {
-      color: rgba(255,255,255,0.70);
-      font-size: 16.5px;
-      line-height: 1.6;
-      max-width: 68ch;
-      margin: 0;
+    /* ---------- Layout primitives ---------- */
+    main { display: block; }
+    .section { padding: 78px 0; border-top: 1px solid transparent; }
+    .section-head { margin-bottom: 30px; }
+    h2 {
+      font-family: var(--f-display); font-weight: 600;
+      font-size: clamp(24px, 3.2vw, 36px); letter-spacing: -0.01em; margin: 0;
     }
-
-    .kicker {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .pill {
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: rgba(255,255,255,0.78);
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.02em;
-    }
-
-    .cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 12px;
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: rgba(255,255,255,0.03);
-      transition: 220ms ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn.primary {
-      background: rgba(255,255,255,0.94);
-      color: #000;
-      border-color: rgba(255,255,255,0.2);
-    }
-
-    .btn::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 20% 10%, rgba(255,255,255,0.22), transparent 55%);
-      opacity: 0;
-      transition: 220ms ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-      border-color: var(--border-strong);
-    }
-
-    .btn:hover::after { opacity: 1; }
+    .section-head p { color: var(--ink-dim); margin: 8px 0 0; max-width: 70ch; }
+    .muted { color: var(--ink-dim); }
 
     .panel {
-      background: linear-gradient(180deg, rgba(12,12,12,0.92), rgba(0,0,0,0.88));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset;
+      background: linear-gradient(180deg, var(--carbon-2), var(--carbon));
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
     }
 
-    .panel.hover {
-      transform: translateZ(0);
-      transition: 220ms ease;
+    /* panel "console" header bar */
+    .console-bar {
+      display: flex; align-items: center; gap: 9px;
+      padding: 11px 16px; border-bottom: 1px solid var(--line);
+      font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-dim);
     }
+    .console-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 9px var(--signal-glow); }
+    .console-bar .spacer { flex: 1; }
+    .console-bar .tag { color: var(--ink-faint); }
 
-    .panel.hover:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.07) inset, var(--shadow);
+    /* ---------- HERO ---------- */
+    .hero { padding: 56px 0 8px; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 26px; align-items: stretch; }
+    .status {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--signal);
+      border: 1px solid var(--signal-dim); background: rgba(103,232,207,0.05);
+      padding: 6px 12px; border-radius: 999px; margin-bottom: 18px;
     }
-
-    .side-stack {
-      display: grid;
-      gap: 14px;
+    .status .beacon { position: relative; width: 8px; height: 8px; }
+    .status .beacon::before, .status .beacon::after {
+      content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--signal);
     }
+    .status .beacon::after { animation: ping 1.8s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 80%,100% { transform: scale(2.6); opacity: 0; } }
 
-    .side-metric {
-      display: grid;
-      gap: 6px;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
-      position: relative;
-      overflow: hidden;
+    h1 {
+      font-family: var(--f-display); font-weight: 600;
+      font-size: clamp(33px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.022em;
+      margin: 6px 0 16px; max-width: 16ch;
     }
+    h1 .hl { color: var(--signal); }
+    .lede { color: var(--ink-dim); font-size: 16.5px; max-width: 60ch; margin: 0 0 8px; }
+    .lede strong { color: var(--ink); font-weight: 600; }
+    .roles-line { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-faint); margin: 14px 0 0; letter-spacing: 0.02em; }
+    .roles-line b { color: var(--signal-2); font-weight: 500; }
 
-    .side-metric::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 60%);
-      opacity: 0.6;
-      transform: translate3d(-12%, -10%, 0);
-      animation: metricDrift 10s ease-in-out infinite alternate;
+    .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
+      padding: 12px 16px; border-radius: 11px;
+      border: 1px solid var(--line-2); color: var(--ink); background: rgba(255,255,255,0.02);
+      transition: 180ms ease; cursor: pointer;
     }
+    .btn svg { width: 15px; height: 15px; }
+    .btn:hover { transform: translateY(-2px); border-color: var(--signal-dim); box-shadow: var(--shadow); }
+    .btn.primary { background: var(--signal); color: #04201A; border-color: transparent; font-weight: 700; }
+    .btn.primary:hover { box-shadow: 0 14px 34px rgba(103,232,207,0.28); }
 
-    @keyframes metricDrift {
-      0% { transform: translate3d(-12%, -10%, 0); }
-      100% { transform: translate3d(10%, 8%, 0); }
+    /* hero telemetry card */
+    .telemetry { display: flex; flex-direction: column; }
+    .telemetry .scope { padding: 14px 16px 6px; }
+    .scope-svg { width: 100%; height: 158px; display: block; }
+    .trace-legend { display: flex; gap: 16px; padding: 2px 16px 12px; flex-wrap: wrap; }
+    .trace-legend span { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); display: inline-flex; align-items: center; gap: 6px; }
+    .trace-legend i { width: 14px; height: 2px; border-radius: 2px; display: inline-block; }
+
+    .kpis { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
+    .kpi { padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .kpi:nth-child(2n) { border-right: none; }
+    .kpi:nth-last-child(-n+2) { border-bottom: none; }
+    .kpi .num { font-family: var(--f-display); font-weight: 600; font-size: 30px; letter-spacing: -0.02em; line-height: 1; }
+    .kpi .num .u { color: var(--signal); font-size: 18px; }
+    .kpi .lab { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); margin-top: 8px; }
+
+    /* ---------- Capability + Impact split ---------- */
+    .split { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 22px; align-items: stretch; }
+
+    /* Radar */
+    .radar-wrap { padding: 14px 16px 18px; display: flex; flex-direction: column; align-items: center; }
+    .radar-svg { width: 100%; max-width: 420px; height: auto; }
+    .radar-foot { font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-faint); letter-spacing: 0.06em; margin-top: 6px; text-align: center; }
+
+    /* Gauges */
+    .gauges { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+    .gauge { padding: 20px 14px; text-align: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .gauge:nth-child(2n) { border-right: none; }
+    .gauge:nth-last-child(-n+2) { border-bottom: none; }
+    .gauge svg { width: 116px; height: 116px; }
+    .gauge .gv { font-family: var(--f-display); font-weight: 600; font-size: 22px; fill: var(--ink); }
+    .gauge .glabel { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); margin-top: 8px; line-height: 1.4; }
+    .gauge .gsub { font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
+
+    /* ---------- Impact meter groups ---------- */
+    .metric-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .mgroup { padding: 18px; }
+    .mgroup h3 {
+      font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--signal); margin: 0 0 16px; display: flex; align-items: center; gap: 8px;
     }
+    .mgroup h3 .cnt { color: var(--ink-faint); margin-left: auto; }
+    .meter { margin: 13px 0; }
+    .meter .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .meter .name { font-size: 13.5px; color: var(--ink); }
+    .meter .val { font-family: var(--f-mono); font-size: 13px; color: var(--signal); font-weight: 500; }
+    .meter .track { height: 6px; border-radius: 999px; background: rgba(255,255,255,0.07); overflow: hidden; }
+    .meter .fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--signal-2), var(--signal)); transition: width 1100ms cubic-bezier(0.22,1,0.36,1); box-shadow: 0 0 12px var(--signal-glow); }
 
-    .side-metric > * { position: relative; z-index: 1; }
-
-    .side-metric .label {
-      color: rgba(255,255,255,0.65);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 800;
+    /* ---------- Timeline / Career run ---------- */
+    .run { position: relative; padding-left: 30px; }
+    .run::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px;
+      background: linear-gradient(180deg, var(--signal), rgba(103,232,207,0.15) 70%, transparent); }
+    .node { position: relative; margin-bottom: 18px; }
+    .node::before {
+      content: ""; position: absolute; left: -30px; top: 24px; width: 14px; height: 14px; border-radius: 50%;
+      background: var(--void); border: 2px solid var(--signal); box-shadow: 0 0 10px var(--signal-glow);
     }
-
-    .side-metric .value { font-weight: 800; font-size: 15px; }
-    .side-metric .note { color: rgba(255,255,255,0.58); font-size: 13px; }
-
-    .section { margin: 56px 0; }
-    h2 { margin: 0 0 12px; font-size: 26px; letter-spacing: -0.01em; }
-    .muted { color: rgba(255,255,255,0.66); }
-
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip {
-      font-size: 13px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      color: rgba(255,255,255,0.86);
-      border: 1px solid var(--border);
-      transition: 180ms ease;
+    .node-card { padding: 18px 20px; }
+    .node-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
+    .node-top h3 { font-family: var(--f-display); font-weight: 600; font-size: 18px; margin: 0; }
+    .node-top .org { color: var(--signal-2); font-weight: 500; }
+    .node-when { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); letter-spacing: 0.04em; margin-left: auto; }
+    .node-where { font-family: var(--f-mono); font-size: 11px; color: var(--ink-faint); margin-top: 2px; letter-spacing: 0.04em; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 4px; }
+    .stat-chip {
+      font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.02em;
+      padding: 5px 9px; border-radius: 7px; color: var(--signal);
+      border: 1px solid var(--signal-dim); background: rgba(103,232,207,0.05);
     }
-    .chip:hover {
-      transform: translateY(-1px);
-      border-color: var(--border-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset;
+    .node ul { margin: 14px 0 0; padding-left: 18px; }
+    .node li { margin: 8px 0; color: var(--ink-dim); font-size: 14px; line-height: 1.6; }
+    .node li strong { color: var(--ink); font-weight: 600; }
+    .stack-line { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); margin: 14px 0 0; letter-spacing: 0.02em; line-height: 1.7; }
+    .stack-line b { color: var(--ink-dim); font-weight: 500; }
+
+    details.node-card { cursor: default; }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    .more-hint { font-family: var(--f-mono); font-size: 11px; color: var(--signal); margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; }
+    .more-hint .chev { transition: transform 200ms ease; }
+    details[open] .more-hint .chev { transform: rotate(180deg); }
+    details[open] .more-hint .txt-open { display: none; }
+    details:not([open]) .more-hint .txt-close { display: none; }
+
+    /* ---------- Tech matrix ---------- */
+    .matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .mcell { padding: 16px; }
+    .mcell h4 { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); margin: 0 0 12px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag-pill { font-size: 12.5px; padding: 6px 10px; border-radius: 8px; color: var(--ink); border: 1px solid var(--line); background: rgba(255,255,255,0.02); transition: 150ms ease; }
+    .tag-pill:hover { border-color: var(--signal-dim); color: var(--signal); }
+
+    /* ---------- Projects ---------- */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .pcard { padding: 18px 20px; position: relative; overflow: hidden; transition: 200ms ease; }
+    .pcard:hover { transform: translateY(-2px); border-color: var(--line-2); }
+    .pcard .ptag { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); }
+    .pcard h3 { font-family: var(--f-display); font-weight: 600; font-size: 17px; margin: 8px 0 10px; }
+    .pcard ul { margin: 0; padding-left: 17px; }
+    .pcard li { margin: 7px 0; color: var(--ink-dim); font-size: 13.5px; line-height: 1.55; }
+    .pcard p.summary { color: var(--ink-dim); font-size: 14px; margin: 0; }
+    .pcard p.summary strong { color: var(--signal); font-weight: 600; }
+
+    /* ---------- Pub / Awards ---------- */
+    .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .list-panel { padding: 18px 20px; }
+    .list-panel ul { margin: 0; padding: 0; list-style: none; }
+    .list-panel li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--ink-dim); display: flex; gap: 12px; align-items: baseline; }
+    .list-panel li:last-child { border-bottom: none; }
+    .list-panel li strong { color: var(--ink); font-weight: 600; }
+    .list-panel li .yr { font-family: var(--f-mono); font-size: 11px; color: var(--signal); white-space: nowrap; margin-left: auto; }
+    .award-medal { color: var(--signal); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.05em; }
+
+    /* ---------- Contact ---------- */
+    .contact-grid { display: flex; flex-wrap: wrap; gap: 12px; padding: 8px 0; }
+    .contact-grid a {
+      display: inline-flex; align-items: center; gap: 9px; padding: 13px 18px; border-radius: 12px;
+      border: 1px solid var(--line-2); background: rgba(255,255,255,0.02);
+      font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.03em; transition: 180ms ease;
     }
+    .contact-grid a:hover { transform: translateY(-2px); border-color: var(--signal-dim); color: var(--signal); box-shadow: var(--shadow); }
+    .contact-grid a svg { width: 16px; height: 16px; }
 
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    footer { border-top: 1px solid var(--line); padding: 26px 0 40px; }
+    footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    footer span { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); letter-spacing: 0.04em; }
 
-    .xp { display: grid; gap: 14px; }
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.show { opacity: 1; transform: none; }
 
-    .xp-item {
-      display: grid;
-      grid-template-columns: 230px 1fr;
-      gap: 20px;
-      align-items: start;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(10,10,10,0.72);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset;
-      transition: 220ms ease;
-    }
-    .xp-item:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, var(--shadow);
-    }
-
-    .where { color: rgba(255,255,255,0.62); font-weight: 800; font-size: 13px; letter-spacing: 0.02em; }
-
-    .xp-item h3 { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
-    .xp-item ul { margin: 10px 0 0 18px; }
-    .xp-item li { margin: 7px 0; color: rgba(255,255,255,0.80); line-height: 1.55; }
-
-    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-
-    .card {
-      border: 1px solid var(--border);
-      padding: 18px;
-      border-radius: var(--radius);
-      background: rgba(10,10,10,0.72);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset;
-      transition: 220ms ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: -60%;
-      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 55%);
-      opacity: 0;
-      transition: 220ms ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, var(--shadow);
-    }
-
-    .card:hover::after { opacity: 0.5; }
-
-    .card h3 { margin: 0 0 8px; font-size: 18px; }
-
-    .contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .contact a {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      transition: 200ms ease;
-    }
-
-    .contact a:hover {
-      transform: translateY(-1px);
-      border-color: var(--border-strong);
-      box-shadow: var(--shadow);
-    }
-
-    footer {
-      margin: 60px 0 24px;
-      color: rgba(255,255,255,0.55);
-      font-size: 13px;
-      text-align: center;
-    }
-
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: 600ms ease;
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; }
-      .xp-item { grid-template-columns: 1fr; }
+    /* ---------- Responsive ---------- */
+    @media (max-width: 940px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .metric-groups { grid-template-columns: 1fr; }
+      .matrix { grid-template-columns: repeat(2, 1fr); }
       .cards { grid-template-columns: 1fr; }
-      .two-col { grid-template-columns: 1fr; }
-      .brand { min-width: 0; }
+      .duo { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .matrix { grid-template-columns: 1fr; }
+      .kpis { grid-template-columns: 1fr 1fr; }
+      .gauges { grid-template-columns: 1fr 1fr; }
+      h1 { font-size: clamp(28px, 8vw, 40px); }
+      .node-when { margin-left: 0; }
+      .section { padding: 56px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 
@@ -483,12 +356,15 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Hazem Hassan",
-    "jobTitle": "Senior Machine Learning Engineer",
+    "jobTitle": "Senior Machine Learning Engineer / AI Technical Lead",
     "email": "mailto:hazem.mamdouh.fekry@gmail.com",
     "telephone": "+201000912694",
     "address": {"@type":"PostalAddress","addressCountry":"EG","addressLocality":"Cairo"},
+    "knowsAbout": ["Computer Vision","OCR","Video Analytics","Edge AI","LLM","Retrieval-Augmented Generation","Diffusion Models","MLOps"],
     "sameAs": [
-      "https://linkedin.com/in/hmamdouh"
+      "https://linkedin.com/in/hmamdouh",
+      "https://github.com/hazemmamdouh",
+      "https://hazemmamdouh.github.io"
     ]
   }
   </script>
@@ -496,343 +372,681 @@
 
 <body>
   <div class="bg"></div>
+  <div class="grid-overlay"></div>
 
   <header>
     <div class="container">
       <nav>
         <div class="brand">
-          <img class="avatar" src="hazem.jpg" alt="Hazem Hassan" />
-          <div class="brand-title">
+          <img src="hazem.jpg" alt="Hazem Hassan" />
+          <div class="id">
             <strong>Hazem Hassan</strong>
-            <span>Senior ML Engineer • CV • GenAI • LLMs</span>
+            <span>ML Engineer · AI Tech Lead</span>
           </div>
         </div>
-
-        <div class="nav-links" aria-label="Primary navigation">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
+        <div class="nav-links" aria-label="Primary">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#impact">Impact</a>
           <a href="#experience">Experience</a>
+          <a href="#stack">Stack</a>
           <a href="#projects">Projects</a>
-          <a href="#publications">Publications</a>
-          <a href="#awards">Awards</a>
+          <a href="#research">Research</a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-
+  <main>
+    <!-- ================= HERO ================= -->
     <section class="hero">
-      <div class="reveal">
-        <div class="badge">Computer Vision • Edge AI • Multi‑RAG • Diffusion</div>
-        <h1>Real‑time, production‑grade AI — engineered for edge and cloud.</h1>
-        <p class="subtitle">
-          Senior Machine Learning Engineer with <strong>9+ years</strong> building and shipping production AI across <strong>Computer Vision, OCR, Video Analytics</strong>, and modern <strong>GenAI</strong>.
-          Hands‑on with <strong>LLM Multi‑RAG</strong> pipelines and <strong>diffusion-based image generation/editing</strong>, alongside scalable deployment using Docker, Kubernetes, and FastAPI.
-          <br /><br />
-          <strong>Target roles:</strong> Senior ML Engineer (CV/GenAI) • ML Technical Lead (Edge AI)
-        </p>
-
-        <div class="kicker" aria-label="Highlights">
-          <span class="pill">Jetson Edge Deployment</span>
-          <span class="pill">Real‑time Video Analytics</span>
-          <span class="pill">Multi‑RAG + Reranking</span>
-          <span class="pill">Diffusion Try‑On</span>
-        </div>
-
-        <div class="cta">
-          <a class="btn primary" href="#contact">Get in touch</a>
-          <!-- Modern / visual CV (existing file) -->
-          <a class="btn" href="hhassan_CV.pdf" download>Download Modern CV</a>
-          <!-- ATS CV (replace [+] with your ATS PDF filename/path, e.g. hhassan_CV_ATS.pdf) -->
-          <a class="btn" href="hhassan_CV_ATS.pdf" download>Download ATS CV</a>
-          <a class="btn" href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">LinkedIn</a>
-          <!-- Optional GitHub (replace [+]) -->
-        </div>
-      </div>
-
-      <div class="panel hover reveal">
-        <div class="side-stack">
-          <div class="side-metric">
-            <div class="label">Current</div>
-            <div class="value">Senior ML Engineer — Beyond Limits</div>
-            <div class="note">Mar 2024 → Present (EMEA)</div>
-          </div>
-
-          <div class="side-metric">
-            <div class="label">Location</div>
-            <div class="value">Cairo, Egypt</div>
-            <div class="note">Open to relocation</div>
-          </div>
-
-          <div class="side-metric">
-            <div class="label">Focus</div>
-            <div class="value">CV + GenAI</div>
-            <div class="note">Edge analytics • LLM Multi‑RAG • Diffusion</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section id="about" class="section reveal">
-      <h2>About</h2>
-      <div class="panel">
-        <p class="muted" style="margin:0; line-height:1.7;">
-          Senior Machine Learning Engineer with proven delivery of <strong>production AI</strong> across <strong>computer vision, OCR, identity verification</strong>, and <strong>GenAI</strong>.
-          Experienced in designing end‑to‑end pipelines (data → training → deployment), optimizing low‑latency inference on <strong>NVIDIA Jetson</strong>, and building robust ML services with modern MLOps practices.
-        </p>
-      </div>
-    </section>
-
-
-    <section id="skills" class="section reveal">
-      <h2>Core Skills (ATS‑friendly)</h2>
-      <div class="panel">
-        <div class="two-col">
-          <div>
-            <h3 style="margin:0 0 10px;">Programming / Backend</h3>
-            <div class="chips">
-              <span class="chip">Python</span>
-              <span class="chip">SQL</span>
-              <span class="chip">FastAPI</span>
-              <span class="chip">Flask</span>
-              <span class="chip">Django</span>
-              <span class="chip">REST APIs</span>
-              <span class="chip">Git</span>
-              <span class="chip">Linux</span>
-            </div>
-
-            <h3 style="margin:18px 0 10px;">ML / DL</h3>
-            <div class="chips">
-              <span class="chip">PyTorch</span>
-              <span class="chip">TensorFlow</span>
-              <span class="chip">Scikit‑learn</span>
-              <span class="chip">Transformers</span>
-              <span class="chip">Evaluation (mAP, F1)</span>
-              <span class="chip">Experimentation</span>
-              <span class="chip">Error Analysis</span>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <span class="status"><span class="beacon"></span> Available · Open to relocation</span>
+            <p class="eyebrow">ML Systems · Live Telemetry</p>
+            <h1>Production AI, engineered for the <span class="hl">edge</span> and the cloud.</h1>
+            <p class="lede">
+              Senior Machine Learning Engineer &amp; AI Technical Lead with <strong>9+ years</strong> shipping
+              production <strong>Computer Vision, OCR, video analytics</strong>, <strong>LLM / Multi-RAG</strong>,
+              and <strong>diffusion</strong> systems — from data pipelines to real-time inference on
+              <strong>NVIDIA Jetson</strong>.
+            </p>
+            <p class="roles-line">TARGET ROLES &gt; <b>Senior ML Engineer (CV / GenAI)</b> · <b>AI Technical Lead (Edge AI)</b></p>
+            <div class="cta">
+              <a class="btn primary" href="#contact">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+                Get in touch
+              </a>
+              <a class="btn" href="hhassan_CV.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+                Modern CV
+              </a>
+              <a class="btn" href="hhassan_CV_ATS.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+                ATS CV
+              </a>
+              <a class="btn" href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4z"/></svg>
+                LinkedIn
+              </a>
             </div>
           </div>
 
-          <div>
-            <h3 style="margin:0 0 10px;">CV / GenAI / Deployment</h3>
-            <div class="chips">
-              <span class="chip">Object Detection</span>
-              <span class="chip">Segmentation</span>
-              <span class="chip">OCR</span>
-              <span class="chip">Video Analytics</span>
-              <span class="chip">Multi‑Object Tracking</span>
-              <span class="chip">Action Recognition</span>
-              <span class="chip">LLM Multi‑RAG</span>
-              <span class="chip">Diffusion Image Gen/Edit</span>
-              <span class="chip">Docker</span>
-              <span class="chip">Kubernetes</span>
-              <span class="chip">ONNX</span>
-              <span class="chip">TensorRT</span>
-              <span class="chip">NVIDIA Jetson</span>
-              <span class="chip">GCP / AWS</span>
+          <!-- Telemetry console -->
+          <div class="panel telemetry reveal">
+            <div class="console-bar">
+              <span class="dot"></span> career.telemetry
+              <span class="spacer"></span>
+              <span class="tag">live</span>
+            </div>
+            <div class="scope">
+              <svg class="scope-svg" id="scope" viewBox="0 0 520 158" preserveAspectRatio="none" aria-hidden="true"></svg>
+            </div>
+            <div class="trace-legend">
+              <span><i style="background:var(--signal)"></i>Throughput (FPS)</span>
+              <span><i style="background:rgba(255,255,255,0.55)"></i>Accuracy</span>
+              <span><i style="background:var(--ink-faint)"></i>Latency</span>
+            </div>
+            <div class="kpis">
+              <div class="kpi"><div class="num"><span data-count="9" data-suffix="">0</span><span class="u">+</span></div><div class="lab">Years in production AI</div></div>
+              <div class="kpi"><div class="num"><span data-count="35">0</span><span class="u"> fps</span></div><div class="lab">Sustained edge throughput</div></div>
+              <div class="kpi"><div class="num"><span class="u">&lt;</span><span data-count="150">0</span><span class="u"> ms</span></div><div class="lab">End-to-end edge latency</div></div>
+              <div class="kpi"><div class="num"><span data-count="80">0</span><span class="u">%</span></div><div class="lab">Annotation time cut</div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ================= CAPABILITIES (Radar + Gauges) ================= -->
+    <section class="section" id="capabilities">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">System Profile</p>
+          <h2>Capabilities &amp; signal strength</h2>
+          <p>Domain focus mapped against the work I ship most. Gauges below are real outcomes pulled from production deployments.</p>
+        </div>
 
-    
-    <section id="experience" class="section reveal">
-      <h2>Experience</h2>
-      <div class="xp">
+        <div class="split">
+          <!-- Radar -->
+          <div class="panel reveal">
+            <div class="console-bar"><span class="dot"></span> domain.radar <span class="spacer"></span><span class="tag">self-assessed</span></div>
+            <div class="radar-wrap">
+              <svg class="radar-svg" id="radar" viewBox="-60 0 540 360" role="img" aria-label="Skill domain radar chart"></svg>
+              <div class="radar-foot">6 axes · 0–100 emphasis scale</div>
+            </div>
+          </div>
 
-        <!-- Beyond Limits (ATS detailed version) -->
-        <div class="xp-item">
-          <div class="where">03/2024 – Present<br />EMEA Team</div>
-          <div>
-            <h3>Senior ML Engineer — Beyond Limits</h3>
-            <ul>
-              <li>Architected and deployed real‑time video analytics on <strong>NVIDIA Jetson</strong> across <strong>10+ camera feeds / 5+ sites</strong>, sustaining <strong>25–35 FPS</strong> with <strong>&lt;150 ms</strong> end‑to‑end latency for tracking, counting, and behavior analytics.</li>
-              <li>Built a production‑ready edge inference stack (pre/post‑processing, batching, stream handling, watchdogs) and packaged deployments using <strong>Docker</strong> with repeatable rollouts and rollback‑safe releases.</li>
-              <li>Optimized inference performance via <strong>ONNX</strong> export and <strong>TensorRT</strong> acceleration, reducing per‑stream latency by <strong>~35%</strong> while maintaining accuracy targets under edge constraints.</li>
-              <li>Designed scalable multi‑camera tracking and zone analytics (entry/exit, dwell time, occupancy) supporting <strong>20+ concurrent streams</strong> with stable long‑running behavior.</li>
-              <li>Delivered embedded analytics for <strong>Single/Double Flow Easier Gates</strong>, achieving flow measurement accuracy equals <strong>~94%</strong> and attaining tracking <strong>ID switches</strong> by <strong>~14%</strong> via calibrated detection thresholds, association tuning, and deployment‑specific validation.</li>
-              <li>Implemented robustness improvements for crowded scenes (occlusions, lighting, motion blur) using augmentation, confidence gating, and temporal smoothing to reduce unstable detections.</li>
-              <li>Built <strong>PPE compliance detection</strong> (Aramco) achieving <strong>~94% precision / ~90% recall</strong>, reducing false alarms by <strong>~35%</strong> using domain augmentation, post‑processing rules, and threshold calibration.</li>
-              <li>Developed CCTV <strong>child violence detection</strong> using spatio‑temporal action recognition and anomaly detection, achieving <strong>F1 ~84%</strong> and using only <strong>~10 mins</strong> of training data.</li>
-              <li>Created a semi‑automated video annotation workflow (auto‑proposals + reviewer validation + active learning loops) that cut labeling time by <strong>~80%</strong> and accelerated dataset iteration cycles. And on applying the training on the semi-automated data it achieved <strong>F1 ~80%</strong>.</li>
-              <li>Implemented dense‑scene people counting and crowd distribution analytics (festival / Haram / SCAI), reducing counting error (MAPE) by <strong>~43%</strong> with robust handling for occlusion and perspective changes.</li>
-              <li>Built observability for production deployments (structured logs, health checks, performance metrics) to support rapid triage and stability across long‑running edge workloads.</li>
-              <li>Built <strong>Multi‑RAG pipelines</strong> for LLM applications (multi‑source retrieval, hybrid search, reranking, and evaluation harnesses), improving <strong>Recall@10 ~20%</strong> and reducing hallucinations by <strong>~30%</strong> using evaluation‑driven iteration.</li>
-              <li>Supported government compliance and violation detection initiatives by integrating vision analytics into operational workflows and producing deployable reporting outputs.</li>
-            </ul>
-            <p class="muted" style="margin:10px 0 0;"><strong>Tech Stack:</strong> PyTorch, OpenCV, NVIDIA Jetson, Python, FastAPI, Docker, Kubernetes, ONNX, TensorRT, Vector Search, LLM APIs</p>
+          <!-- Headline gauges -->
+          <div class="panel reveal">
+            <div class="console-bar"><span class="dot"></span> headline.metrics <span class="spacer"></span><span class="tag">production</span></div>
+            <div class="gauges" id="gauges"></div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- IDefy (quantified ATS version) -->
-        <div class="xp-item">
-          <div class="where">10/2022 – 02/2024<br />Giza, Egypt</div>
-          <div>
-            <h3>Technical Lead — IDefy (Digital Identity / eKYC)</h3>
-            <ul>
-              <li>Owned end‑to‑end delivery of digital identity onboarding products across <strong>SaaS, SDK, web, and mobile</strong>, shipping <strong>3 major production releases</strong> from design through go‑live.</li>
-              <li>Led and mentored a cross‑functional team (<strong>8–12 members</strong>) spanning Backend, ML, UI/UX, Mobile, and DevOps; improved execution velocity by <strong>~30%</strong> through clear ownership, planning, and engineering standards.</li>
-              <li>Designed and implemented backend services and APIs for <strong>Document OCR</strong>, <strong>Face Matching</strong>, <strong>Liveness Detection</strong>, <strong>Identity Verification</strong>, and <strong>Access Management</strong>, sustaining <strong>99.9%</strong> uptime for production usage.</li>
-              <li>Improved verification user journey by introducing quality checks (blur/glare detection, face‑in‑frame guidance) and retry logic, increasing successful verification completion by <strong>~20%</strong>.</li>
-              <li>Built a configurable structured‑document recognition system requiring only a few samples per template, reaching <strong>~95%</strong> recognition accuracy and accelerating onboarding of new document types.</li>
-              <li>Implemented secure onboarding flows (tokenized sessions, audit logging, role‑based access) aligned with enterprise compliance requirements.</li>
-              <li>Hardened production reliability using API rate limiting, timeouts, and graceful fallbacks; reduced operational incidents by <strong>~25%</strong> across releases.</li>
-              <li>Released and published <strong>IDefy eKYC</strong> and <strong>GAMA Visitor Management</strong>, enabling scalable visitor onboarding and identity verification workflows.</li>
-            </ul>
-            <p class="muted" style="margin:10px 0 0;"><strong>Tech Stack:</strong> Python, FastAPI/Flask, OCR/CV pipelines, Docker, Cloud, SQL/NoSQL</p>
+    <!-- ================= IMPACT DASHBOARD ================= -->
+    <section class="section" id="impact">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Measured Outcomes</p>
+          <h2>Impact dashboard</h2>
+          <p>Every bar is a shipped result — grouped by the kind of system it came from. Bars fill as you scroll.</p>
+        </div>
+
+        <div class="metric-groups">
+          <div class="panel mgroup reveal">
+            <h3>Vision &amp; Edge <span class="cnt">06</span></h3>
+            <div class="meter" data-fill="94"><div class="top"><span class="name">PPE detection — precision</span><span class="val">94%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="90"><div class="top"><span class="name">PPE detection — recall</span><span class="val">90%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="94"><div class="top"><span class="name">Easier-Gates flow accuracy</span><span class="val">94%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="84"><div class="top"><span class="name">Violence detection — F1 (10-min data)</span><span class="val">F1 84%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="43"><div class="top"><span class="name">Crowd-count error reduced (MAPE)</span><span class="val">−43%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="35"><div class="top"><span class="name">Edge latency reduced (TensorRT)</span><span class="val">−35%</span></div><div class="track"><div class="fill"></div></div></div>
+          </div>
+
+          <div class="panel mgroup reveal">
+            <h3>Identity &amp; OCR <span class="cnt">05</span></h3>
+            <div class="meter" data-fill="99.9"><div class="top"><span class="name">eKYC service uptime</span><span class="val">99.9%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="95"><div class="top"><span class="name">Structured-doc recognition</span><span class="val">95%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="88"><div class="top"><span class="name">Sotoor Arabic OCR accuracy (100−WER)</span><span class="val">~88%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="20"><div class="top"><span class="name">Verification completion ↑</span><span class="val">+20%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="25"><div class="top"><span class="name">Operational incidents ↓</span><span class="val">−25%</span></div><div class="track"><div class="fill"></div></div></div>
+          </div>
+
+          <div class="panel mgroup reveal">
+            <h3>GenAI &amp; LLM <span class="cnt">02</span></h3>
+            <div class="meter" data-fill="30"><div class="top"><span class="name">Hallucinations reduced</span><span class="val">−30%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="20"><div class="top"><span class="name">Multi-RAG Recall@10 ↑</span><span class="val">+20%</span></div><div class="track"><div class="fill"></div></div></div>
+          </div>
+
+          <div class="panel mgroup reveal">
+            <h3>Data-centric &amp; Research <span class="cnt">04</span></h3>
+            <div class="meter" data-fill="80"><div class="top"><span class="name">Annotation time cut (semi-auto)</span><span class="val">−80%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="80"><div class="top"><span class="name">F1 on auto-labeled data</span><span class="val">F1 80%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="91"><div class="top"><span class="name">Post-op infection — specificity</span><span class="val">91%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="82"><div class="top"><span class="name">Post-op infection — sensitivity</span><span class="val">82%</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- RDI (quantified ATS version) -->
-        <div class="xp-item">
-          <div class="where">01/2021 – 10/2022<br />Giza, Egypt</div>
-          <div>
-            <h3>Senior ML Engineer (Computer Vision / OCR) — RDI</h3>
-            <ul>
-              <li>Led CV/OCR team delivering <strong>Sotoor Arabic OCR</strong>, achieving <strong>~12%</strong> Word Error Rate  and improving recognition quality by <strong>~15%</strong> through iterative training, evaluation, and targeted data improvements.</li>
-              <li>Built document understanding modules (layout analysis, line segmentation, font detection, text recognition, denoising, correction) and reduced OCR error rate by <strong>~7%</strong> on noisy and low‑quality scans.</li>
-              <li>Improved robustness for challenging documents (skew, blur, stains, complex layouts) using geometric normalization, augmentation, and post‑correction heuristics.</li>
-              <li>Optimized batch inference throughput to process <strong>30–50 pages/min</strong> while maintaining consistent quality across diverse fonts and layouts.</li>
-              <li>Established evaluation standards (CER/WER breakdown by font/layout) and regression testing to ensure stable model updates across releases.</li>
-              <li>Adapted the <strong>K2 toolkit</strong> (originally designed for speech) for OCR decoding/training, improving training efficiency by <strong>~7%</strong> and stabilizing convergence for sequence recognition.</li>
-              <li>Collaborated with product stakeholders to prioritize error categories and deliver incremental improvements aligned with customer document quality constraints.</li>
-            </ul>
-            <p class="muted" style="margin:10px 0 0;"><strong>Tech Stack:</strong> PyTorch, OpenCV, K2, OCR pipelines, Python, Linux</p>
+    <!-- ================= EXPERIENCE / CAREER RUN ================= -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Career Run</p>
+          <h2>Experience timeline</h2>
+          <p>Four checkpoints across 9+ years. Expand any role for the full deployment log.</p>
+        </div>
+
+        <div class="run">
+          <!-- Beyond -->
+          <div class="node reveal">
+            <details class="panel node-card" open>
+              <summary>
+                <div class="node-top">
+                  <h3>Senior ML Engineer · <span class="org">Beyond Limits</span></h3>
+                  <span class="node-when">03/2024 — PRESENT</span>
+                </div>
+                <div class="node-where">REMOTE · EMEA</div>
+                <div class="chip-row">
+                  <span class="stat-chip">25–35 FPS edge</span>
+                  <span class="stat-chip">&lt;150ms latency</span>
+                  <span class="stat-chip">10+ feeds / 5+ sites</span>
+                  <span class="stat-chip">F1 84% · 10-min data</span>
+                  <span class="stat-chip">−43% MAPE</span>
+                </div>
+                <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
+              </summary>
+              <ul>
+                <li>Architected and deployed real-time video analytics on <strong>NVIDIA Jetson</strong> across <strong>10+ camera feeds / 5+ sites</strong>, sustaining <strong>25–35 FPS</strong> with <strong>&lt;150 ms</strong> end-to-end latency for tracking, counting, and behavior analytics.</li>
+                <li>Built a production edge inference stack (pre/post-processing, batching, stream handling, watchdogs) packaged with <strong>Docker</strong> for repeatable, rollback-safe releases.</li>
+                <li>Optimized inference via <strong>ONNX</strong> export and <strong>TensorRT</strong> acceleration, cutting per-stream latency by <strong>~35%</strong> while holding accuracy under edge constraints.</li>
+                <li>Designed scalable multi-camera tracking and zone analytics (entry/exit, dwell, occupancy) supporting <strong>20+ concurrent streams</strong>.</li>
+                <li>Delivered embedded analytics for <strong>Single/Double Flow Easier Gates</strong>, reaching <strong>~94%</strong> flow accuracy and reducing tracking <strong>ID switches ~14%</strong>.</li>
+                <li>Built <strong>PPE compliance detection</strong> (Aramco): <strong>~94% precision / ~90% recall</strong>, reducing false alarms by <strong>~35%</strong>.</li>
+                <li>Developed CCTV <strong>violence detection</strong> via spatio-temporal action recognition, reaching <strong>F1 ~84%</strong> from only <strong>~10 minutes</strong> of labeled data.</li>
+                <li>Created a <strong>semi-automated annotation workflow</strong> (auto-proposals + reviewer validation + active learning), cutting labeling time <strong>~80%</strong>; models trained on the auto-labeled data hit <strong>F1 ~80%</strong>.</li>
+                <li>Implemented dense-scene people counting and crowd distribution analytics, reducing counting error (MAPE) by <strong>~43%</strong>.</li>
+                <li>Built <strong>Multi-RAG pipelines</strong> for LLM apps (multi-source retrieval, hybrid search, reranking, eval harnesses), improving <strong>Recall@10 ~20%</strong> and reducing hallucinations <strong>~30%</strong>.</li>
+                <li>Developed thermal/IR algorithms — fog dehazing/defogging and optical-flow anomaly detection — to restore visibility on low-visibility feeds.</li>
+              </ul>
+              <p class="stack-line"><b>STACK ›</b> PyTorch · OpenCV · NVIDIA Jetson · Python · FastAPI · Docker · Kubernetes · ONNX · TensorRT · Vector Search · LLM APIs</p>
+            </details>
+          </div>
+
+          <!-- IDefy -->
+          <div class="node reveal">
+            <details class="panel node-card">
+              <summary>
+                <div class="node-top">
+                  <h3>Technical Lead · <span class="org">IDefy</span> <span class="muted" style="font-weight:400;font-size:14px;">(Digital Identity / eKYC)</span></h3>
+                  <span class="node-when">10/2022 — 02/2024</span>
+                </div>
+                <div class="node-where">GIZA, EGYPT</div>
+                <div class="chip-row">
+                  <span class="stat-chip">3 production releases</span>
+                  <span class="stat-chip">Team 8–12</span>
+                  <span class="stat-chip">99.9% uptime</span>
+                  <span class="stat-chip">95% doc OCR</span>
+                  <span class="stat-chip">+20% verification</span>
+                </div>
+                <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
+              </summary>
+              <ul>
+                <li>Owned end-to-end delivery of identity onboarding products across <strong>SaaS, SDK, web, and mobile</strong>, shipping <strong>3 major production releases</strong>.</li>
+                <li>Led and mentored a cross-functional team of <strong>8–12</strong> (Backend, ML, UI/UX, Mobile, DevOps); raised execution velocity <strong>~30%</strong>.</li>
+                <li>Designed services and APIs for <strong>Document OCR, Face Matching, Liveness, Identity Verification</strong>, and Access Management at <strong>99.9% uptime</strong>.</li>
+                <li>Improved the verification journey (blur/glare detection, face-in-frame guidance, retry logic), lifting successful completion <strong>~20%</strong>.</li>
+                <li>Built a configurable structured-document recognition system needing only a few samples per template, reaching <strong>~95%</strong> accuracy.</li>
+                <li>Hardened reliability (rate limiting, timeouts, graceful fallbacks), reducing operational incidents <strong>~25%</strong>.</li>
+                <li>Released and published <strong>IDefy eKYC</strong> and <strong>GAMA Visitor Management</strong>.</li>
+              </ul>
+              <p class="stack-line"><b>STACK ›</b> Python · FastAPI / Flask · OCR/CV pipelines · Docker · Cloud · SQL / NoSQL</p>
+            </details>
+          </div>
+
+          <!-- RDI Senior -->
+          <div class="node reveal">
+            <details class="panel node-card">
+              <summary>
+                <div class="node-top">
+                  <h3>Senior ML Engineer · <span class="org">RDI</span> <span class="muted" style="font-weight:400;font-size:14px;">(Computer Vision / OCR)</span></h3>
+                  <span class="node-when">01/2021 — 10/2022</span>
+                </div>
+                <div class="node-where">GIZA, EGYPT</div>
+                <div class="chip-row">
+                  <span class="stat-chip">12% WER · Sotoor OCR</span>
+                  <span class="stat-chip">30–50 pages/min</span>
+                  <span class="stat-chip">−7% OCR error</span>
+                  <span class="stat-chip">+25% train efficiency</span>
+                </div>
+                <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
+              </summary>
+              <ul>
+                <li>Led CV/OCR delivery of <strong>Sotoor Arabic OCR</strong>, achieving <strong>~12% WER</strong> on manuscripts and lifting recognition quality <strong>~15%</strong>.</li>
+                <li>Built document-understanding modules (layout analysis, line segmentation, font detection, recognition, denoising, correction), reducing OCR error <strong>~7%</strong> on noisy scans.</li>
+                <li>Improved robustness for skew, blur, stains, and complex layouts via geometric normalization, augmentation, and post-correction.</li>
+                <li>Optimized batch inference to <strong>30–50 pages/min</strong> with consistent quality across fonts and layouts.</li>
+                <li>Adapted the <strong>K2 toolkit</strong> for OCR decoding/training, improving training efficiency <strong>~25%</strong> and stabilizing sequence recognition.</li>
+              </ul>
+              <p class="stack-line"><b>STACK ›</b> PyTorch · OpenCV · K2 · OCR pipelines · Python · Linux</p>
+            </details>
+          </div>
+
+          <!-- RDI Researcher -->
+          <div class="node reveal">
+            <details class="panel node-card">
+              <summary>
+                <div class="node-top">
+                  <h3>ML Researcher · <span class="org">RDI</span></h3>
+                  <span class="node-when">2017 — 2021</span>
+                </div>
+                <div class="node-where">GIZA, EGYPT</div>
+                <div class="chip-row">
+                  <span class="stat-chip">Arabic NLP &amp; Speech</span>
+                  <span class="stat-chip">OCR · Diacritization</span>
+                  <span class="stat-chip">Voice Conversion</span>
+                </div>
+                <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
+              </summary>
+              <ul>
+                <li>Built Arabic-language NLP systems across speech and text with a research team.</li>
+                <li>Developed and deployed production systems: <strong>Speech Recognition, OCR, Text Diacritization, Voice Conversion</strong>, and <strong>Quran Recitation Verification</strong>.</li>
+              </ul>
+              <p class="stack-line"><b>STACK ›</b> PyTorch · TensorFlow · Speech &amp; NLP toolkits · Python · Linux</p>
+            </details>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="xp-item">
-          <div class="where">2017 – 2021<br />Giza, Egypt</div>
-          <div>
-            <h3>ML Researcher — RDI</h3>
+    <!-- ================= TECH STACK MATRIX ================= -->
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Toolchain</p>
+          <h2>Tech stack matrix</h2>
+          <p>End-to-end coverage: data → training → serving → edge.</p>
+        </div>
+        <div class="matrix">
+          <div class="panel mcell reveal"><h4>Languages &amp; Data</h4><div class="tags">
+            <span class="tag-pill">Python</span><span class="tag-pill">SQL</span><span class="tag-pill">PostgreSQL</span><span class="tag-pill">NoSQL</span><span class="tag-pill">Pandas</span><span class="tag-pill">NumPy</span><span class="tag-pill">Feature Eng.</span>
+          </div></div>
+          <div class="panel mcell reveal"><h4>ML / Deep Learning</h4><div class="tags">
+            <span class="tag-pill">PyTorch</span><span class="tag-pill">TensorFlow</span><span class="tag-pill">Scikit-learn</span><span class="tag-pill">Transformers</span><span class="tag-pill">Fine-tuning</span><span class="tag-pill">Custom Loss</span><span class="tag-pill">Error Analysis</span>
+          </div></div>
+          <div class="panel mcell reveal"><h4>Computer Vision</h4><div class="tags">
+            <span class="tag-pill">Object Detection</span><span class="tag-pill">Segmentation</span><span class="tag-pill">OCR</span><span class="tag-pill">Video Analytics</span><span class="tag-pill">Multi-Object Tracking</span><span class="tag-pill">Action Recognition</span><span class="tag-pill">Optical Flow</span><span class="tag-pill">Liveness</span>
+          </div></div>
+          <div class="panel mcell reveal"><h4>GenAI / LLM</h4><div class="tags">
+            <span class="tag-pill">LLMs</span><span class="tag-pill">Multi-RAG</span><span class="tag-pill">Embeddings</span><span class="tag-pill">Reranking</span><span class="tag-pill">Chunking</span><span class="tag-pill">Prompt Eng.</span><span class="tag-pill">LLM Eval</span><span class="tag-pill">Diffusion</span>
+          </div></div>
+          <div class="panel mcell reveal"><h4>Serving &amp; MLOps</h4><div class="tags">
+            <span class="tag-pill">FastAPI</span><span class="tag-pill">REST APIs</span><span class="tag-pill">Docker</span><span class="tag-pill">Kubernetes</span><span class="tag-pill">CI/CD</span><span class="tag-pill">ONNX</span><span class="tag-pill">TensorRT</span>
+          </div></div>
+          <div class="panel mcell reveal"><h4>Cloud &amp; Edge</h4><div class="tags">
+            <span class="tag-pill">GCP</span><span class="tag-pill">AWS</span><span class="tag-pill">Vertex AI</span><span class="tag-pill">SageMaker</span><span class="tag-pill">NVIDIA Jetson</span><span class="tag-pill">Linux</span><span class="tag-pill">Git</span>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Build Log</p>
+          <h2>Selected projects</h2>
+        </div>
+        <div class="cards">
+          <div class="panel pcard reveal">
+            <span class="ptag">Agentic · Co-Founder · 2025–Present</span>
+            <h3>Agentic AI Call-Center Assistant</h3>
             <ul>
-              <li>Developed Arabic NLP, speech recognition, and character recognition pipelines, contributing to model training workflows and dataset preparation for sequence‑based systems.</li>
+              <li>Agentic assistant automating support via LLM orchestration, tool-calling, and <strong>Multi-RAG</strong> retrieval over policies, FAQs, and internal docs.</li>
+              <li>Intent detection + conversation state for structured multi-turn flows and compliant responses.</li>
+              <li>Tool integrations for ticketing, CRM lookup, status retrieval, escalation routing, and follow-ups — end-to-end task completion, not just Q&amp;A.</li>
+              <li>Guardrails: policy refusals, PII masking, scoped tool permissions, human-in-the-loop escalation.</li>
+              <li>Quality framework — groundedness checks, citation validation, regression testing — plus telemetry for latency and tool-call success.</li>
+            </ul>
+          </div>
+
+          <div class="panel pcard reveal">
+            <span class="ptag">GenAI · Lead Engineer · 2025–Present</span>
+            <h3>Fashimi — AI Virtual Try-On Platform</h3>
+            <ul>
+              <li>End-to-end try-on platform pairing <strong>LLM-driven recommendation</strong> with <strong>diffusion-based</strong> avatar generation and photorealistic synthesis.</li>
+              <li>GenAI architecture preserving identity and garment fidelity across pose, lighting, and texture.</li>
+              <li>Recommendation engine turning mood / occasion / climate / preferences into structured outfit prompts.</li>
+              <li>Fine-tuned segmentation/detection for clean garment masks, reducing artifacts and boosting fit realism.</li>
+              <li>Production APIs with async jobs, versioned result storage, and quality eval loops.</li>
+            </ul>
+          </div>
+
+          <div class="panel pcard reveal">
+            <span class="ptag">Clinical ML · 2022–2023</span>
+            <h3>Post-Operative Infection Prediction</h3>
+            <p class="summary">Ensemble model with imputation on clinical data — <strong>82% sensitivity</strong> and <strong>91% specificity</strong>, supporting Newcastle University PhD research and published at the FCI Annual Conference.</p>
+          </div>
+
+          <div class="panel pcard reveal">
+            <span class="ptag">Real-time CV · 2022</span>
+            <h3>Valorant Esports Overlay</h3>
+            <p class="summary">Real-time multi-threaded CV pipeline extracting gameplay data for esports overlays — object detection, pattern recognition, and color analysis at <strong>50–72 ms</strong> response latency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RESEARCH / AWARDS ================= -->
+    <section class="section" id="research">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Record</p>
+          <h2>Publications &amp; awards</h2>
+        </div>
+        <div class="duo">
+          <div class="panel list-panel reveal">
+            <h4 style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--signal);margin:0 0 8px;">Publications</h4>
+            <ul>
+              <li><span><strong>Arabic Multi-Genre Broadcast Speech Recognition</strong> — IEEE ASRU</span><span class="yr">2019</span></li>
+              <li><span><strong>Prognostic AI for Post-Operative Infections</strong> — FCI Annual Conference</span><span class="yr">2023</span></li>
+              <li><span><strong>QuranScript Verification System</strong> — ESOLE Conference of Language Engineering</span><span class="yr">2016</span></li>
+            </ul>
+          </div>
+          <div class="panel list-panel reveal">
+            <h4 style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--signal);margin:0 0 8px;">Awards</h4>
+            <ul>
+              <li><span><span class="award-medal">1ST PLACE</span> — Multi-Genre Broadcast Challenge (MGB-5)</span><span class="yr">2019</span></li>
+              <li><span><span class="award-medal">1ST PLACE</span> — ICFHR RASM (Historical Arabic Scientific Manuscripts)</span><span class="yr">2018</span></li>
+            </ul>
+            <h4 style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--signal);margin:18px 0 8px;">Education</h4>
+            <ul>
+              <li><span><strong>B.Sc. Electrical, Electronics &amp; Communication Engineering</strong> — Cairo University</span><span class="yr">2016</span></li>
             </ul>
           </div>
         </div>
-
       </div>
     </section>
 
-
-    <section id="projects" class="section reveal">
-      <h2>Projects</h2>
-      <div class="cards">
-
-        <div class="card">
-          <h3>Agentic AI Call‑Center Assistant (2025-Present)</h3>
-          <p class="muted" style="margin:0; line-height:1.65;">
-            <li>Designed and delivered an agentic call-center assistant that automates customer support workflows using LLM orchestration, tool calling, and Multi-RAG knowledge retrieval (policies, FAQs, troubleshooting playbooks, and internal documentation).</li>
-            <li>Implemented intent detection and conversation state management to guide multi-turn interactions, ensuring the agent collects missing information, follows structured flows, and generates compliant responses.</li>
-            <li>Built a Multi-RAG retrieval layer with multi-source ingestion (knowledge base, CRM notes, product manuals), hybrid search patterns, and reranking strategies to improve grounding and reduce hallucinations.</li>
-            <li>Developed tool integrations for operational actions such as ticket creation/update, CRM lookup, order/account status retrieval, escalation routing, and follow-up scheduling, enabling end-to-end task completion rather than Q&A only.</li>
-            <li>Implemented guardrails and safety controls including policy-based refusals, PII masking/redaction, controlled tool permissions, and “human-in-the-loop” escalation for sensitive or low-confidence cases.</li>
-            <li>Built a response quality framework using automated evaluation (groundedness checks, citation validation, conversation scoring, and regression testing) to prevent prompt drift and ensure consistent outcomes across releases.</li>
-            <li>Designed fallback strategies for production reliability including confidence thresholds, retry policies, safe response templates, and rollback mechanisms for prompt/model updates.</li>
-            <li>Delivered the system as scalable APIs with asynchronous processing, structured logs, and telemetry for observability (latency, tool-call success rate, and failure reasons).</li>
-            <li>Collaborated with product and support teams to translate call-center requirements into agent workflows, define success metrics, and iterate based on real conversation traces and failure analysis.</li>
-            
-          </p>
+    <!-- ================= CONTACT ================= -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Connect</p>
+          <h2>Let's build something measurable.</h2>
+          <p>Cairo, Egypt · Open to relocation · Available for Senior ML / AI Lead roles.</p>
         </div>
-
-        <div class="card">
-          <h3>Fashimi — AI Virtual Try‑On Platform (2025–Present)</h3>
-          <p class="muted" style="margin:0; line-height:1.65;">
-            <li>Led end-to-end engineering of an AI virtual try-on platform by combining LLM-driven recommendation and prompt orchestration with diffusion-based avatar generation and try-on synthesis to deliver photorealistic personalized outputs.</li>
-            <li>Designed the GenAI architecture including user profile ingestion (body/face images + preferences), garment understanding, and controlled generation workflow to ensure consistent identity, garment preservation, and high-quality rendering.</li>
-            <li>Implemented an LLM recommendation engine that converts user context (mood, occasion, climate, style preferences, budget constraints) into structured outfit decisions and generates optimized prompts for try-on generation.</li>
-            <li>Built the diffusion generation pipeline for avatar creation and try-on synthesis, handling conditioning strategies (identity, segmentation masks, garment attributes), and enforcing visual fidelity across lighting, pose, and texture constraints.</li>
-            <li>Integrated text-prompt segmentation and vision preprocessing to enable accurate garment extraction, background control, and consistent fit alignment on generated avatars.</li>
-            <li>Fine-tuned domain-specific segmentation and detection models to improve clothing masks and object extraction quality, reducing artifacts and boosting fit realism for multi-category outfits.</li>
-            <li>Developed an evaluation workflow for generation quality including automated checks (mask alignment, artifact detection, identity consistency) and human-in-the-loop feedback loops to drive iterative improvement.</li>
-            <li>Delivered production-ready services through scalable APIs, defining system contracts for generation requests, async job handling, and result storage/versioning for repeatability and traceability.</li>
-            <li>Collaborated cross-functionally with product and design teams to align generation quality with UX expectations, and translated requirements into measurable metrics and iterative releases.</li>
-          </p>
-          <!-- Optional demo link -->
+        <div class="panel" style="padding:20px;">
+          <div class="contact-grid reveal">
+            <a href="mailto:hazem.mamdouh.fekry@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              hazem.mamdouh.fekry@gmail.com
+            </a>
+            <a href="tel:+201000912694">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a14 14 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+              +20 100 0912 694
+            </a>
+            <a href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4z"/></svg>
+              in/hmamdouh
+            </a>
+            <a href="https://github.com/hazemmamdouh" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+              github/hazemmamdouh
+            </a>
+          </div>
         </div>
-
-        <div class="card">
-          <h3>Post‑Operative Infections Prediction (2022–2023)</h3>
-          <p class="muted" style="margin:0; line-height:1.65;">
-            Ensemble ML model with imputation on clinical data; achieved <strong>82% sensitivity</strong> and <strong>91% specificity</strong>, supporting Newcastle University PhD research.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Valorant Game Overlay (2022)</h3>
-          <p class="muted" style="margin:0; line-height:1.65;">
-            Real‑time multi‑threaded CV pipeline for esports overlays; object detection and color analysis with <strong>50–72 ms</strong> response latency.
-          </p>
-        </div>
-
-
       </div>
     </section>
-
-
-    <section id="publications" class="section reveal">
-      <h2>Publications</h2>
-      <div class="panel">
-        <ul style="margin:0 0 0 18px;">
-          <li><strong>Arabic Multi‑Genre Broadcast Speech Recognition</strong> — IEEE ASRU 2019.</li>
-          <li><strong>Developing an AI predictive model for post‑operative infection</strong> — 2023.</li>
-          <li><strong>Data Preparation and Handling for Written Quran Script Verification</strong> — 2016.</li>
-        </ul>
-      </div>
-    </section>
-
-
-    <section id="awards" class="section reveal">
-      <h2>Awards</h2>
-      <div class="panel">
-        <ul style="margin:0 0 0 18px;">
-          <li><strong>1st Place</strong> — Multi‑Genre Broadcast Challenge (MGB‑5), 2019.</li>
-          <li><strong>1st Place</strong> — ICFHR 2018 RASM (Recognition of Historical Arabic Scientific Manuscripts).</li>
-        </ul>
-      </div>
-    </section>
-
-
-    <section id="contact" class="section reveal">
-      <h2>Contact</h2>
-      <div class="panel">
-        <div class="contact">
-          <a href="mailto:hazem.mamdouh.fekry@gmail.com">Email</a>
-          <a href="tel:+201000912694">Phone</a>
-          <a href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">LinkedIn</a>
-          <!-- Optional: add Calendly link -->
-        </div>
-        <p class="muted" style="margin:12px 0 0;">Cairo, Egypt • Open to re-allocation</p>
-      </div>
-    </section>
-
   </main>
 
   <footer>
-    <div class="container">© <span id="y"></span> Hazem Hassan — Futuristic monochrome portfolio.</div>
+    <div class="container">
+      <span>© <span id="y"></span> Hazem Hassan</span>
+      <span>Built as an ML telemetry console · Cairo, EG</span>
+    </div>
   </footer>
 
   <script>
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
+  (function () {
+    "use strict";
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('show');
-          io.unobserve(e.target);
-        }
+    /* ---------- Reveal on scroll ---------- */
+    var revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var ro = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("show"); ro.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(function (el) { ro.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add("show"); });
+    }
+
+    /* ---------- Count-up KPIs ---------- */
+    function countUp(el) {
+      var target = parseFloat(el.getAttribute("data-count"));
+      if (reduced) { el.textContent = target; return; }
+      var dur = 1100, start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        var v = target * eased;
+        el.textContent = (target % 1 === 0) ? Math.round(v) : v.toFixed(1);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    var counters = document.querySelectorAll("[data-count]");
+    if ("IntersectionObserver" in window) {
+      var co = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); } });
+      }, { threshold: 0.6 });
+      counters.forEach(function (el) { co.observe(el); });
+    } else { counters.forEach(countUp); }
+
+    /* ---------- Meter bars ---------- */
+    var meters = document.querySelectorAll(".meter");
+    if ("IntersectionObserver" in window) {
+      var mo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            var f = e.target.querySelector(".fill");
+            var v = parseFloat(e.target.getAttribute("data-fill"));
+            f.style.width = Math.min(v, 100) + "%";
+            mo.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      meters.forEach(function (m) { mo.observe(m); });
+    } else {
+      meters.forEach(function (m) { m.querySelector(".fill").style.width = m.getAttribute("data-fill") + "%"; });
+    }
+
+    /* ---------- Radial gauges ---------- */
+    var gaugeData = [
+      { v: 94, label: "PPE precision", sub: "Aramco safety" },
+      { v: 84, label: "Violence F1", sub: "from 10-min data" },
+      { v: 80, label: "Annotation cut", sub: "semi-auto loop" },
+      { v: 43, label: "Crowd error ↓", sub: "MAPE reduction" }
+    ];
+    var gWrap = document.getElementById("gauges");
+    var R = 46, C = 2 * Math.PI * R;
+    gaugeData.forEach(function (g) {
+      var cell = document.createElement("div");
+      cell.className = "gauge";
+      cell.innerHTML =
+        '<svg viewBox="0 0 120 120">' +
+          '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="9"/>' +
+          '<circle class="arc" cx="60" cy="60" r="' + R + '" fill="none" stroke="url(#gg)" stroke-width="9" stroke-linecap="round" ' +
+          'transform="rotate(-90 60 60)" stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '"/>' +
+          '<text class="gv" x="60" y="66" text-anchor="middle">0%</text>' +
+          '<defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">' +
+            '<stop offset="0%" stop-color="var(--signal-2)"/><stop offset="100%" stop-color="var(--signal)"/>' +
+          '</linearGradient></defs>' +
+        '</svg>' +
+        '<div class="glabel">' + g.label + '<div class="gsub">' + g.sub + '</div></div>';
+      gWrap.appendChild(cell);
+      var arc = cell.querySelector(".arc");
+      var txt = cell.querySelector(".gv");
+      function animate() {
+        var off = C * (1 - g.v / 100);
+        if (reduced) { arc.style.strokeDashoffset = off; txt.textContent = g.v + "%"; return; }
+        arc.style.transition = "stroke-dashoffset 1300ms cubic-bezier(0.22,1,0.36,1)";
+        requestAnimationFrame(function () { arc.style.strokeDashoffset = off; });
+        var start = null, dur = 1300;
+        function tick(ts) { if (!start) start = ts; var p = Math.min((ts - start) / dur, 1);
+          txt.textContent = Math.round(g.v * (1 - Math.pow(1 - p, 3))) + "%"; if (p < 1) requestAnimationFrame(tick); }
+        requestAnimationFrame(tick);
+      }
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { animate(); io.disconnect(); } }); }, { threshold: 0.5 });
+        io.observe(cell);
+      } else { animate(); }
+    });
+
+    /* ---------- Capability radar ---------- */
+    (function () {
+      var axes = [
+        { label: "Computer Vision", v: 96 },
+        { label: "Edge & Real-time", v: 90 },
+        { label: "OCR / Doc AI", v: 92 },
+        { label: "GenAI / LLM", v: 84 },
+        { label: "MLOps / Deploy", v: 88 },
+        { label: "Data-centric AI", v: 90 }
+      ];
+      var svg = document.getElementById("radar");
+      if (!svg) return;
+      var cx = 210, cy = 170, rad = 120, n = axes.length;
+      function pt(i, r) {
+        var ang = -Math.PI / 2 + i * (2 * Math.PI / n);
+        return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+      }
+      var ns = "http://www.w3.org/2000/svg", parts = "";
+      // rings
+      [0.25, 0.5, 0.75, 1].forEach(function (f) {
+        var p = "";
+        for (var i = 0; i < n; i++) { var q = pt(i, rad * f); p += (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1) + " "; }
+        p += "Z";
+        parts += '<path d="' + p + '" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>';
       });
-    }, { threshold: 0.12 });
+      // spokes + labels
+      for (var i = 0; i < n; i++) {
+        var e = pt(i, rad);
+        parts += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>';
+        var lp = pt(i, rad + 26);
+        var anchor = Math.abs(lp[0] - cx) < 6 ? "middle" : (lp[0] < cx ? "end" : "start");
+        parts += '<text x="' + lp[0].toFixed(1) + '" y="' + (lp[1] + 4).toFixed(1) + '" text-anchor="' + anchor + '" ' +
+          'font-family="JetBrains Mono, monospace" font-size="10.5" fill="#99A2AD" letter-spacing="0.04em">' + axes[i].label + '</text>';
+      }
+      // data polygon
+      var dpath = "", dots = "";
+      for (var j = 0; j < n; j++) {
+        var rr = reduced ? axes[j].v / 100 * rad : 0;
+        var dp = pt(j, axes[j].v / 100 * rad);
+        dpath += (j ? "L" : "M") + dp[0].toFixed(1) + " " + dp[1].toFixed(1) + " ";
+        dots += '<circle cx="' + dp[0].toFixed(1) + '" cy="' + dp[1].toFixed(1) + '" r="3.2" fill="var(--signal)"/>';
+      }
+      dpath += "Z";
+      svg.innerHTML = parts +
+        '<path id="radarPoly" d="' + dpath + '" fill="rgba(103,232,207,0.16)" stroke="var(--signal)" stroke-width="2" ' +
+        'style="opacity:' + (reduced ? 1 : 0) + ';transform-origin:' + cx + 'px ' + cy + 'px;transform:scale(' + (reduced ? 1 : 0.2) + ');"/>' +
+        '<g id="radarDots" style="opacity:' + (reduced ? 1 : 0) + '">' + dots + '</g>';
+      var poly = svg.querySelector("#radarPoly"), dg = svg.querySelector("#radarDots");
+      function grow() {
+        if (reduced) return;
+        poly.style.transition = "transform 900ms cubic-bezier(0.22,1,0.36,1), opacity 600ms ease";
+        dg.style.transition = "opacity 700ms ease 300ms";
+        requestAnimationFrame(function () { poly.style.opacity = 1; poly.style.transform = "scale(1)"; dg.style.opacity = 1; });
+      }
+      if ("IntersectionObserver" in window) {
+        var io2 = new IntersectionObserver(function (en) { en.forEach(function (ev) { if (ev.isIntersecting) { grow(); io2.disconnect(); } }); }, { threshold: 0.4 });
+        io2.observe(svg);
+      } else { grow(); }
+    })();
 
-    revealEls.forEach(el => io.observe(el));
+    /* ---------- Hero telemetry scope ---------- */
+    (function () {
+      var svg = document.getElementById("scope");
+      if (!svg) return;
+      var W = 520, H = 158, pad = 6;
+      function trace(seed, base, amp, color, width, dash) {
+        var pts = [], n = 60, x;
+        var s = seed;
+        function rnd() { s = (s * 9301 + 49297) % 233280; return s / 233280; }
+        var val = base;
+        for (var i = 0; i <= n; i++) {
+          val += (rnd() - 0.5) * amp;
+          val = Math.max(pad, Math.min(H - pad, val + (base - val) * 0.08));
+          x = pad + (W - 2 * pad) * (i / n);
+          pts.push([x, val]);
+        }
+        var d = "";
+        for (var k = 0; k < pts.length; k++) {
+          if (k === 0) { d += "M" + pts[k][0].toFixed(1) + " " + pts[k][1].toFixed(1); }
+          else {
+            var px = pts[k - 1][0], py = pts[k - 1][1], cxp = (px + pts[k][0]) / 2;
+            d += " Q" + px.toFixed(1) + " " + py.toFixed(1) + " " + cxp.toFixed(1) + " " + ((py + pts[k][1]) / 2).toFixed(1);
+          }
+        }
+        return { d: d, end: pts[pts.length - 1], color: color, width: width, dash: dash };
+      }
+      var traces = [
+        trace(133, 95, 34, "var(--ink-faint)", 1.3, "3 4"),   // latency
+        trace(771, 70, 26, "rgba(255,255,255,0.55)", 1.5, ""),// accuracy
+        trace(412, 48, 40, "var(--signal)", 2.2, "")          // throughput (hero)
+      ];
+      var inner = '<defs><linearGradient id="scopeFade" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0%" stop-color="rgba(103,232,207,0.18)"/><stop offset="100%" stop-color="rgba(103,232,207,0)"/></linearGradient></defs>';
+      // fill under signal trace
+      var sig = traces[2];
+      inner += '<path d="' + sig.d + ' L' + (W - pad) + ' ' + (H - pad) + ' L' + pad + ' ' + (H - pad) + ' Z" fill="url(#scopeFade)" opacity="0.9"/>';
+      traces.forEach(function (t, idx) {
+        var len = 1400;
+        inner += '<path d="' + t.d + '" fill="none" stroke="' + t.color + '" stroke-width="' + t.width + '" ' +
+          (t.dash ? 'stroke-dasharray="' + t.dash + '" ' : '') +
+          'stroke-linecap="round" class="scope-line" data-idx="' + idx + '"/>';
+      });
+      // live dot at end of signal trace
+      inner += '<circle cx="' + sig.end[0].toFixed(1) + '" cy="' + sig.end[1].toFixed(1) + '" r="3.6" fill="var(--signal)"><animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/></circle>';
+      svg.innerHTML = inner;
+
+      if (!reduced) {
+        svg.querySelectorAll(".scope-line").forEach(function (p) {
+          var L = p.getTotalLength();
+          p.style.strokeDasharray = p.getAttribute("stroke-dasharray") ? p.getAttribute("stroke-dasharray") : L;
+          if (!p.getAttribute("stroke-dasharray") || p.dataset.idx === "2") {
+            p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
+            p.style.transition = "stroke-dashoffset 1500ms ease " + (p.dataset.idx * 180) + "ms";
+            requestAnimationFrame(function () { p.style.strokeDashoffset = 0; });
+          }
+        });
+      }
+    })();
+
+    /* ---------- Scroll-spy nav ---------- */
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+    var sections = navLinks.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+    if ("IntersectionObserver" in window) {
+      var so = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id); });
+          }
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      sections.forEach(function (s) { if (s) so.observe(s); });
+    }
+  })();
   </script>
 </body>
 </html>
