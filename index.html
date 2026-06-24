@@ -418,9 +418,13 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
                 Get in touch
               </a>
+              <a class="btn" href="hhassan_CV.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+                Modern CV
+              </a>
               <a class="btn" href="hhassan_CV_ATS.pdf" download>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-                CV
+                ATS CV
               </a>
               <a class="btn" href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4z"/></svg>
@@ -545,7 +549,7 @@
               <summary>
                 <div class="node-top">
                   <h3>Senior ML Engineer · <span class="org">Beyond Limits</span></h3>
-                  <span class="node-when">03/2024 — </span>
+                  <span class="node-when">03/2024 — PRESENT</span>
                 </div>
                 <div class="node-where">REMOTE · EMEA</div>
                 <div class="chip-row">
@@ -554,6 +558,9 @@
                   <span class="stat-chip">10+ feeds / 5+ sites</span>
                   <span class="stat-chip">F1 84% · 10-min data</span>
                   <span class="stat-chip">−43% MAPE</span>
+                  <span class="stat-chip">LangGraph · LlamaIndex</span>
+                  <span class="stat-chip">FAISS RAG · TTFT &lt;5s</span>
+                  <span class="stat-chip">Ragas + LangSmith eval</span>
                 </div>
                 <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
               </summary>
@@ -568,9 +575,14 @@
                 <li>Created a <strong>semi-automated annotation workflow</strong> (auto-proposals + reviewer validation + active learning), cutting labeling time <strong>~80%</strong>; models trained on the auto-labeled data hit <strong>F1 ~80%</strong>.</li>
                 <li>Implemented dense-scene people counting and crowd distribution analytics, reducing counting error (MAPE) by <strong>~43%</strong>.</li>
                 <li>Built <strong>Multi-RAG pipelines</strong> for LLM apps (multi-source retrieval, hybrid search, reranking, eval harnesses), improving <strong>Recall@10 ~20%</strong> and reducing hallucinations <strong>~30%</strong>.</li>
+                <li>Built <strong>agentic LLM workflows with LangGraph</strong> — agents modeled as directed graphs with message passing, tool-calling, and execution orchestration across nodes — served through custom <strong>Python · FastAPI</strong> orchestration.</li>
+                <li>Developed <strong>RAG systems with LlamaIndex</strong>: embedding fine-tuning, retrieval orchestration, synthetic QA generation, and <strong>multi-modal pipelines</strong> over text, charts, and research papers, backed by a <strong>FAISS</strong> vector store.</li>
+                <li>Engineered a <strong>long-document RAG path</strong> (recursive + sequential summarization) with <strong>NeMo Guardrails</strong> intent routing between retrieval and summarization, tuning chunk size to hold <strong>time-to-first-token &lt; 5s</strong>.</li>
+                <li>Built an <strong>LLM evaluation framework</strong> — <strong>Ragas</strong> component-level retriever/generator scoring (context relevancy/recall, faithfulness, answer relevancy) with <strong>LangSmith</strong> tracing and continuous evaluation — plus <strong>MT-Bench</strong> (LLM-as-judge), <strong>AlpacaEval</strong>, <strong>LM-Eval</strong>, <strong>Elo</strong>, perplexity, and a concurrency/latency benchmark measuring per-token timing under load.</li>
+                <li>Prototyped an <strong>agentic AI call-center assistant</strong>: tool-calling + Multi-RAG for intent handling and answer generation with CRM/ticketing actions, guardrails, <strong>human-in-the-loop escalation</strong>, and an output-quality evaluation loop.</li>
                 <li>Developed thermal/IR algorithms — fog dehazing/defogging and optical-flow anomaly detection — to restore visibility on low-visibility feeds.</li>
               </ul>
-              <p class="stack-line"><b>STACK ›</b> PyTorch · OpenCV · NVIDIA Jetson · Python · FastAPI · Docker · Kubernetes · ONNX · TensorRT · Vector Search · LLM APIs</p>
+              <p class="stack-line"><b>STACK ›</b> PyTorch · OpenCV · NVIDIA Jetson · Python · FastAPI · Docker · Kubernetes · ONNX · TensorRT · LangGraph · LlamaIndex · FAISS · Ragas · LangSmith · NeMo Guardrails · LLM APIs</p>
             </details>
           </div>
 
@@ -700,7 +712,7 @@
         </div>
         <div class="cards">
           <div class="panel pcard reveal">
-            <span class="ptag">Agentic · Co-Founder · 2025–</span>
+            <span class="ptag">Agentic · Co-Founder · 2025–Present</span>
             <h3>Agentic AI Call-Center Assistant</h3>
             <ul>
               <li>Agentic assistant automating support via LLM orchestration, tool-calling, and <strong>Multi-RAG</strong> retrieval over policies, FAQs, and internal docs.</li>
@@ -712,7 +724,7 @@
           </div>
 
           <div class="panel pcard reveal">
-            <span class="ptag">GenAI · Lead Engineer · 2025–2026</span>
+            <span class="ptag">GenAI · Lead Engineer · 2025–Present</span>
             <h3>Fashimi — AI Virtual Try-On Platform</h3>
             <ul>
               <li>End-to-end try-on platform pairing <strong>LLM-driven recommendation</strong> with <strong>diffusion-based</strong> avatar generation and photorealistic synthesis.</li>
