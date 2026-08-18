@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hazem Hassan — Senior Machine Learning Engineer</title>
-  <meta name="description" content="Hazem Hassan — Senior ML Engineer / AI Technical Lead. 9+ years shipping production Computer Vision, OCR, Edge AI, Video Analytics, LLM Multi-RAG, and Diffusion systems." />
-  <meta property="og:title" content="Hazem Hassan — Senior Machine Learning Engineer" />
-  <meta property="og:description" content="Senior ML Engineer (9+ years) shipping production AI across CV, GenAI, LLM Multi-RAG, and real-time edge deployments. A portfolio rendered as the ML telemetry console he builds." />
+  <title>Hazem Hassan — Senior AI/ML Engineer · Computer Vision · LLM &amp; Agentic Systems</title>
+  <meta name="description" content="Hazem Hassan — Senior ML Engineer / AI Technical Lead. 9+ years shipping production AI on two tracks: Computer Vision, OCR, video analytics and edge deployment on NVIDIA Jetson; and LLM / agentic systems with LangGraph, LlamaIndex, RAG, Ragas and LangSmith." />
+  <meta property="og:title" content="Hazem Hassan — Senior AI/ML Engineer" />
+  <meta property="og:description" content="Two tracks, one engineer: real-time Computer Vision on the edge, and LLM / agentic systems in production. A portfolio rendered as the ML telemetry console he builds." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#07090C" />
+  <meta name="theme-color" content="#05070A" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2305070A'/%3E%3Cpath d='M18 44V20M18 32h12M30 44V20' stroke='%2367E8CF' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M38 44V20M38 32h10M48 44V20' stroke='%23A78BFA' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,31 +17,39 @@
 
   <style>
     :root {
-      /* ---- Console palette: monochrome carbon + a single phosphor signal ---- */
-      --void:      #07090C;
-      --carbon:    #0E1116;
-      --carbon-2:  #12161D;
-      --carbon-3:  #171C24;
+      /* ---- Console palette: carbon + dual phosphor signal (vision / language) ---- */
+      --void:      #05070A;
+      --carbon:    #0C0F14;
+      --carbon-2:  #11151C;
+      --carbon-3:  #171C25;
       --line:      rgba(255,255,255,0.08);
-      --line-2:    rgba(255,255,255,0.14);
+      --line-2:    rgba(255,255,255,0.15);
       --ink:       #EEF2F5;
       --ink-dim:   #99A2AD;
       --ink-faint: #5C6571;
-      /* instrument-only accent — phosphor mint (oscilloscope / IR readout) */
-      --signal:    #67E8CF;
-      --signal-2:  #44C9B3;
-      --signal-dim:rgba(103,232,207,0.16);
-      --signal-glow:rgba(103,232,207,0.40);
 
-      --r-lg: 18px;
+      /* track A — vision (phosphor mint) */
+      --signal:    #67E8CF;
+      --signal-2:  #35BFA6;
+      --signal-dim:rgba(103,232,207,0.16);
+      --signal-glow:rgba(103,232,207,0.42);
+      /* track B — language (violet) */
+      --sig-b:     #A78BFA;
+      --sig-b-2:   #7C5CF0;
+      --sig-b-dim: rgba(167,139,250,0.16);
+      --sig-b-glow:rgba(167,139,250,0.40);
+
+      --r-lg: 20px;
       --r-md: 14px;
       --r-sm: 10px;
-      --shadow: 0 18px 50px rgba(0,0,0,0.55);
-      --maxw: 1140px;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --maxw: 1160px;
 
       --f-display: "Space Grotesk", system-ui, sans-serif;
       --f-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     * { box-sizing: border-box; }
@@ -56,106 +65,218 @@
       line-height: 1.6;
     }
 
-    /* ---------- Ambient console background ---------- */
-    .bg { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
-    .bg::before {
-      content: ""; position: absolute; inset: -30%;
+    /* ---------- Ambient: drifting aurora, live grid, constellation, noise ---------- */
+    .bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; overflow: hidden; }
+    .bg .aurora {
+      position: absolute; inset: -35%;
       background:
-        radial-gradient(closest-side at 18% 8%, rgba(103,232,207,0.10), transparent 70%),
-        radial-gradient(closest-side at 82% 0%, rgba(255,255,255,0.05), transparent 70%),
-        radial-gradient(closest-side at 60% 95%, rgba(103,232,207,0.06), transparent 70%);
-      filter: blur(10px);
+        radial-gradient(closest-side at 20% 12%, rgba(103,232,207,0.16), transparent 68%),
+        radial-gradient(closest-side at 82% 4%,  rgba(167,139,250,0.15), transparent 68%),
+        radial-gradient(closest-side at 62% 92%, rgba(103,232,207,0.09), transparent 70%),
+        radial-gradient(closest-side at 8%  78%, rgba(167,139,250,0.08), transparent 70%);
+      filter: blur(14px);
+      animation: drift 26s ease-in-out infinite alternate;
     }
+    @keyframes drift {
+      0%   { transform: translate3d(-2%, -1%, 0) scale(1);    }
+      50%  { transform: translate3d(3%, 2%, 0)  scale(1.08);  }
+      100% { transform: translate3d(-1%, 3%, 0) scale(1.03);  }
+    }
+    #field { position: fixed; inset: 0; z-index: -3; pointer-events: none; opacity: 0.55; }
     .grid-overlay {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      position: fixed; inset: -60px; z-index: -2; pointer-events: none;
       background-image:
-        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(circle at 50% 22%, #000 0%, rgba(0,0,0,0.35) 55%, transparent 78%);
-      -webkit-mask-image: radial-gradient(circle at 50% 22%, #000 0%, rgba(0,0,0,0.35) 55%, transparent 78%);
+        linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: radial-gradient(circle at 50% 18%, #000 0%, rgba(0,0,0,0.35) 55%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 18%, #000 0%, rgba(0,0,0,0.35) 55%, transparent 80%);
+      animation: gridpan 34s linear infinite;
+    }
+    @keyframes gridpan { to { background-position: 58px 58px; } }
+    .noise {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     a { color: var(--ink); text-decoration: none; }
     ::selection { background: var(--signal-dim); color: #fff; }
 
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
-
     .mono { font-family: var(--f-mono); }
+
+    /* ---------- Scroll progress ---------- */
+    .progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 100%; z-index: 200;
+      transform-origin: 0 50%; transform: scaleX(0);
+      background: linear-gradient(90deg, var(--signal), var(--sig-b));
+      box-shadow: 0 0 14px var(--signal-glow);
+    }
+
+    /* ---------- Eyebrow / section index ---------- */
     .eyebrow {
-      font-family: var(--f-mono);
-      font-size: 11.5px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--signal);
-      display: inline-flex; align-items: center; gap: 9px;
-      margin: 0 0 14px;
+      font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--signal);
+      display: inline-flex; align-items: center; gap: 9px; margin: 0 0 14px;
     }
     .eyebrow::before {
       content: ""; width: 7px; height: 7px; border-radius: 2px;
       background: var(--signal); box-shadow: 0 0 10px var(--signal-glow);
+      animation: pulse 2.4s ease-in-out infinite;
     }
+    .eyebrow.b { color: var(--sig-b); }
+    .eyebrow.b::before { background: var(--sig-b); box-shadow: 0 0 10px var(--sig-b-glow); }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
 
     /* ---------- Header ---------- */
     header {
-      position: sticky; top: 0; z-index: 80;
-      backdrop-filter: blur(12px);
-      background: rgba(7,9,12,0.74);
+      position: sticky; top: 0; z-index: 90;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      background: rgba(5,7,10,0.72);
       border-bottom: 1px solid var(--line);
+      transition: background 300ms ease, border-color 300ms ease;
     }
-    nav { display: flex; align-items: center; justify-content: space-between; gap: 14px; height: 64px; }
-    .brand { display: flex; align-items: center; gap: 11px; }
-    .brand img {
-      width: 38px; height: 38px; border-radius: 11px; object-fit: cover;
-      border: 1px solid var(--line-2);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset;
-    }
-    .brand .id { display: flex; flex-direction: column; line-height: 1.1; }
-    .brand .id strong { font-family: var(--f-display); font-weight: 600; font-size: 15px; letter-spacing: 0.2px; }
-    .brand .id span { font-family: var(--f-mono); color: var(--ink-dim); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; }
+    header.pinned { background: rgba(5,7,10,0.92); border-color: var(--line-2); }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 14px; height: 66px; }
 
-    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .mark { position: relative; width: 40px; height: 40px; display: grid; place-items: center; flex: none; }
+    .mark .ring {
+      position: absolute; inset: 0; border-radius: 13px; padding: 1px;
+      background: conic-gradient(from 0deg, var(--signal), var(--sig-b), var(--signal));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: spin 7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .mark .glyph {
+      position: absolute; inset: 3px; border-radius: 11px; background: var(--carbon);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+      font-family: var(--f-display); font-weight: 700; font-size: 15px; letter-spacing: -0.02em;
+    }
+    .mark .glyph i { font-style: normal; color: var(--signal); }
+    .mark .glyph b { color: var(--sig-b); font-weight: 700; }
+    .mark .face {
+      position: absolute; left: 3px; top: 3px;
+      width: calc(100% - 6px); height: calc(100% - 6px);
+      border-radius: 11px; object-fit: cover; object-position: center;
+      transition: transform 420ms var(--ease), filter 420ms ease;
+    }
+    .brand:hover .face { transform: scale(1.06); filter: saturate(1.1); }
+
+    /* hero ID badge */
+    .idcard { display: flex; align-items: center; gap: 14px; padding: 16px; border-bottom: 1px solid var(--line); }
+    .portrait { position: relative; width: 62px; height: 62px; flex: none; }
+    .portrait .halo {
+      position: absolute; inset: -3px; border-radius: 20px; padding: 1.5px;
+      background: conic-gradient(from 0deg, var(--signal), var(--sig-b), var(--signal));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: spin 9s linear infinite;
+    }
+    .portrait img {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%; border-radius: 17px; object-fit: cover; object-position: center;
+      border: 1px solid var(--line-2); display: block;
+      transition: transform 480ms var(--ease);
+    }
+    .portrait .fallback {
+      position: absolute; inset: 0; border-radius: 17px; display: grid; place-items: center;
+      background: var(--carbon-3); border: 1px solid var(--line-2);
+      font-family: var(--f-display); font-weight: 700; font-size: 20px; color: var(--signal);
+    }
+    .idcard:hover .portrait img { transform: scale(1.04); }
+    .idcard .who { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .idcard .who strong { font-family: var(--f-display); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+    .idcard .who span { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
+    .idcard .who em { font-style: normal; font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-faint); letter-spacing: 0.06em; }
+    .brand .id { display: flex; flex-direction: column; line-height: 1.15; }
+    .brand .id strong { font-family: var(--f-display); font-weight: 600; font-size: 15px; letter-spacing: 0.2px; }
+    .brand .id span { font-family: var(--f-mono); color: var(--ink-dim); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 2px; }
     .nav-links a {
-      font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em;
-      color: var(--ink-dim); padding: 8px 11px; border-radius: 999px;
-      border: 1px solid transparent; transition: 160ms ease;
+      position: relative; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.04em;
+      color: var(--ink-dim); padding: 8px 10px; border-radius: 999px;
+      border: 1px solid transparent; transition: color 180ms ease, background 180ms ease;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 10px; right: 10px; bottom: 3px; height: 1px;
+      background: var(--signal); transform: scaleX(0); transform-origin: 0 50%;
+      transition: transform 280ms var(--ease);
     }
     .nav-links a:hover { color: var(--ink); background: rgba(255,255,255,0.04); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
     .nav-links a.active { color: var(--signal); }
-    .nav-toggle { display: none; }
+
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px; margin-left: 8px;
+      font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 9px 13px; border-radius: 999px; color: var(--void); font-weight: 700;
+      background: linear-gradient(100deg, var(--signal), var(--sig-b));
+      background-size: 200% 100%; animation: sheen 6s ease infinite;
+      transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+    }
+    @keyframes sheen { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(103,232,207,0.25); }
+    .nav-cta svg { width: 14px; height: 14px; }
+
+    .nav-toggle {
+      display: none; background: transparent; border: 1px solid var(--line-2); color: var(--ink);
+      width: 40px; height: 38px; border-radius: 11px; cursor: pointer; padding: 0;
+    }
+    .nav-toggle span { display: block; width: 16px; height: 1.6px; background: currentColor; margin: 3.4px auto; transition: 260ms var(--ease); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
     /* ---------- Layout primitives ---------- */
-    main { display: block; }
-    .section { padding: 78px 0; border-top: 1px solid transparent; }
-    .section-head { margin-bottom: 30px; }
+    .section { padding: 84px 0; }
+    .section-head { margin-bottom: 32px; position: relative; }
+    .section-head .idx {
+      position: absolute; right: 0; top: -6px;
+      font-family: var(--f-mono); font-size: 62px; font-weight: 700; line-height: 1;
+      color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.07); letter-spacing: -0.04em;
+      pointer-events: none; user-select: none;
+    }
     h2 {
       font-family: var(--f-display); font-weight: 600;
-      font-size: clamp(24px, 3.2vw, 36px); letter-spacing: -0.01em; margin: 0;
+      font-size: clamp(25px, 3.3vw, 38px); letter-spacing: -0.015em; margin: 0;
     }
     .section-head p { color: var(--ink-dim); margin: 8px 0 0; max-width: 70ch; }
+    .rule { height: 1px; background: linear-gradient(90deg, var(--signal), var(--sig-b), transparent); margin-top: 18px; transform: scaleX(0); transform-origin: 0 50%; transition: transform 900ms var(--ease); }
+    .reveal.show .rule { transform: scaleX(1); }
     .muted { color: var(--ink-dim); }
 
     .panel {
+      position: relative;
       background: linear-gradient(180deg, var(--carbon-2), var(--carbon));
       border: 1px solid var(--line);
       border-radius: var(--r-lg);
       box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
+      overflow: hidden;
     }
+    /* cursor spotlight on panels */
+    .panel::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,0.06), transparent 70%);
+      transition: opacity 300ms ease;
+    }
+    .panel:hover::after { opacity: 1; }
 
-    /* panel "console" header bar */
     .console-bar {
       display: flex; align-items: center; gap: 9px;
       padding: 11px 16px; border-bottom: 1px solid var(--line);
       font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--ink-dim);
     }
-    .console-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 9px var(--signal-glow); }
+    .console-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 9px var(--signal-glow); animation: pulse 2s ease-in-out infinite; }
     .console-bar .spacer { flex: 1; }
     .console-bar .tag { color: var(--ink-faint); }
 
     /* ---------- HERO ---------- */
-    .hero { padding: 56px 0 8px; }
-    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 26px; align-items: stretch; }
+    .hero { padding: 58px 0 10px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 26px; align-items: stretch; }
     .status {
       display: inline-flex; align-items: center; gap: 9px;
       font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase;
@@ -164,63 +285,165 @@
       padding: 6px 12px; border-radius: 999px; margin-bottom: 18px;
     }
     .status .beacon { position: relative; width: 8px; height: 8px; }
-    .status .beacon::before, .status .beacon::after {
-      content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--signal);
-    }
-    .status .beacon::after { animation: ping 1.8s cubic-bezier(0,0,0.2,1) infinite; }
-    @keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 80%,100% { transform: scale(2.6); opacity: 0; } }
+    .status .beacon::before, .status .beacon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--signal); }
+    .status .beacon::after { animation: ping 1.9s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 80%,100% { transform: scale(2.8); opacity: 0; } }
 
     h1 {
       font-family: var(--f-display); font-weight: 600;
-      font-size: clamp(33px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.022em;
-      margin: 6px 0 16px; max-width: 16ch;
+      font-size: clamp(34px, 4.8vw, 62px); line-height: 1.02; letter-spacing: -0.025em;
+      margin: 6px 0 16px; max-width: 17ch;
     }
-    h1 .hl { color: var(--signal); }
+    h1 .w { display: inline-block; opacity: 0; transform: translateY(22px) rotate(2deg); animation: wordIn 780ms var(--ease) forwards; }
+    @keyframes wordIn { to { opacity: 1; transform: none; } }
+    h1 .hl {
+      background: linear-gradient(100deg, var(--signal) 10%, var(--sig-b) 55%, var(--signal) 90%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: wordIn 780ms var(--ease) forwards, sheen 5.5s ease infinite;
+    }
     .lede { color: var(--ink-dim); font-size: 16.5px; max-width: 60ch; margin: 0 0 8px; }
     .lede strong { color: var(--ink); font-weight: 600; }
-    .roles-line { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-faint); margin: 14px 0 0; letter-spacing: 0.02em; }
-    .roles-line b { color: var(--signal-2); font-weight: 500; }
+
+    .rotator { font-family: var(--f-mono); font-size: 13px; color: var(--ink-faint); margin: 16px 0 0; letter-spacing: 0.02em; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+    .rotator .lbl { color: var(--ink-faint); }
+    .rotator .slot { color: var(--signal); font-weight: 500; position: relative; min-height: 1em; }
+    .rotator .slot.b { color: var(--sig-b); }
+    .rotator .caret { display: inline-block; width: 8px; height: 15px; background: var(--signal); vertical-align: -2px; margin-left: 3px; animation: blink 1.05s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
 
     .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
     .btn {
+      position: relative; overflow: hidden;
       display: inline-flex; align-items: center; gap: 9px;
       font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
-      padding: 12px 16px; border-radius: 11px;
+      padding: 12px 16px; border-radius: 12px;
       border: 1px solid var(--line-2); color: var(--ink); background: rgba(255,255,255,0.02);
-      transition: 180ms ease; cursor: pointer;
+      transition: transform 220ms var(--ease), border-color 220ms ease, box-shadow 220ms ease, color 220ms ease;
+      cursor: pointer;
     }
-    .btn svg { width: 15px; height: 15px; }
-    .btn:hover { transform: translateY(-2px); border-color: var(--signal-dim); box-shadow: var(--shadow); }
-    .btn.primary { background: var(--signal); color: #04201A; border-color: transparent; font-weight: 700; }
-    .btn.primary:hover { box-shadow: 0 14px 34px rgba(103,232,207,0.28); }
+    .btn svg { width: 15px; height: 15px; transition: transform 260ms var(--ease); }
+    .btn::before {
+      content: ""; position: absolute; top: 0; bottom: 0; width: 45%; left: -60%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.14), transparent);
+      transform: skewX(-18deg); transition: left 620ms var(--ease);
+    }
+    .btn:hover::before { left: 130%; }
+    .btn:hover { transform: translateY(-3px); border-color: var(--signal-dim); box-shadow: var(--shadow); }
+    .btn:hover svg { transform: translateY(2px); }
+    .btn.b:hover { border-color: var(--sig-b-dim); color: var(--sig-b); }
+    .btn.a:hover { color: var(--signal); }
+    .btn.primary {
+      background: linear-gradient(100deg, var(--signal), var(--sig-b)); background-size: 200% 100%;
+      color: #05130F; border-color: transparent; font-weight: 700; animation: sheen 6s ease infinite;
+    }
+    .btn.primary:hover { box-shadow: 0 16px 38px rgba(103,232,207,0.28); }
+    .btn.primary:hover svg { transform: translateX(3px); }
 
     /* hero telemetry card */
     .telemetry { display: flex; flex-direction: column; }
-    .telemetry .scope { padding: 14px 16px 6px; }
-    .scope-svg { width: 100%; height: 158px; display: block; }
+    .telemetry .scope { padding: 14px 16px 6px; position: relative; }
+    .scope-svg { width: 100%; height: 156px; display: block; }
+    .scan {
+      position: absolute; top: 14px; bottom: 6px; width: 90px; left: -90px;
+      background: linear-gradient(90deg, transparent, rgba(103,232,207,0.10), transparent);
+      animation: sweep 4.6s linear infinite; pointer-events: none;
+    }
+    @keyframes sweep { to { left: 100%; } }
+    .ticker-line { font-family: var(--f-mono); font-size: 11px; color: var(--signal); padding: 0 16px 10px; letter-spacing: 0.04em; min-height: 18px; }
     .trace-legend { display: flex; gap: 16px; padding: 2px 16px 12px; flex-wrap: wrap; }
     .trace-legend span { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); display: inline-flex; align-items: center; gap: 6px; }
     .trace-legend i { width: 14px; height: 2px; border-radius: 2px; display: inline-block; }
 
     .kpis { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
-    .kpi { padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .kpi { padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background 240ms ease; }
+    .kpi:hover { background: rgba(255,255,255,0.025); }
     .kpi:nth-child(2n) { border-right: none; }
     .kpi:nth-last-child(-n+2) { border-bottom: none; }
     .kpi .num { font-family: var(--f-display); font-weight: 600; font-size: 30px; letter-spacing: -0.02em; line-height: 1; }
     .kpi .num .u { color: var(--signal); font-size: 18px; }
     .kpi .lab { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); margin-top: 8px; }
 
+    /* ---------- Marquee ticker ---------- */
+    .marquee {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      overflow: hidden; padding: 13px 0; margin-top: 34px;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .marquee .track { display: flex; gap: 30px; width: max-content; animation: slide 38s linear infinite; }
+    .marquee:hover .track { animation-play-state: paused; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+    .marquee b {
+      font-family: var(--f-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-faint); display: inline-flex; align-items: center; gap: 30px;
+    }
+    .marquee b::after { content: "◆"; color: var(--signal); font-size: 8px; opacity: 0.6; }
+
+    /* ---------- Résumé variants ---------- */
+    .resume-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .rcard {
+      padding: 22px 20px 20px; display: flex; flex-direction: column; gap: 12px;
+      transition: transform 300ms var(--ease), border-color 300ms ease, box-shadow 300ms ease;
+    }
+    .rcard::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0.18); transform-origin: 0 50%; transition: transform 520ms var(--ease);
+    }
+    .rcard:hover::before { transform: scaleX(1); }
+    .rcard:hover { transform: translateY(-6px); border-color: var(--line-2); box-shadow: var(--shadow); }
+    .rcard.vision { --accent: var(--signal); }
+    .rcard.llm    { --accent: var(--sig-b); }
+    .rcard.full   { --accent: #EEF2F5; }
+    .rcard .ricon {
+      width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+      border: 1px solid var(--line-2); background: rgba(255,255,255,0.03); color: var(--accent);
+      transition: transform 420ms var(--ease), box-shadow 420ms ease;
+    }
+    .rcard:hover .ricon { transform: translateY(-2px) rotate(-6deg) scale(1.06); box-shadow: 0 0 26px -6px var(--accent); }
+    .rcard .ricon svg { width: 22px; height: 22px; }
+    .rcard h3 { font-family: var(--f-display); font-weight: 600; font-size: 18px; margin: 2px 0 0; }
+    .rcard .rmeta { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .rcard p { color: var(--ink-dim); font-size: 13.5px; margin: 0; flex: 1; }
+    .rcard .rtags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .rcard .rtags span { font-family: var(--f-mono); font-size: 10.5px; padding: 4px 8px; border-radius: 6px; color: var(--ink-dim); border: 1px solid var(--line); }
+    .rcard .rfoot { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+    .dl {
+      position: relative; overflow: hidden; flex: 1;
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+      padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--line-2); color: var(--ink); background: rgba(255,255,255,0.03);
+      transition: transform 220ms var(--ease), border-color 220ms ease, color 220ms ease, box-shadow 220ms ease;
+    }
+    .dl svg { width: 15px; height: 15px; transition: transform 320ms var(--ease); }
+    .dl::before {
+      content: ""; position: absolute; top: 0; bottom: 0; width: 45%; left: -60%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.16), transparent);
+      transform: skewX(-18deg); transition: left 640ms var(--ease);
+    }
+    .dl:hover::before { left: 130%; }
+    .dl:hover { transform: translateY(-2px); color: var(--accent); border-color: var(--accent); box-shadow: 0 14px 30px -14px var(--accent); }
+    .dl:hover svg { transform: translateY(3px); }
+    .dl-alt {
+      font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-faint); padding: 12px 10px; border-radius: 10px; border: 1px solid var(--line);
+      transition: 200ms ease;
+    }
+    .dl-alt:hover { color: var(--ink); border-color: var(--line-2); }
+
     /* ---------- Capability + Impact split ---------- */
     .split { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 22px; align-items: stretch; }
-
-    /* Radar */
     .radar-wrap { padding: 14px 16px 18px; display: flex; flex-direction: column; align-items: center; }
-    .radar-svg { width: 100%; max-width: 420px; height: auto; }
+    .radar-svg { width: 100%; max-width: 430px; height: auto; }
     .radar-foot { font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-faint); letter-spacing: 0.06em; margin-top: 6px; text-align: center; }
+    #radarSweep { transform-origin: 210px 170px; animation: spin 5.2s linear infinite; }
 
-    /* Gauges */
-    .gauges { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
-    .gauge { padding: 20px 14px; text-align: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .gauges { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .gauge { padding: 20px 14px; text-align: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background 240ms ease; }
+    .gauge:hover { background: rgba(255,255,255,0.025); }
     .gauge:nth-child(2n) { border-right: none; }
     .gauge:nth-last-child(-n+2) { border-bottom: none; }
     .gauge svg { width: 116px; height: 116px; }
@@ -228,31 +451,47 @@
     .gauge .glabel { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); margin-top: 8px; line-height: 1.4; }
     .gauge .gsub { font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
 
-    /* ---------- Impact meter groups ---------- */
+    /* ---------- Impact meters ---------- */
     .metric-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
     .mgroup { padding: 18px; }
     .mgroup h3 {
       font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--signal); margin: 0 0 16px; display: flex; align-items: center; gap: 8px;
     }
+    .mgroup.b h3 { color: var(--sig-b); }
     .mgroup h3 .cnt { color: var(--ink-faint); margin-left: auto; }
     .meter { margin: 13px 0; }
-    .meter .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .meter .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; gap: 12px; }
     .meter .name { font-size: 13.5px; color: var(--ink); }
-    .meter .val { font-family: var(--f-mono); font-size: 13px; color: var(--signal); font-weight: 500; }
+    .meter .val { font-family: var(--f-mono); font-size: 13px; color: var(--signal); font-weight: 500; white-space: nowrap; }
+    .mgroup.b .meter .val { color: var(--sig-b); }
     .meter .track { height: 6px; border-radius: 999px; background: rgba(255,255,255,0.07); overflow: hidden; }
-    .meter .fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--signal-2), var(--signal)); transition: width 1100ms cubic-bezier(0.22,1,0.36,1); box-shadow: 0 0 12px var(--signal-glow); }
+    .meter .fill {
+      height: 100%; width: 0; border-radius: 999px;
+      background: linear-gradient(90deg, var(--signal-2), var(--signal));
+      transition: width 1200ms var(--ease); box-shadow: 0 0 12px var(--signal-glow); position: relative;
+    }
+    .mgroup.b .meter .fill { background: linear-gradient(90deg, var(--sig-b-2), var(--sig-b)); box-shadow: 0 0 12px var(--sig-b-glow); }
+    .meter .fill::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: translateX(-100%); animation: shimmer 2.8s ease-in-out infinite 1s;
+    }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 60%,100% { transform: translateX(220%); } }
 
-    /* ---------- Timeline / Career run ---------- */
-    .run { position: relative; padding-left: 30px; }
-    .run::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px;
-      background: linear-gradient(180deg, var(--signal), rgba(103,232,207,0.15) 70%, transparent); }
+    /* ---------- Timeline ---------- */
+    .run { position: relative; padding-left: 32px; }
+    .run .spine { position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .run .spine i { position: absolute; inset: 0 0 auto 0; height: 0%; background: linear-gradient(180deg, var(--signal), var(--sig-b)); box-shadow: 0 0 14px var(--signal-glow); transition: height 180ms linear; }
     .node { position: relative; margin-bottom: 18px; }
     .node::before {
-      content: ""; position: absolute; left: -30px; top: 24px; width: 14px; height: 14px; border-radius: 50%;
+      content: ""; position: absolute; left: -32px; top: 26px; width: 14px; height: 14px; border-radius: 50%;
       background: var(--void); border: 2px solid var(--signal); box-shadow: 0 0 10px var(--signal-glow);
+      transition: transform 320ms var(--ease), box-shadow 320ms ease;
     }
-    .node-card { padding: 18px 20px; }
+    .node:hover::before { transform: scale(1.3); box-shadow: 0 0 18px var(--signal-glow); }
+    .node-card { padding: 18px 20px; transition: border-color 260ms ease, transform 260ms var(--ease); }
+    .node-card:hover { border-color: var(--line-2); }
     .node-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
     .node-top h3 { font-family: var(--f-display); font-weight: 600; font-size: 18px; margin: 0; }
     .node-top .org { color: var(--signal-2); font-weight: 500; }
@@ -263,35 +502,52 @@
       font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.02em;
       padding: 5px 9px; border-radius: 7px; color: var(--signal);
       border: 1px solid var(--signal-dim); background: rgba(103,232,207,0.05);
+      transition: transform 220ms var(--ease), background 220ms ease;
     }
-    .node ul { margin: 14px 0 0; padding-left: 18px; }
+    .stat-chip:hover { transform: translateY(-2px); background: rgba(103,232,207,0.11); }
+    .stat-chip.b { color: var(--sig-b); border-color: var(--sig-b-dim); background: rgba(167,139,250,0.06); }
+    .stat-chip.b:hover { background: rgba(167,139,250,0.12); }
+    .track-label {
+      font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ink-faint); margin: 18px 0 6px; display: flex; align-items: center; gap: 10px;
+    }
+    .track-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .track-label.a { color: var(--signal); }
+    .track-label.b { color: var(--sig-b); }
+    .node ul { margin: 10px 0 0; padding-left: 18px; }
     .node li { margin: 8px 0; color: var(--ink-dim); font-size: 14px; line-height: 1.6; }
     .node li strong { color: var(--ink); font-weight: 600; }
-    .stack-line { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); margin: 14px 0 0; letter-spacing: 0.02em; line-height: 1.7; }
+    .stack-line { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); margin: 16px 0 0; letter-spacing: 0.02em; line-height: 1.7; }
     .stack-line b { color: var(--ink-dim); font-weight: 500; }
 
     details.node-card { cursor: default; }
     details > summary { list-style: none; cursor: pointer; }
     details > summary::-webkit-details-marker { display: none; }
     .more-hint { font-family: var(--f-mono); font-size: 11px; color: var(--signal); margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; }
-    .more-hint .chev { transition: transform 200ms ease; }
+    .more-hint .chev { transition: transform 260ms var(--ease); }
     details[open] .more-hint .chev { transform: rotate(180deg); }
     details[open] .more-hint .txt-open { display: none; }
     details:not([open]) .more-hint .txt-close { display: none; }
+    details[open] ul, details[open] .stack-line, details[open] .track-label { animation: fadeUp 520ms var(--ease); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } }
 
     /* ---------- Tech matrix ---------- */
     .matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .mcell { padding: 16px; }
+    .mcell { padding: 16px; transition: transform 260ms var(--ease), border-color 260ms ease; }
+    .mcell:hover { transform: translateY(-4px); border-color: var(--line-2); }
     .mcell h4 { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); margin: 0 0 12px; }
+    .mcell.b h4 { color: var(--sig-b); }
     .tags { display: flex; flex-wrap: wrap; gap: 7px; }
-    .tag-pill { font-size: 12.5px; padding: 6px 10px; border-radius: 8px; color: var(--ink); border: 1px solid var(--line); background: rgba(255,255,255,0.02); transition: 150ms ease; }
-    .tag-pill:hover { border-color: var(--signal-dim); color: var(--signal); }
+    .tag-pill { font-size: 12.5px; padding: 6px 10px; border-radius: 8px; color: var(--ink); border: 1px solid var(--line); background: rgba(255,255,255,0.02); transition: 180ms var(--ease); }
+    .tag-pill:hover { transform: translateY(-2px); border-color: var(--signal-dim); color: var(--signal); }
+    .mcell.b .tag-pill:hover { border-color: var(--sig-b-dim); color: var(--sig-b); }
 
     /* ---------- Projects ---------- */
     .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .pcard { padding: 18px 20px; position: relative; overflow: hidden; transition: 200ms ease; }
-    .pcard:hover { transform: translateY(-2px); border-color: var(--line-2); }
+    .pcard { padding: 20px 22px; transition: transform 300ms var(--ease), border-color 300ms ease, box-shadow 300ms ease; }
+    .pcard:hover { transform: translateY(-5px); border-color: var(--line-2); box-shadow: var(--shadow); }
     .pcard .ptag { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); }
+    .pcard.b .ptag { color: var(--sig-b); }
     .pcard h3 { font-family: var(--f-display); font-weight: 600; font-size: 17px; margin: 8px 0 10px; }
     .pcard ul { margin: 0; padding-left: 17px; }
     .pcard li { margin: 7px 0; color: var(--ink-dim); font-size: 13.5px; line-height: 1.55; }
@@ -301,32 +557,51 @@
     /* ---------- Pub / Awards ---------- */
     .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .list-panel { padding: 18px 20px; }
+    .list-panel h4 { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); margin: 0 0 8px; }
     .list-panel ul { margin: 0; padding: 0; list-style: none; }
-    .list-panel li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--ink-dim); display: flex; gap: 12px; align-items: baseline; }
+    .list-panel li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--ink-dim); display: flex; gap: 12px; align-items: baseline; transition: padding-left 240ms var(--ease), color 240ms ease; }
+    .list-panel li:hover { padding-left: 6px; color: var(--ink); }
     .list-panel li:last-child { border-bottom: none; }
     .list-panel li strong { color: var(--ink); font-weight: 600; }
     .list-panel li .yr { font-family: var(--f-mono); font-size: 11px; color: var(--signal); white-space: nowrap; margin-left: auto; }
-    .award-medal { color: var(--signal); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.05em; }
+    .award-medal { color: var(--sig-b); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.05em; }
 
     /* ---------- Contact ---------- */
     .contact-grid { display: flex; flex-wrap: wrap; gap: 12px; padding: 8px 0; }
     .contact-grid a {
       display: inline-flex; align-items: center; gap: 9px; padding: 13px 18px; border-radius: 12px;
       border: 1px solid var(--line-2); background: rgba(255,255,255,0.02);
-      font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.03em; transition: 180ms ease;
+      font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.03em; transition: 220ms var(--ease);
     }
-    .contact-grid a:hover { transform: translateY(-2px); border-color: var(--signal-dim); color: var(--signal); box-shadow: var(--shadow); }
+    .contact-grid a:hover { transform: translateY(-3px); border-color: var(--signal-dim); color: var(--signal); box-shadow: var(--shadow); }
     .contact-grid a svg { width: 16px; height: 16px; }
 
-    footer { border-top: 1px solid var(--line); padding: 26px 0 40px; }
-    footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    footer { border-top: 1px solid var(--line); padding: 26px 0 44px; }
+    footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: center; }
     footer span { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); letter-spacing: 0.04em; }
+    footer .off b { color: var(--ink-dim); font-weight: 500; }
 
-    /* ---------- Reveal animation ---------- */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 700ms ease, transform 700ms ease; }
+    /* back-to-top */
+    .totop {
+      position: fixed; right: 22px; bottom: 22px; z-index: 95;
+      width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+      background: rgba(12,15,20,0.85); border: 1px solid var(--line-2); color: var(--ink);
+      backdrop-filter: blur(10px); cursor: pointer;
+      opacity: 0; transform: translateY(14px) scale(0.9); pointer-events: none;
+      transition: 320ms var(--ease);
+    }
+    .totop.on { opacity: 1; transform: none; pointer-events: auto; }
+    .totop:hover { color: var(--signal); border-color: var(--signal-dim); transform: translateY(-3px); }
+    .totop svg { width: 17px; height: 17px; }
+
+    /* ---------- Reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 760ms var(--ease), transform 760ms var(--ease); }
     .reveal.show { opacity: 1; transform: none; }
 
     /* ---------- Responsive ---------- */
+    @media (max-width: 1040px) {
+      .nav-links a { padding: 8px 8px; font-size: 11px; }
+    }
     @media (max-width: 940px) {
       .hero-grid { grid-template-columns: 1fr; }
       .split { grid-template-columns: 1fr; }
@@ -334,20 +609,35 @@
       .matrix { grid-template-columns: repeat(2, 1fr); }
       .cards { grid-template-columns: 1fr; }
       .duo { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .resume-grid { grid-template-columns: 1fr; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: absolute; top: 66px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 2px; padding: 12px 22px 18px;
+        background: rgba(5,7,10,0.97); border-bottom: 1px solid var(--line);
+        opacity: 0; visibility: hidden; transform: translateY(-10px);
+        transition: 260ms var(--ease);
+      }
+      .nav-links.open { opacity: 1; visibility: visible; transform: none; }
+      .nav-links a { font-size: 13px; padding: 11px 8px; }
+      .nav-cta { margin-left: 0; justify-content: center; margin-top: 8px; }
+      .section-head .idx { font-size: 46px; opacity: 0.7; }
     }
     @media (max-width: 560px) {
       .matrix { grid-template-columns: 1fr; }
       .kpis { grid-template-columns: 1fr 1fr; }
       .gauges { grid-template-columns: 1fr 1fr; }
-      h1 { font-size: clamp(28px, 8vw, 40px); }
+      h1 { font-size: clamp(29px, 8.4vw, 42px); }
       .node-when { margin-left: 0; }
-      .section { padding: 56px 0; }
+      .section { padding: 58px 0; }
+      .cta .btn { flex: 1 1 100%; justify-content: center; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
       .reveal { opacity: 1; transform: none; }
+      h1 .w { opacity: 1; transform: none; }
+      #field { display: none; }
     }
   </style>
 
@@ -356,11 +646,12 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Hazem Hassan",
-    "jobTitle": "Senior Machine Learning Engineer / AI Technical Lead",
+    "jobTitle": "Senior AI/ML Engineer — Computer Vision, LLM & Agentic Systems",
     "email": "mailto:hazem.mamdouh.fekry@gmail.com",
     "telephone": "+201000912694",
     "address": {"@type":"PostalAddress","addressCountry":"EG","addressLocality":"Cairo"},
-    "knowsAbout": ["Computer Vision","OCR","Video Analytics","Edge AI","LLM","Retrieval-Augmented Generation","Diffusion Models","MLOps"],
+    "alumniOf": {"@type":"CollegeOrUniversity","name":"Cairo University"},
+    "knowsAbout": ["Computer Vision","OCR","Video Analytics","Multi-Object Tracking","Edge AI","NVIDIA Jetson","TensorRT","Large Language Models","Agentic Workflows","LangGraph","LlamaIndex","Retrieval-Augmented Generation","LLM Evaluation","Diffusion Models","MLOps"],
     "sameAs": [
       "https://linkedin.com/in/hmamdouh",
       "https://github.com/hazemmamdouh",
@@ -371,60 +662,80 @@
 </head>
 
 <body>
-  <div class="bg"></div>
+  <div class="progress" id="progress"></div>
+  <div class="bg"><div class="aurora"></div></div>
+  <canvas id="field"></canvas>
   <div class="grid-overlay"></div>
+  <div class="noise"></div>
 
-  <header>
+  <header id="hdr">
     <div class="container">
       <nav>
-        <div class="brand">
-          <img src="hazem.jpg" alt="Hazem Hassan" />
-          <div class="id">
+        <a class="brand" href="#top" aria-label="Hazem Hassan — home">
+          <span class="mark">
+            <span class="ring"></span>
+            <span class="glyph"><i>H</i><b>H</b></span>
+            <img class="face" src="./hazem.jpg" alt="Hazem Hassan" onerror="this.remove()" />
+          </span>
+          <span class="id">
             <strong>Hazem Hassan</strong>
-            <span>ML Engineer · AI Tech Lead</span>
-          </div>
-        </div>
-        <div class="nav-links" aria-label="Primary">
+            <span>Senior ML Engineer · AI Tech Lead</span>
+          </span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks" aria-label="Primary">
+          <a href="#resume">Résumé</a>
           <a href="#capabilities">Capabilities</a>
           <a href="#impact">Impact</a>
           <a href="#experience">Experience</a>
           <a href="#stack">Stack</a>
           <a href="#projects">Projects</a>
           <a href="#research">Research</a>
-          <a href="#contact">Contact</a>
+          <a class="nav-cta" href="#contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Contact
+          </a>
         </div>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <!-- ================= HERO ================= -->
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
           <div class="reveal">
             <span class="status"><span class="beacon"></span> Available · Open to relocation</span>
-            <p class="eyebrow">ML Systems · Live Telemetry</p>
-            <h1>Production AI, engineered for the <span class="hl">edge</span> and the cloud.</h1>
+            <p class="eyebrow">Two tracks · One engineer</p>
+            <h1 data-split>Production AI, engineered for the <span class="hl">edge</span> and the <span class="hl">agent</span>.</h1>
             <p class="lede">
-              Senior Machine Learning Engineer &amp; AI Technical Lead with <strong>9+ years</strong> shipping
-              production <strong>Computer Vision, OCR, video analytics</strong>, <strong>LLM / Multi-RAG</strong>,
-              and <strong>diffusion</strong> systems — from data pipelines to real-time inference on
-              <strong>NVIDIA Jetson</strong>.
+              Senior ML Engineer &amp; AI Technical Lead with <strong>9+ years</strong> shipping production systems end-to-end —
+              <strong>computer vision, OCR and video analytics</strong> running on <strong>NVIDIA Jetson</strong>, and
+              <strong>LLM / agentic systems</strong> built with <strong>LangGraph, LlamaIndex and RAG</strong>, measured with a full
+              <strong>Ragas + LangSmith</strong> evaluation stack.
             </p>
-            <p class="roles-line">TARGET ROLES &gt; <b>Senior ML Engineer (CV / GenAI)</b> · <b>AI Technical Lead (Edge AI)</b></p>
+            <p class="rotator">
+              <span class="lbl">TARGET ROLES &gt;</span>
+              <span class="slot" id="roleSlot"></span><span class="caret" id="roleCaret"></span>
+            </p>
+
             <div class="cta">
-              <a class="btn primary" href="#contact">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
-                Get in touch
-              </a>
-              <a class="btn" href="hhassan_CV.pdf" download>
+              <a class="btn a" href="hhassan_CV.pdf" download>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-                Modern CV
+                Computer Vision CV
               </a>
-              <a class="btn" href="hhassan_CV_ATS.pdf" download>
+              <a class="btn b" href="hhassan_LLM.pdf" download>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-                ATS CV
+                LLM &amp; Agentic CV
+              </a>
+              <a class="btn primary" href="hhassan_full.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+                Full Résumé
               </a>
               <a class="btn" href="https://linkedin.com/in/hmamdouh" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4z"/></svg>
@@ -436,40 +747,125 @@
           <!-- Telemetry console -->
           <div class="panel telemetry reveal">
             <div class="console-bar">
-              <span class="dot"></span> career.telemetry
+              <span class="dot"></span> operator.profile
               <span class="spacer"></span>
               <span class="tag">live</span>
             </div>
-            <div class="scope">
-              <svg class="scope-svg" id="scope" viewBox="0 0 520 158" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="idcard">
+              <span class="portrait">
+                <span class="halo"></span>
+                <span class="fallback" aria-hidden="true">HH</span>
+                <img src="./hazem.jpg" alt="Portrait of Hazem Hassan" onerror="this.remove()" />
+              </span>
+              <span class="who">
+                <strong>Hazem Hassan</strong>
+                <span>Senior AI/ML Engineer</span>
+                <em>Cairo, EG · Computer Vision + LLM &amp; Agentic</em>
+              </span>
             </div>
+            <div class="scope">
+              <svg class="scope-svg" id="scope" viewBox="0 0 520 156" preserveAspectRatio="none" aria-hidden="true"></svg>
+              <div class="scan"></div>
+            </div>
+            <div class="ticker-line" id="bootLine"></div>
             <div class="trace-legend">
               <span><i style="background:var(--signal)"></i>Throughput (FPS)</span>
-              <span><i style="background:rgba(255,255,255,0.55)"></i>Accuracy</span>
+              <span><i style="background:var(--sig-b)"></i>Retrieval quality</span>
               <span><i style="background:var(--ink-faint)"></i>Latency</span>
             </div>
             <div class="kpis">
-              <div class="kpi"><div class="num"><span data-count="9" data-suffix="">0</span><span class="u">+</span></div><div class="lab">Years in production AI</div></div>
+              <div class="kpi"><div class="num"><span data-count="9">0</span><span class="u">+</span></div><div class="lab">Years in production AI</div></div>
               <div class="kpi"><div class="num"><span data-count="35">0</span><span class="u"> fps</span></div><div class="lab">Sustained edge throughput</div></div>
               <div class="kpi"><div class="num"><span class="u">&lt;</span><span data-count="150">0</span><span class="u"> ms</span></div><div class="lab">End-to-end edge latency</div></div>
-              <div class="kpi"><div class="num"><span data-count="80">0</span><span class="u">%</span></div><div class="lab">Annotation time cut</div></div>
+              <div class="kpi"><div class="num"><span class="u">&lt;</span><span data-count="5">0</span><span class="u"> s</span></div><div class="lab">RAG time-to-first-token</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="track" id="mqTrack"></div>
+      </div>
+    </section>
+
+    <!-- ================= RÉSUMÉ VARIANTS ================= -->
+    <section class="section" id="resume">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="idx">01</span>
+          <p class="eyebrow">Download</p>
+          <h2>Three résumés, one engineer</h2>
+          <p>Same nine years, framed for the role you're hiring for. Every version is one page-dense, ATS-readable PDF — DOCX beside it if your pipeline prefers it.</p>
+          <div class="rule"></div>
+        </div>
+
+        <div class="resume-grid">
+          <div class="panel rcard vision reveal">
+            <span class="ricon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <span class="rmeta">Track A · Vision</span>
+            <h3>Computer Vision</h3>
+            <p>Real-time vision on the edge: detection, multi-object tracking, OCR, thermal/IR processing, and Jetson deployment tuned with TensorRT and ONNX.</p>
+            <div class="rtags"><span>Jetson</span><span>Tracking</span><span>OCR</span><span>Thermal/IR</span><span>TensorRT</span></div>
+            <div class="rfoot">
+              <a class="dl" href="hhassan_CV.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+                PDF · 114 KB
+              </a>
+              <a class="dl-alt" href="hhassan_CV.docx" download>DOCX</a>
+            </div>
+          </div>
+
+          <div class="panel rcard llm reveal">
+            <span class="ricon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17.5" r="2.4"/><path d="M7.9 7.3 10.6 15.5M16.6 9.1 13.4 15.8M8.4 6.2h7.2"/></svg>
+            </span>
+            <span class="rmeta">Track B · Language</span>
+            <h3>LLM &amp; Agentic Systems</h3>
+            <p>Agentic workflows with LangGraph, RAG with LlamaIndex and FAISS, guardrails and escalation routing — with a real evaluation and observability stack behind it.</p>
+            <div class="rtags"><span>LangGraph</span><span>LlamaIndex</span><span>Multi-RAG</span><span>Ragas</span><span>LangSmith</span></div>
+            <div class="rfoot">
+              <a class="dl" href="hhassan_LLM.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+                PDF · 129 KB
+              </a>
+              <a class="dl-alt" href="hhassan_LLM.docx" download>DOCX</a>
+            </div>
+          </div>
+
+          <div class="panel rcard full reveal">
+            <span class="ricon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5"/><path d="M9 12h7M9 16h7M9 8h2"/></svg>
+            </span>
+            <span class="rmeta">Complete · Both tracks</span>
+            <h3>Full Résumé</h3>
+            <p>The whole record: vision and language side by side, plus leadership, publications, awards, and the full deployment history across four roles.</p>
+            <div class="rtags"><span>CV + LLM</span><span>Leadership</span><span>Publications</span><span>9+ years</span></div>
+            <div class="rfoot">
+              <a class="dl" href="hhassan_full.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+                PDF · 112 KB
+              </a>
+              <a class="dl-alt" href="hhassan_full.docx" download>DOCX</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= CAPABILITIES (Radar + Gauges) ================= -->
+    <!-- ================= CAPABILITIES ================= -->
     <section class="section" id="capabilities">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">System Profile</p>
+          <span class="idx">02</span>
+          <p class="eyebrow">System profile</p>
           <h2>Capabilities &amp; signal strength</h2>
-          <p>Domain focus mapped against the work I ship most. Gauges below are real outcomes pulled from production deployments.</p>
+          <p>Domain focus mapped against the work I ship most. Gauges are real outcomes pulled from production deployments.</p>
+          <div class="rule"></div>
         </div>
 
         <div class="split">
-          <!-- Radar -->
           <div class="panel reveal">
             <div class="console-bar"><span class="dot"></span> domain.radar <span class="spacer"></span><span class="tag">self-assessed</span></div>
             <div class="radar-wrap">
@@ -478,7 +874,6 @@
             </div>
           </div>
 
-          <!-- Headline gauges -->
           <div class="panel reveal">
             <div class="console-bar"><span class="dot"></span> headline.metrics <span class="spacer"></span><span class="tag">production</span></div>
             <div class="gauges" id="gauges"></div>
@@ -487,45 +882,51 @@
       </div>
     </section>
 
-    <!-- ================= IMPACT DASHBOARD ================= -->
+    <!-- ================= IMPACT ================= -->
     <section class="section" id="impact">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Measured Outcomes</p>
+          <span class="idx">03</span>
+          <p class="eyebrow">Measured outcomes</p>
           <h2>Impact dashboard</h2>
-          <p>Every bar is a shipped result — grouped by the kind of system it came from. Bars fill as you scroll.</p>
+          <p>Every bar is a shipped result, grouped by the kind of system it came from. Bars fill as you scroll.</p>
+          <div class="rule"></div>
         </div>
 
         <div class="metric-groups">
           <div class="panel mgroup reveal">
-            <h3>Vision &amp; Edge <span class="cnt">06</span></h3>
+            <h3>Vision &amp; Edge <span class="cnt">07</span></h3>
             <div class="meter" data-fill="94"><div class="top"><span class="name">PPE detection — precision</span><span class="val">94%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="90"><div class="top"><span class="name">PPE detection — recall</span><span class="val">90%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="94"><div class="top"><span class="name">Easier-Gates flow accuracy</span><span class="val">94%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="84"><div class="top"><span class="name">Violence detection — F1 (10-min data)</span><span class="val">F1 84%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="43"><div class="top"><span class="name">Crowd-count error reduced (MAPE)</span><span class="val">−43%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="35"><div class="top"><span class="name">Edge latency reduced (TensorRT)</span><span class="val">−35%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="25"><div class="top"><span class="name">PPE false alarms reduced</span><span class="val">−25%</span></div><div class="track"><div class="fill"></div></div></div>
+          </div>
+
+          <div class="panel mgroup b reveal">
+            <h3>LLM &amp; Agentic <span class="cnt">04</span></h3>
+            <div class="meter" data-fill="30"><div class="top"><span class="name">Hallucinations reduced (Multi-RAG)</span><span class="val">−30%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="20"><div class="top"><span class="name">Multi-RAG Recall@10 ↑</span><span class="val">+20%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="92"><div class="top"><span class="name">Long-doc RAG — TTFT budget held</span><span class="val">&lt; 5 s</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="100"><div class="top"><span class="name">Eval coverage — retriever + generator</span><span class="val">Ragas + LangSmith</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
 
           <div class="panel mgroup reveal">
             <h3>Identity &amp; OCR <span class="cnt">05</span></h3>
             <div class="meter" data-fill="99.9"><div class="top"><span class="name">eKYC service uptime</span><span class="val">99.9%</span></div><div class="track"><div class="fill"></div></div></div>
-            <div class="meter" data-fill="95"><div class="top"><span class="name">Structured-doc recognition</span><span class="val">95%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="96"><div class="top"><span class="name">Structured-doc recognition</span><span class="val">96%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="88"><div class="top"><span class="name">Sotoor Arabic OCR accuracy (100−WER)</span><span class="val">~88%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="20"><div class="top"><span class="name">Verification completion ↑</span><span class="val">+20%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="25"><div class="top"><span class="name">Operational incidents ↓</span><span class="val">−25%</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
 
           <div class="panel mgroup reveal">
-            <h3>GenAI &amp; LLM <span class="cnt">02</span></h3>
-            <div class="meter" data-fill="30"><div class="top"><span class="name">Hallucinations reduced</span><span class="val">−30%</span></div><div class="track"><div class="fill"></div></div></div>
-            <div class="meter" data-fill="20"><div class="top"><span class="name">Multi-RAG Recall@10 ↑</span><span class="val">+20%</span></div><div class="track"><div class="fill"></div></div></div>
-          </div>
-
-          <div class="panel mgroup reveal">
-            <h3>Data-centric &amp; Research <span class="cnt">04</span></h3>
+            <h3>Data-centric &amp; Research <span class="cnt">05</span></h3>
             <div class="meter" data-fill="80"><div class="top"><span class="name">Annotation time cut (semi-auto)</span><span class="val">−80%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="80"><div class="top"><span class="name">F1 on auto-labeled data</span><span class="val">F1 80%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="60"><div class="top"><span class="name">Visual-prompt detector vs. YOLOE</span><span class="val">+3 AP</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="91"><div class="top"><span class="name">Post-op infection — specificity</span><span class="val">91%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="82"><div class="top"><span class="name">Post-op infection — sensitivity</span><span class="val">82%</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
@@ -533,56 +934,63 @@
       </div>
     </section>
 
-    <!-- ================= EXPERIENCE / CAREER RUN ================= -->
+    <!-- ================= EXPERIENCE ================= -->
     <section class="section" id="experience">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Career Run</p>
+          <span class="idx">04</span>
+          <p class="eyebrow">Career run</p>
           <h2>Experience timeline</h2>
           <p>Four checkpoints across 9+ years. Expand any role for the full deployment log.</p>
+          <div class="rule"></div>
         </div>
 
-        <div class="run">
-          <!-- Beyond -->
+        <div class="run" id="run">
+          <div class="spine"><i id="spineFill"></i></div>
+
+          <!-- Beyond AI -->
           <div class="node reveal">
             <details class="panel node-card" open>
               <summary>
                 <div class="node-top">
-                  <h3>Senior ML Engineer · <span class="org">Beyond Limits</span></h3>
+                  <h3>Senior ML Engineer · <span class="org">Beyond AI</span></h3>
                   <span class="node-when">03/2024 — PRESENT</span>
                 </div>
                 <div class="node-where">REMOTE · EMEA</div>
                 <div class="chip-row">
                   <span class="stat-chip">25–35 FPS edge</span>
-                  <span class="stat-chip">&lt;150ms latency</span>
+                  <span class="stat-chip">&lt;150 ms latency</span>
                   <span class="stat-chip">10+ feeds / 5+ sites</span>
+                  <span class="stat-chip">+3 AP over YOLOE</span>
                   <span class="stat-chip">F1 84% · 10-min data</span>
-                  <span class="stat-chip">−43% MAPE</span>
-                  <span class="stat-chip">LangGraph · LlamaIndex</span>
-                  <span class="stat-chip">FAISS RAG · TTFT &lt;5s</span>
-                  <span class="stat-chip">Ragas + LangSmith eval</span>
+                  <span class="stat-chip b">LangGraph · LlamaIndex</span>
+                  <span class="stat-chip b">FAISS RAG · TTFT &lt;5 s</span>
+                  <span class="stat-chip b">Ragas + LangSmith</span>
                 </div>
                 <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
               </summary>
+
+              <p class="track-label b">— LLM &amp; Agentic Systems</p>
               <ul>
-                <li>Architected and deployed real-time video analytics on <strong>NVIDIA Jetson</strong> across <strong>10+ camera feeds / 5+ sites</strong>, sustaining <strong>25–35 FPS</strong> with <strong>&lt;150 ms</strong> end-to-end latency for tracking, counting, and behavior analytics.</li>
-                <li>Built a production edge inference stack (pre/post-processing, batching, stream handling, watchdogs) packaged with <strong>Docker</strong> for repeatable, rollback-safe releases.</li>
-                <li>Optimized inference via <strong>ONNX</strong> export and <strong>TensorRT</strong> acceleration, cutting per-stream latency by <strong>~35%</strong> while holding accuracy under edge constraints.</li>
-                <li>Designed scalable multi-camera tracking and zone analytics (entry/exit, dwell, occupancy) supporting <strong>20+ concurrent streams</strong>.</li>
-                <li>Delivered embedded analytics for <strong>Single/Double Flow Easier Gates</strong>, reaching <strong>~94%</strong> flow accuracy and reducing tracking <strong>ID switches ~14%</strong>.</li>
-                <li>Built <strong>PPE compliance detection</strong> (Aramco): <strong>~94% precision / ~90% recall</strong>, reducing false alarms by <strong>~35%</strong>.</li>
-                <li>Developed CCTV <strong>violence detection</strong> via spatio-temporal action recognition, reaching <strong>F1 ~84%</strong> from only <strong>~10 minutes</strong> of labeled data.</li>
-                <li>Created a <strong>semi-automated annotation workflow</strong> (auto-proposals + reviewer validation + active learning), cutting labeling time <strong>~80%</strong>; models trained on the auto-labeled data hit <strong>F1 ~80%</strong>.</li>
-                <li>Implemented dense-scene people counting and crowd distribution analytics, reducing counting error (MAPE) by <strong>~43%</strong>.</li>
-                <li>Built <strong>Multi-RAG pipelines</strong> for LLM apps (multi-source retrieval, hybrid search, reranking, eval harnesses), improving <strong>Recall@10 ~20%</strong> and reducing hallucinations <strong>~30%</strong>.</li>
-                <li>Built <strong>agentic LLM workflows with LangGraph</strong> — agents modeled as directed graphs with message passing, tool-calling, and execution orchestration across nodes — served through custom <strong>Python · FastAPI</strong> orchestration.</li>
+                <li>Built <strong>agentic LLM workflows with LangGraph</strong> — agents modeled as directed graphs with message passing, tool-calling, and execution orchestration across nodes — plus custom orchestration and RAG services on <strong>Python + FastAPI</strong>.</li>
                 <li>Developed <strong>RAG systems with LlamaIndex</strong>: embedding fine-tuning, retrieval orchestration, synthetic QA generation, and <strong>multi-modal pipelines</strong> over text, charts, and research papers, backed by a <strong>FAISS</strong> vector store.</li>
-                <li>Engineered a <strong>long-document RAG path</strong> (recursive + sequential summarization) with <strong>NeMo Guardrails</strong> intent routing between retrieval and summarization, tuning chunk size to hold <strong>time-to-first-token &lt; 5s</strong>.</li>
-                <li>Built an <strong>LLM evaluation framework</strong> — <strong>Ragas</strong> component-level retriever/generator scoring (context relevancy/recall, faithfulness, answer relevancy) with <strong>LangSmith</strong> tracing and continuous evaluation — plus <strong>MT-Bench</strong> (LLM-as-judge), <strong>AlpacaEval</strong>, <strong>LM-Eval</strong>, <strong>Elo</strong>, perplexity, and a concurrency/latency benchmark measuring per-token timing under load.</li>
-                <li>Prototyped an <strong>agentic AI call-center assistant</strong>: tool-calling + Multi-RAG for intent handling and answer generation with CRM/ticketing actions, guardrails, <strong>human-in-the-loop escalation</strong>, and an output-quality evaluation loop.</li>
-                <li>Developed thermal/IR algorithms — fog dehazing/defogging and optical-flow anomaly detection — to restore visibility on low-visibility feeds.</li>
+                <li>Engineered a <strong>long-document RAG path</strong> (recursive + sequential summarization) with <strong>NeMo Guardrails</strong> intent routing between retrieval and summarization, holding <strong>time-to-first-token under 5 seconds</strong>.</li>
+                <li>Built an <strong>LLM evaluation framework</strong> integrating <strong>Ragas</strong> (context relevancy/recall, faithfulness, answer relevancy) and <strong>LangSmith</strong> for tracing and continuous evaluation; added <strong>MT-Bench</strong> (LLM-as-judge), <strong>AlpacaEval</strong>, <strong>LM-Eval</strong>, <strong>Elo</strong>, perplexity, and a concurrency/latency benchmark measuring per-token timing under load.</li>
+                <li>Built <strong>Multi-RAG pipelines</strong> (multi-source retrieval, hybrid search, reranking), improving <strong>Recall@10 ~20%</strong> and reducing hallucinations <strong>~30%</strong>.</li>
               </ul>
-              <p class="stack-line"><b>STACK ›</b> PyTorch · OpenCV · NVIDIA Jetson · Python · FastAPI · Docker · Kubernetes · ONNX · TensorRT · LangGraph · LlamaIndex · FAISS · Ragas · LangSmith · NeMo Guardrails · LLM APIs</p>
+
+              <p class="track-label a">— Computer Vision &amp; Edge</p>
+              <ul>
+                <li>Built an in-house <strong>visual-prompt detector</strong> (region-prompt contrastive alignment) that adapts to new domains from a few reference images with <strong>no re-training or re-labeling</strong> — <strong>+3 AP over YOLOE</strong>.</li>
+                <li>Fine-tuned <strong>OpenVLA</strong> for task-specific robotic manipulation and <strong>quantized</strong> the model for edge inference, cutting memory footprint and latency enough to run the policy on-device rather than off-loading to a server.</li>
+                <li>Deployed real-time video analytics on <strong>NVIDIA Jetson</strong> across <strong>10+ camera feeds / 5+ sites</strong>, sustaining <strong>25–35 FPS</strong> with <strong>&lt;150 ms</strong> latency for tracking, counting, and behavior analytics.</li>
+                <li>Built <strong>PPE compliance detection</strong> (Aramco) at <strong>94% precision / 90% recall</strong>, reducing false alarms <strong>25%</strong> via post-processing and threshold calibration.</li>
+                <li>Built CCTV <strong>violence detection</strong> (spatio-temporal modeling), reaching <strong>F1 ~84%</strong> from only <strong>10 minutes</strong> of labeled data, cutting annotation time <strong>~80%</strong> via a semi-automated labeling workflow with active-learning data selection.</li>
+                <li>Developed <strong>thermal/IR image-processing</strong> algorithms: fog dehazing/defogging to restore visibility in low-visibility conditions, and optical-flow-based detection of anomalous motion on IR feeds.</li>
+                <li>Tuned detection + multi-object tracking for <strong>“Easier Gates”</strong> flow analytics, reaching <strong>94% flow accuracy</strong> and reducing <strong>ID switches by 14%</strong>.</li>
+                <li>Optimized inference via <strong>ONNX</strong> export and <strong>TensorRT</strong> acceleration, cutting per-stream latency <strong>~35%</strong>; implemented dense-scene people counting, reducing counting error (MAPE) <strong>~43%</strong>.</li>
+              </ul>
+              <p class="stack-line"><b>STACK ›</b> Python · FastAPI · PyTorch · OpenCV · NVIDIA Jetson · Docker · Kubernetes · ONNX · TensorRT · LangGraph · LlamaIndex · FAISS · Ragas · LangSmith · NeMo Guardrails · OpenVLA</p>
             </details>
           </div>
 
@@ -596,24 +1004,23 @@
                 </div>
                 <div class="node-where">GIZA, EGYPT</div>
                 <div class="chip-row">
-                  <span class="stat-chip">3 production releases</span>
+                  <span class="stat-chip">3 production deployments</span>
                   <span class="stat-chip">Team 8–12</span>
                   <span class="stat-chip">99.9% uptime</span>
-                  <span class="stat-chip">95% doc OCR</span>
+                  <span class="stat-chip">96% doc OCR</span>
                   <span class="stat-chip">+20% verification</span>
                 </div>
                 <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
               </summary>
               <ul>
-                <li>Owned end-to-end delivery of identity onboarding products across <strong>SaaS, SDK, web, and mobile</strong>, shipping <strong>3 major production releases</strong>.</li>
-                <li>Led and mentored a cross-functional team of <strong>8–12</strong> (Backend, ML, UI/UX, Mobile, DevOps); raised execution velocity <strong>~30%</strong>.</li>
-                <li>Designed services and APIs for <strong>Document OCR, Face Matching, Liveness, Identity Verification</strong>, and Access Management at <strong>99.9% uptime</strong>.</li>
-                <li>Improved the verification journey (blur/glare detection, face-in-frame guidance, retry logic), lifting successful completion <strong>~20%</strong>.</li>
-                <li>Built a configurable structured-document recognition system needing only a few samples per template, reaching <strong>~95%</strong> accuracy.</li>
-                <li>Hardened reliability (rate limiting, timeouts, graceful fallbacks), reducing operational incidents <strong>~25%</strong>.</li>
+                <li>Led digital identity onboarding products across <strong>SaaS, SDK, web, and mobile</strong>, delivering <strong>3 production deployments</strong> end-to-end.</li>
+                <li>Built validation and quality-control workflows for <strong>OCR, face matching, liveness</strong>, and identity-verification datasets, improving verification success rate <strong>20%</strong> through data-quality tuning and systematic failure analysis.</li>
+                <li>Developed configurable <strong>OCR / document-processing pipelines</strong> that adapted to new structured documents using limited samples, annotation rules, and validation checks, reaching <strong>96% recognition accuracy</strong>.</li>
+                <li>Analyzed production failure cases across OCR, face verification, and liveness detection to identify noisy data, poor image quality, edge cases, and retraining opportunities.</li>
+                <li>Led and mentored a cross-functional team of <strong>8–12</strong> (Backend, ML, UI/UX, Mobile, DevOps); designed services and APIs running at <strong>99.9% uptime</strong> and hardened reliability (rate limiting, timeouts, graceful fallbacks), cutting operational incidents <strong>~25%</strong>.</li>
                 <li>Released and published <strong>IDefy eKYC</strong> and <strong>GAMA Visitor Management</strong>.</li>
               </ul>
-              <p class="stack-line"><b>STACK ›</b> Python · FastAPI / Flask · OCR/CV pipelines · Docker · Cloud · SQL / NoSQL</p>
+              <p class="stack-line"><b>STACK ›</b> Python · FastAPI / Flask · OCR &amp; CV pipelines · Docker · Cloud · SQL / NoSQL</p>
             </details>
           </div>
 
@@ -622,7 +1029,7 @@
             <details class="panel node-card">
               <summary>
                 <div class="node-top">
-                  <h3>Senior ML Engineer · <span class="org">RDI</span> <span class="muted" style="font-weight:400;font-size:14px;">(Computer Vision / OCR)</span></h3>
+                  <h3>Senior ML Engineer · <span class="org">RDI</span> <span class="muted" style="font-weight:400;font-size:14px;">(Computer Vision)</span></h3>
                   <span class="node-when">01/2021 — 10/2022</span>
                 </div>
                 <div class="node-where">GIZA, EGYPT</div>
@@ -635,11 +1042,10 @@
                 <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
               </summary>
               <ul>
-                <li>Led CV/OCR delivery of <strong>Sotoor Arabic OCR</strong>, achieving <strong>~12% WER</strong> on manuscripts and lifting recognition quality <strong>~15%</strong>.</li>
-                <li>Built document-understanding modules (layout analysis, line segmentation, font detection, recognition, denoising, correction), reducing OCR error <strong>~7%</strong> on noisy scans.</li>
-                <li>Improved robustness for skew, blur, stains, and complex layouts via geometric normalization, augmentation, and post-correction.</li>
-                <li>Optimized batch inference to <strong>30–50 pages/min</strong> with consistent quality across fonts and layouts.</li>
-                <li>Adapted the <strong>K2 toolkit</strong> for OCR decoding/training, improving training efficiency <strong>~25%</strong> and stabilizing sequence recognition.</li>
+                <li>Led the delivery of the <strong>Sotoor Arabic OCR System</strong>, achieving <strong>12% WER</strong> on Arabic manuscripts.</li>
+                <li>Built document OCR pipeline modules (layout analysis, segmentation, font detection, recognition, denoising, correction), reducing OCR error <strong>~7%</strong> on noisy scans.</li>
+                <li>Adapted the <strong>K2 Toolkit</strong> for OCR training/decoding, improving training efficiency <strong>~25%</strong> and gaining <strong>~4% WER</strong>, boosting sequence-recognition stability.</li>
+                <li>Improved robustness for skew, blur, stains, and complex layouts via geometric normalization, augmentation, and post-correction; optimized batch inference to <strong>30–50 pages/min</strong>.</li>
               </ul>
               <p class="stack-line"><b>STACK ›</b> PyTorch · OpenCV · K2 · OCR pipelines · Python · Linux</p>
             </details>
@@ -651,7 +1057,7 @@
               <summary>
                 <div class="node-top">
                   <h3>ML Researcher · <span class="org">RDI</span></h3>
-                  <span class="node-when">2017 — 2021</span>
+                  <span class="node-when">01/2017 — 01/2021</span>
                 </div>
                 <div class="node-where">GIZA, EGYPT</div>
                 <div class="chip-row">
@@ -662,8 +1068,8 @@
                 <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
               </summary>
               <ul>
-                <li>Built Arabic-language NLP systems across speech and text with a research team.</li>
-                <li>Developed and deployed production systems: <strong>Speech Recognition, OCR, Text Diacritization, Voice Conversion</strong>, and <strong>Quran Recitation Verification</strong>.</li>
+                <li>Collaborated on a team building NLP systems for the <strong>Arabic language</strong> across speech and text.</li>
+                <li>Developed and deployed production systems including <strong>Speech Recognition, Optical Character Recognition, Text Diacritization, Voice Conversion</strong>, and <strong>Quran Recitation Verification</strong>.</li>
               </ul>
               <p class="stack-line"><b>STACK ›</b> PyTorch · TensorFlow · Speech &amp; NLP toolkits · Python · Linux</p>
             </details>
@@ -672,32 +1078,34 @@
       </div>
     </section>
 
-    <!-- ================= TECH STACK MATRIX ================= -->
+    <!-- ================= STACK ================= -->
     <section class="section" id="stack">
       <div class="container">
         <div class="section-head reveal">
+          <span class="idx">05</span>
           <p class="eyebrow">Toolchain</p>
           <h2>Tech stack matrix</h2>
-          <p>End-to-end coverage: data → training → serving → edge.</p>
+          <p>End-to-end coverage: data → training → serving → edge, on both tracks.</p>
+          <div class="rule"></div>
         </div>
         <div class="matrix">
-          <div class="panel mcell reveal"><h4>Languages &amp; Data</h4><div class="tags">
-            <span class="tag-pill">Python</span><span class="tag-pill">SQL</span><span class="tag-pill">PostgreSQL</span><span class="tag-pill">NoSQL</span><span class="tag-pill">Pandas</span><span class="tag-pill">NumPy</span><span class="tag-pill">Feature Eng.</span>
+          <div class="panel mcell reveal"><h4>Programming &amp; Data</h4><div class="tags">
+            <span class="tag-pill">Python (expert)</span><span class="tag-pill">C/C++</span><span class="tag-pill">CUDA</span><span class="tag-pill">SQL</span><span class="tag-pill">PostgreSQL</span><span class="tag-pill">NoSQL</span><span class="tag-pill">Pandas</span><span class="tag-pill">NumPy</span><span class="tag-pill">Git</span><span class="tag-pill">Linux</span>
+          </div></div>
+          <div class="panel mcell b reveal"><h4>LLM &amp; Agentic Systems</h4><div class="tags">
+            <span class="tag-pill">LangGraph</span><span class="tag-pill">LlamaIndex</span><span class="tag-pill">Multi-RAG</span><span class="tag-pill">Embeddings</span><span class="tag-pill">Reranking</span><span class="tag-pill">Chunking</span><span class="tag-pill">FAISS</span><span class="tag-pill">NeMo Guardrails</span><span class="tag-pill">Tool-calling</span><span class="tag-pill">Prompt Eng.</span>
+          </div></div>
+          <div class="panel mcell b reveal"><h4>LLM Eval &amp; Observability</h4><div class="tags">
+            <span class="tag-pill">Ragas</span><span class="tag-pill">LangSmith</span><span class="tag-pill">MT-Bench</span><span class="tag-pill">AlpacaEval</span><span class="tag-pill">LM-Eval Harness</span><span class="tag-pill">Elo Rating</span><span class="tag-pill">Perplexity</span><span class="tag-pill">Latency Benchmarking</span>
+          </div></div>
+          <div class="panel mcell reveal"><h4>Computer Vision &amp; NLP</h4><div class="tags">
+            <span class="tag-pill">Object Detection</span><span class="tag-pill">Segmentation</span><span class="tag-pill">OCR</span><span class="tag-pill">Video Analytics</span><span class="tag-pill">Multi-Object Tracking</span><span class="tag-pill">Action Recognition</span><span class="tag-pill">Anomaly Detection</span><span class="tag-pill">Face Recognition</span><span class="tag-pill">Liveness</span><span class="tag-pill">Optical Flow</span><span class="tag-pill">Diffusion Models</span>
           </div></div>
           <div class="panel mcell reveal"><h4>ML / Deep Learning</h4><div class="tags">
-            <span class="tag-pill">PyTorch</span><span class="tag-pill">TensorFlow</span><span class="tag-pill">Scikit-learn</span><span class="tag-pill">Transformers</span><span class="tag-pill">Fine-tuning</span><span class="tag-pill">Custom Loss</span><span class="tag-pill">Error Analysis</span>
+            <span class="tag-pill">PyTorch</span><span class="tag-pill">TensorFlow</span><span class="tag-pill">Scikit-learn</span><span class="tag-pill">Fine-Tuning</span><span class="tag-pill">Hyperparameter Tuning</span><span class="tag-pill">Custom Loss</span><span class="tag-pill">Evaluation Metrics</span><span class="tag-pill">Error Analysis</span>
           </div></div>
-          <div class="panel mcell reveal"><h4>Computer Vision</h4><div class="tags">
-            <span class="tag-pill">Object Detection</span><span class="tag-pill">Segmentation</span><span class="tag-pill">OCR</span><span class="tag-pill">Video Analytics</span><span class="tag-pill">Multi-Object Tracking</span><span class="tag-pill">Action Recognition</span><span class="tag-pill">Optical Flow</span><span class="tag-pill">Liveness</span>
-          </div></div>
-          <div class="panel mcell reveal"><h4>GenAI / LLM</h4><div class="tags">
-            <span class="tag-pill">LLMs</span><span class="tag-pill">Multi-RAG</span><span class="tag-pill">Embeddings</span><span class="tag-pill">Reranking</span><span class="tag-pill">Chunking</span><span class="tag-pill">Prompt Eng.</span><span class="tag-pill">LLM Eval</span><span class="tag-pill">Diffusion</span>
-          </div></div>
-          <div class="panel mcell reveal"><h4>Serving &amp; MLOps</h4><div class="tags">
-            <span class="tag-pill">FastAPI</span><span class="tag-pill">REST APIs</span><span class="tag-pill">Docker</span><span class="tag-pill">Kubernetes</span><span class="tag-pill">CI/CD</span><span class="tag-pill">ONNX</span><span class="tag-pill">TensorRT</span>
-          </div></div>
-          <div class="panel mcell reveal"><h4>Cloud &amp; Edge</h4><div class="tags">
-            <span class="tag-pill">GCP</span><span class="tag-pill">AWS</span><span class="tag-pill">Vertex AI</span><span class="tag-pill">SageMaker</span><span class="tag-pill">NVIDIA Jetson</span><span class="tag-pill">Linux</span><span class="tag-pill">Git</span>
+          <div class="panel mcell reveal"><h4>Serving, Cloud &amp; Edge</h4><div class="tags">
+            <span class="tag-pill">FastAPI</span><span class="tag-pill">REST APIs</span><span class="tag-pill">Docker</span><span class="tag-pill">Kubernetes</span><span class="tag-pill">CI/CD</span><span class="tag-pill">ONNX</span><span class="tag-pill">TensorRT</span><span class="tag-pill">GCP Vertex AI</span><span class="tag-pill">AWS SageMaker</span><span class="tag-pill">Ground Truth</span><span class="tag-pill">NVIDIA Jetson</span>
           </div></div>
         </div>
       </div>
@@ -707,72 +1115,74 @@
     <section class="section" id="projects">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Build Log</p>
+          <span class="idx">06</span>
+          <p class="eyebrow">Build log</p>
           <h2>Selected projects</h2>
+          <div class="rule"></div>
         </div>
         <div class="cards">
-          <div class="panel pcard reveal">
+          <div class="panel pcard b reveal">
             <span class="ptag">Agentic · Co-Founder · 2025–Present</span>
             <h3>Agentic AI Call-Center Assistant</h3>
             <ul>
-              <li>Agentic assistant automating support via LLM orchestration, tool-calling, and <strong>Multi-RAG</strong> retrieval over policies, FAQs, and internal docs.</li>
-              <li>Intent detection + conversation state for structured multi-turn flows and compliant responses.</li>
-              <li>Tool integrations for ticketing, CRM lookup, status retrieval, escalation routing, and follow-ups — end-to-end task completion, not just Q&amp;A.</li>
-              <li>Guardrails: policy refusals, PII masking, scoped tool permissions, human-in-the-loop escalation.</li>
-              <li>Quality framework — groundedness checks, citation validation, regression testing — plus telemetry for latency and tool-call success.</li>
+              <li>Agentic assistant automating support via LLM <strong>tool-calling</strong> and <strong>Multi-RAG</strong> retrieval over policies, FAQs, and internal docs.</li>
+              <li>Intent handling, answer generation, and CRM/ticketing actions driven end-to-end — task completion, not just Q&amp;A.</li>
+              <li>Reliable conversation orchestration with <strong>guardrails</strong>, escalation-to-human routing, PII masking, and scoped tool permissions.</li>
+              <li>Quality evaluation loop — groundedness checks, citation validation, regression testing — plus telemetry for latency and tool-call success.</li>
             </ul>
           </div>
 
-          <div class="panel pcard reveal">
+          <div class="panel pcard b reveal">
             <span class="ptag">GenAI · Lead Engineer · 2025–Present</span>
             <h3>Fashimi — AI Virtual Try-On Platform</h3>
             <ul>
-              <li>End-to-end try-on platform pairing <strong>LLM-driven recommendation</strong> with <strong>diffusion-based</strong> avatar generation and photorealistic synthesis.</li>
-              <li>GenAI architecture preserving identity and garment fidelity across pose, lighting, and texture.</li>
+              <li>End-to-end try-on platform pairing <strong>LLM-driven recommendation</strong> and prompt generation with <strong>diffusion-based</strong> avatar generation and photorealistic rendering.</li>
               <li>Recommendation engine turning mood / occasion / climate / preferences into structured outfit prompts.</li>
-              <li>Fine-tuned segmentation/detection for clean garment masks, reducing artifacts and boosting fit realism.</li>
+              <li>Fine-tuned segmentation for clean garment masks, preserving identity and garment fidelity across pose, lighting, and texture.</li>
               <li>Production APIs with async jobs, versioned result storage, and quality eval loops.</li>
             </ul>
           </div>
 
           <div class="panel pcard reveal">
-            <span class="ptag">Clinical ML · 2022–2023</span>
-            <h3>Post-Operative Infection Prediction</h3>
-            <p class="summary">Ensemble model with imputation on clinical data — <strong>82% sensitivity</strong> and <strong>91% specificity</strong>, supporting Newcastle University PhD research and published at the FCI Annual Conference.</p>
+            <span class="ptag">Real-time CV · 2022</span>
+            <h3>Valorant Esports Overlay</h3>
+            <p class="summary">Real-time multi-threaded system extracting gameplay data from Valorant for esports competition overlays — object detection, pattern recognition, and color analysis at <strong>50–72 ms</strong> response latency.</p>
           </div>
 
           <div class="panel pcard reveal">
-            <span class="ptag">Real-time CV · 2022</span>
-            <h3>Valorant Esports Overlay</h3>
-            <p class="summary">Real-time multi-threaded CV pipeline extracting gameplay data for esports overlays — object detection, pattern recognition, and color analysis at <strong>50–72 ms</strong> response latency.</p>
+            <span class="ptag">Clinical ML · 2022–2023</span>
+            <h3>Post-Operative Infection Prediction</h3>
+            <p class="summary">Ensemble model with imputation on clinical data — <strong>82% sensitivity</strong> and <strong>91% specificity</strong>, supporting PhD research and published at the FCI Annual Conference.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= RESEARCH / AWARDS ================= -->
+    <!-- ================= RESEARCH ================= -->
     <section class="section" id="research">
       <div class="container">
         <div class="section-head reveal">
+          <span class="idx">07</span>
           <p class="eyebrow">Record</p>
-          <h2>Publications &amp; awards</h2>
+          <h2>Publications, awards &amp; education</h2>
+          <div class="rule"></div>
         </div>
         <div class="duo">
           <div class="panel list-panel reveal">
-            <h4 style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--signal);margin:0 0 8px;">Publications</h4>
+            <h4>Publications</h4>
             <ul>
               <li><span><strong>Arabic Multi-Genre Broadcast Speech Recognition</strong> — IEEE ASRU</span><span class="yr">2019</span></li>
               <li><span><strong>Prognostic AI for Post-Operative Infections</strong> — FCI Annual Conference</span><span class="yr">2023</span></li>
-              <li><span><strong>QuranScript Verification System</strong> — ESOLE Conference of Language Engineering</span><span class="yr">2016</span></li>
+              <li><span><strong>QuranScript Verification System</strong> — 16th ESOLE Conference of Language Engineering</span><span class="yr">2016</span></li>
             </ul>
           </div>
           <div class="panel list-panel reveal">
-            <h4 style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--signal);margin:0 0 8px;">Awards</h4>
+            <h4>Awards</h4>
             <ul>
               <li><span><span class="award-medal">1ST PLACE</span> — Multi-Genre Broadcast Challenge (MGB-5)</span><span class="yr">2019</span></li>
               <li><span><span class="award-medal">1ST PLACE</span> — ICFHR RASM (Historical Arabic Scientific Manuscripts)</span><span class="yr">2018</span></li>
             </ul>
-            <h4 style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--signal);margin:18px 0 8px;">Education</h4>
+            <h4 style="margin-top:18px;">Education</h4>
             <ul>
               <li><span><strong>B.Sc. Electrical, Electronics &amp; Communication Engineering</strong> — Cairo University</span><span class="yr">2016</span></li>
             </ul>
@@ -785,9 +1195,11 @@
     <section class="section" id="contact">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Connect</p>
+          <span class="idx">08</span>
+          <p class="eyebrow b">Connect</p>
           <h2>Let's build something measurable.</h2>
-          <p>Cairo, Egypt · Open to relocation · Available for Senior ML / AI Lead roles.</p>
+          <p>Cairo, Egypt · Open to relocation · Available for Senior ML Engineer, AI Technical Lead, Computer Vision, and LLM / Agentic Systems roles.</p>
+          <div class="rule"></div>
         </div>
         <div class="panel" style="padding:20px;">
           <div class="contact-grid reveal">
@@ -807,6 +1219,10 @@
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
               github/hazemmamdouh
             </a>
+            <a href="hhassan_full.pdf" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+              Full résumé (PDF)
+            </a>
           </div>
         </div>
       </div>
@@ -815,10 +1231,15 @@
 
   <footer>
     <div class="container">
-      <span>© <span id="y"></span> Hazem Hassan</span>
-      <span>Built as an ML telemetry console · Cairo, EG</span>
+      <span>© <span id="y"></span> Hazem Hassan · Cairo, EG</span>
+      <span class="off">OFF-DUTY › <b>Swimming</b> · <b>Gaming</b> · <b>Padel</b></span>
+      <span>Built as an ML telemetry console</span>
     </div>
   </footer>
+
+  <button class="totop" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V6"/><path d="m6 12 6-6 6 6"/></svg>
+  </button>
 
   <script>
   (function () {
@@ -826,12 +1247,105 @@
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    /* ---------- Reveal on scroll ---------- */
+    /* ---------- Hero headline: split into animated words ---------- */
+    (function () {
+      var h = document.querySelector("h1[data-split]");
+      if (!h) return;
+      var i = 0;
+      function walk(node) {
+        Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+          if (n.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            n.textContent.split(/(\s+)/).forEach(function (tok) {
+              if (!tok) return;
+              if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); return; }
+              var s = document.createElement("span");
+              s.className = "w"; s.textContent = tok;
+              s.style.animationDelay = (60 + i * 55) + "ms"; i++;
+              frag.appendChild(s);
+            });
+            node.replaceChild(frag, n);
+          } else if (n.nodeType === 1) {
+            if (n.classList.contains("hl")) { n.style.animationDelay = (60 + i * 55) + "ms, 0ms"; i++; }
+            else walk(n);
+          }
+        });
+      }
+      walk(h);
+    })();
+
+    /* ---------- Scroll progress + header state + back-to-top ---------- */
+    var progress = document.getElementById("progress"),
+        hdr = document.getElementById("hdr"),
+        toTop = document.getElementById("toTop"),
+        spineFill = document.getElementById("spineFill"),
+        run = document.getElementById("run"),
+        ticking = false;
+
+    function onScroll() {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = "scaleX(" + (h > 0 ? Math.min(y / h, 1) : 0) + ")";
+      hdr.classList.toggle("pinned", y > 12);
+      toTop.classList.toggle("on", y > 700);
+      if (run && spineFill) {
+        var r = run.getBoundingClientRect();
+        var p = (window.innerHeight * 0.62 - r.top) / r.height;
+        spineFill.style.height = Math.max(0, Math.min(1, p)) * 100 + "%";
+      }
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll();
+    toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); });
+
+    /* ---------- Mobile nav ---------- */
+    var navToggle = document.getElementById("navToggle"), navLinksEl = document.getElementById("navLinks");
+    navToggle.addEventListener("click", function () {
+      var open = navLinksEl.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    navLinksEl.addEventListener("click", function (e) {
+      if (e.target.closest("a")) { navLinksEl.classList.remove("open"); navToggle.setAttribute("aria-expanded", "false"); }
+    });
+
+    /* ---------- Panel cursor spotlight ---------- */
+    if (!reduced && window.matchMedia("(pointer: fine)").matches) {
+      document.addEventListener("pointermove", function (e) {
+        var p = e.target.closest(".panel");
+        if (!p) return;
+        var r = p.getBoundingClientRect();
+        p.style.setProperty("--mx", (e.clientX - r.left) + "px");
+        p.style.setProperty("--my", (e.clientY - r.top) + "px");
+      }, { passive: true });
+    }
+
+    /* ---------- Magnetic buttons ---------- */
+    if (!reduced && window.matchMedia("(pointer: fine)").matches) {
+      document.querySelectorAll(".btn, .dl, .nav-cta").forEach(function (b) {
+        b.addEventListener("pointermove", function (e) {
+          var r = b.getBoundingClientRect();
+          var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+          var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+          b.style.transform = "translate(" + (dx * 6).toFixed(2) + "px," + (dy * 5 - 3).toFixed(2) + "px)";
+        });
+        b.addEventListener("pointerleave", function () { b.style.transform = ""; });
+      });
+    }
+
+    /* ---------- Reveal on scroll (staggered) ---------- */
     var revealEls = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
       var ro = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add("show"); ro.unobserve(e.target); }
+        entries.forEach(function (e, k) {
+          if (e.isIntersecting) {
+            e.target.style.transitionDelay = (Math.min(k, 5) * 90) + "ms";
+            e.target.classList.add("show");
+            ro.unobserve(e.target);
+          }
         });
       }, { threshold: 0.12 });
       revealEls.forEach(function (el) { ro.observe(el); });
@@ -839,11 +1353,80 @@
       revealEls.forEach(function (el) { el.classList.add("show"); });
     }
 
+    /* ---------- Marquee ---------- */
+    (function () {
+      var items = ["Computer Vision", "LangGraph", "NVIDIA Jetson", "LlamaIndex", "TensorRT", "Multi-RAG", "Multi-Object Tracking", "Ragas", "OCR", "LangSmith", "ONNX", "FAISS", "Action Recognition", "NeMo Guardrails", "FastAPI", "Diffusion Models", "Kubernetes", "OpenVLA", "Thermal / IR", "Prompt Engineering"];
+      var t = document.getElementById("mqTrack");
+      if (!t) return;
+      var half = items.map(function (s) { return "<b>" + s + "</b>"; }).join("");
+      t.innerHTML = half + half;
+    })();
+
+    /* ---------- Boot / telemetry log line ---------- */
+    (function () {
+      var el = document.getElementById("bootLine");
+      if (!el) return;
+      var lines = [
+        "> jetson.stream[10] · 32 fps · 128 ms",
+        "> tracker.id_switches ↓ 14% · flow 94%",
+        "> ppe.detect · P 94% / R 90% · alarms ↓ 25%",
+        "> rag.query · ttft 4.2s · recall@10 ↑ 20%",
+        "> eval.ragas · faithfulness ok · langsmith trace ✓",
+        "> vprompt.detect · +3 AP vs YOLOE · 0 relabels"
+      ];
+      if (reduced) { el.textContent = lines[0]; return; }
+      var li = 0, ci = 0, del = false;
+      function tick() {
+        var s = lines[li];
+        el.textContent = s.slice(0, ci) + (ci < s.length ? "▌" : "");
+        if (!del) {
+          ci++;
+          if (ci > s.length) { del = true; setTimeout(tick, 1700); return; }
+          setTimeout(tick, 22);
+        } else {
+          ci -= 3;
+          if (ci <= 0) { ci = 0; del = false; li = (li + 1) % lines.length; setTimeout(tick, 320); return; }
+          setTimeout(tick, 12);
+        }
+      }
+      tick();
+    })();
+
+    /* ---------- Rotating target roles ---------- */
+    (function () {
+      var slot = document.getElementById("roleSlot"), caret = document.getElementById("roleCaret");
+      if (!slot) return;
+      var roles = [
+        ["Senior ML Engineer", false],
+        ["Senior Computer Vision Engineer", false],
+        ["LLM / Agentic Systems Engineer", true],
+        ["AI Technical Lead (Edge AI)", false]
+      ];
+      if (reduced) { slot.textContent = roles.map(function (r) { return r[0]; }).join(" · "); caret.style.display = "none"; return; }
+      var i = 0, c = 0, del = false;
+      function tick() {
+        var r = roles[i], s = r[0];
+        slot.classList.toggle("b", !!r[1]);
+        caret.style.background = r[1] ? "var(--sig-b)" : "var(--signal)";
+        slot.textContent = s.slice(0, c);
+        if (!del) {
+          c++;
+          if (c > s.length) { del = true; setTimeout(tick, 1900); return; }
+          setTimeout(tick, 46);
+        } else {
+          c--;
+          if (c <= 0) { del = false; i = (i + 1) % roles.length; setTimeout(tick, 260); return; }
+          setTimeout(tick, 20);
+        }
+      }
+      tick();
+    })();
+
     /* ---------- Count-up KPIs ---------- */
     function countUp(el) {
       var target = parseFloat(el.getAttribute("data-count"));
       if (reduced) { el.textContent = target; return; }
-      var dur = 1100, start = null;
+      var dur = 1200, start = null;
       function step(ts) {
         if (!start) start = ts;
         var p = Math.min((ts - start) / dur, 1);
@@ -866,11 +1449,11 @@
     var meters = document.querySelectorAll(".meter");
     if ("IntersectionObserver" in window) {
       var mo = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
+        entries.forEach(function (e, k) {
           if (e.isIntersecting) {
             var f = e.target.querySelector(".fill");
             var v = parseFloat(e.target.getAttribute("data-fill"));
-            f.style.width = Math.min(v, 100) + "%";
+            setTimeout(function () { f.style.width = Math.min(v, 100) + "%"; }, Math.min(k, 7) * 70);
             mo.unobserve(e.target);
           }
         });
@@ -882,25 +1465,27 @@
 
     /* ---------- Radial gauges ---------- */
     var gaugeData = [
-      { v: 94, label: "PPE precision", sub: "Aramco safety" },
-      { v: 84, label: "Violence F1", sub: "from 10-min data" },
-      { v: 80, label: "Annotation cut", sub: "semi-auto loop" },
-      { v: 43, label: "Crowd error ↓", sub: "MAPE reduction" }
+      { v: 94, label: "PPE precision", sub: "Aramco safety", b: false },
+      { v: 84, label: "Violence F1", sub: "from 10-min data", b: false },
+      { v: 80, label: "Annotation cut", sub: "semi-auto + active learning", b: false },
+      { v: 20, label: "Recall@10 ↑", sub: "Multi-RAG retrieval", b: true }
     ];
     var gWrap = document.getElementById("gauges");
     var R = 46, C = 2 * Math.PI * R;
-    gaugeData.forEach(function (g) {
+    gaugeData.forEach(function (g, gi) {
       var cell = document.createElement("div");
       cell.className = "gauge";
+      var gid = "gg" + gi;
       cell.innerHTML =
         '<svg viewBox="0 0 120 120">' +
+          '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="1" y2="1">' +
+            '<stop offset="0%" stop-color="' + (g.b ? "var(--sig-b-2)" : "var(--signal-2)") + '"/>' +
+            '<stop offset="100%" stop-color="' + (g.b ? "var(--sig-b)" : "var(--signal)") + '"/>' +
+          '</linearGradient></defs>' +
           '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="9"/>' +
-          '<circle class="arc" cx="60" cy="60" r="' + R + '" fill="none" stroke="url(#gg)" stroke-width="9" stroke-linecap="round" ' +
+          '<circle class="arc" cx="60" cy="60" r="' + R + '" fill="none" stroke="url(#' + gid + ')" stroke-width="9" stroke-linecap="round" ' +
           'transform="rotate(-90 60 60)" stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '"/>' +
           '<text class="gv" x="60" y="66" text-anchor="middle">0%</text>' +
-          '<defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">' +
-            '<stop offset="0%" stop-color="var(--signal-2)"/><stop offset="100%" stop-color="var(--signal)"/>' +
-          '</linearGradient></defs>' +
         '</svg>' +
         '<div class="glabel">' + g.label + '<div class="gsub">' + g.sub + '</div></div>';
       gWrap.appendChild(cell);
@@ -908,12 +1493,16 @@
       var txt = cell.querySelector(".gv");
       function animate() {
         var off = C * (1 - g.v / 100);
-        if (reduced) { arc.style.strokeDashoffset = off; txt.textContent = g.v + "%"; return; }
-        arc.style.transition = "stroke-dashoffset 1300ms cubic-bezier(0.22,1,0.36,1)";
+        if (reduced) { arc.style.strokeDashoffset = off; txt.textContent = (g.b ? "+" : "") + g.v + "%"; return; }
+        arc.style.transition = "stroke-dashoffset 1400ms cubic-bezier(0.22,1,0.36,1)";
         requestAnimationFrame(function () { arc.style.strokeDashoffset = off; });
-        var start = null, dur = 1300;
-        function tick(ts) { if (!start) start = ts; var p = Math.min((ts - start) / dur, 1);
-          txt.textContent = Math.round(g.v * (1 - Math.pow(1 - p, 3))) + "%"; if (p < 1) requestAnimationFrame(tick); }
+        var start = null, dur = 1400;
+        function tick(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          txt.textContent = (g.b ? "+" : "") + Math.round(g.v * (1 - Math.pow(1 - p, 3))) + "%";
+          if (p < 1) requestAnimationFrame(tick);
+        }
         requestAnimationFrame(tick);
       }
       if ("IntersectionObserver" in window) {
@@ -926,9 +1515,9 @@
     (function () {
       var axes = [
         { label: "Computer Vision", v: 96 },
-        { label: "Edge & Real-time", v: 90 },
+        { label: "Edge & Real-time", v: 92 },
         { label: "OCR / Doc AI", v: 92 },
-        { label: "GenAI / LLM", v: 84 },
+        { label: "LLM / Agentic", v: 88 },
         { label: "MLOps / Deploy", v: 88 },
         { label: "Data-centric AI", v: 90 }
       ];
@@ -939,41 +1528,49 @@
         var ang = -Math.PI / 2 + i * (2 * Math.PI / n);
         return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
       }
-      var ns = "http://www.w3.org/2000/svg", parts = "";
-      // rings
+      var parts =
+        '<defs><linearGradient id="radFill" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0%" stop-color="rgba(103,232,207,0.24)"/><stop offset="100%" stop-color="rgba(167,139,250,0.20)"/>' +
+        '</linearGradient>' +
+        '<linearGradient id="radStroke" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0%" stop-color="#67E8CF"/><stop offset="100%" stop-color="#A78BFA"/>' +
+        '</linearGradient>' +
+        '<linearGradient id="sweepGrad" x1="0" y1="0" x2="1" y2="0">' +
+        '<stop offset="0%" stop-color="rgba(103,232,207,0.34)"/><stop offset="100%" stop-color="rgba(103,232,207,0)"/>' +
+        '</linearGradient></defs>';
       [0.25, 0.5, 0.75, 1].forEach(function (f) {
         var p = "";
         for (var i = 0; i < n; i++) { var q = pt(i, rad * f); p += (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1) + " "; }
-        p += "Z";
-        parts += '<path d="' + p + '" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>';
+        parts += '<path d="' + p + 'Z" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>';
       });
-      // spokes + labels
       for (var i = 0; i < n; i++) {
         var e = pt(i, rad);
         parts += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>';
-        var lp = pt(i, rad + 26);
+        var lp = pt(i, rad + 27);
         var anchor = Math.abs(lp[0] - cx) < 6 ? "middle" : (lp[0] < cx ? "end" : "start");
         parts += '<text x="' + lp[0].toFixed(1) + '" y="' + (lp[1] + 4).toFixed(1) + '" text-anchor="' + anchor + '" ' +
           'font-family="JetBrains Mono, monospace" font-size="10.5" fill="#99A2AD" letter-spacing="0.04em">' + axes[i].label + '</text>';
       }
-      // data polygon
+      if (!reduced) {
+        parts += '<path id="radarSweep" d="M' + cx + ' ' + cy + ' L' + cx + ' ' + (cy - rad) + ' A' + rad + ' ' + rad + ' 0 0 1 ' +
+          (cx + rad * Math.sin(Math.PI / 4)).toFixed(1) + ' ' + (cy - rad * Math.cos(Math.PI / 4)).toFixed(1) + ' Z" fill="url(#sweepGrad)"/>';
+      }
       var dpath = "", dots = "";
       for (var j = 0; j < n; j++) {
-        var rr = reduced ? axes[j].v / 100 * rad : 0;
         var dp = pt(j, axes[j].v / 100 * rad);
         dpath += (j ? "L" : "M") + dp[0].toFixed(1) + " " + dp[1].toFixed(1) + " ";
-        dots += '<circle cx="' + dp[0].toFixed(1) + '" cy="' + dp[1].toFixed(1) + '" r="3.2" fill="var(--signal)"/>';
+        dots += '<circle cx="' + dp[0].toFixed(1) + '" cy="' + dp[1].toFixed(1) + '" r="3.4" fill="url(#radStroke)"/>';
       }
       dpath += "Z";
       svg.innerHTML = parts +
-        '<path id="radarPoly" d="' + dpath + '" fill="rgba(103,232,207,0.16)" stroke="var(--signal)" stroke-width="2" ' +
+        '<path id="radarPoly" d="' + dpath + '" fill="url(#radFill)" stroke="url(#radStroke)" stroke-width="2" ' +
         'style="opacity:' + (reduced ? 1 : 0) + ';transform-origin:' + cx + 'px ' + cy + 'px;transform:scale(' + (reduced ? 1 : 0.2) + ');"/>' +
         '<g id="radarDots" style="opacity:' + (reduced ? 1 : 0) + '">' + dots + '</g>';
       var poly = svg.querySelector("#radarPoly"), dg = svg.querySelector("#radarDots");
       function grow() {
         if (reduced) return;
-        poly.style.transition = "transform 900ms cubic-bezier(0.22,1,0.36,1), opacity 600ms ease";
-        dg.style.transition = "opacity 700ms ease 300ms";
+        poly.style.transition = "transform 950ms cubic-bezier(0.22,1,0.36,1), opacity 620ms ease";
+        dg.style.transition = "opacity 700ms ease 320ms";
         requestAnimationFrame(function () { poly.style.opacity = 1; poly.style.transform = "scale(1)"; dg.style.opacity = 1; });
       }
       if ("IntersectionObserver" in window) {
@@ -982,67 +1579,154 @@
       } else { grow(); }
     })();
 
-    /* ---------- Hero telemetry scope ---------- */
+    /* ---------- Hero telemetry scope (live, animated) ---------- */
     (function () {
       var svg = document.getElementById("scope");
       if (!svg) return;
-      var W = 520, H = 158, pad = 6;
-      function trace(seed, base, amp, color, width, dash) {
-        var pts = [], n = 60, x;
-        var s = seed;
+      var W = 520, H = 156, pad = 6, N = 62;
+
+      function makeSeries(seed, base, amp) {
+        var s = seed, out = [], val = base;
         function rnd() { s = (s * 9301 + 49297) % 233280; return s / 233280; }
-        var val = base;
-        for (var i = 0; i <= n; i++) {
+        for (var i = 0; i <= N; i++) {
           val += (rnd() - 0.5) * amp;
           val = Math.max(pad, Math.min(H - pad, val + (base - val) * 0.08));
-          x = pad + (W - 2 * pad) * (i / n);
-          pts.push([x, val]);
+          out.push(val);
         }
-        var d = "";
-        for (var k = 0; k < pts.length; k++) {
-          if (k === 0) { d += "M" + pts[k][0].toFixed(1) + " " + pts[k][1].toFixed(1); }
+        out.rnd = rnd; out.base = base; out.amp = amp;
+        return out;
+      }
+      function toPath(vals) {
+        var d = "", x;
+        for (var k = 0; k < vals.length; k++) {
+          x = pad + (W - 2 * pad) * (k / N);
+          if (k === 0) { d += "M" + x.toFixed(1) + " " + vals[k].toFixed(1); }
           else {
-            var px = pts[k - 1][0], py = pts[k - 1][1], cxp = (px + pts[k][0]) / 2;
-            d += " Q" + px.toFixed(1) + " " + py.toFixed(1) + " " + cxp.toFixed(1) + " " + ((py + pts[k][1]) / 2).toFixed(1);
+            var px = pad + (W - 2 * pad) * ((k - 1) / N);
+            d += " Q" + px.toFixed(1) + " " + vals[k - 1].toFixed(1) + " " + ((px + x) / 2).toFixed(1) + " " + ((vals[k - 1] + vals[k]) / 2).toFixed(1);
           }
         }
-        return { d: d, end: pts[pts.length - 1], color: color, width: width, dash: dash };
+        return d;
       }
-      var traces = [
-        trace(133, 95, 34, "var(--ink-faint)", 1.3, "3 4"),   // latency
-        trace(771, 70, 26, "rgba(255,255,255,0.55)", 1.5, ""),// accuracy
-        trace(412, 48, 40, "var(--signal)", 2.2, "")          // throughput (hero)
+
+      var series = [
+        { vals: makeSeries(133, 100, 30), color: "var(--ink-faint)", w: 1.3, dash: "3 4" },
+        { vals: makeSeries(771, 72, 24), color: "var(--sig-b)", w: 1.6, dash: "" },
+        { vals: makeSeries(412, 46, 36), color: "var(--signal)", w: 2.3, dash: "" }
       ];
+
       var inner = '<defs><linearGradient id="scopeFade" x1="0" y1="0" x2="0" y2="1">' +
-        '<stop offset="0%" stop-color="rgba(103,232,207,0.18)"/><stop offset="100%" stop-color="rgba(103,232,207,0)"/></linearGradient></defs>';
-      // fill under signal trace
-      var sig = traces[2];
-      inner += '<path d="' + sig.d + ' L' + (W - pad) + ' ' + (H - pad) + ' L' + pad + ' ' + (H - pad) + ' Z" fill="url(#scopeFade)" opacity="0.9"/>';
-      traces.forEach(function (t, idx) {
-        var len = 1400;
-        inner += '<path d="' + t.d + '" fill="none" stroke="' + t.color + '" stroke-width="' + t.width + '" ' +
-          (t.dash ? 'stroke-dasharray="' + t.dash + '" ' : '') +
-          'stroke-linecap="round" class="scope-line" data-idx="' + idx + '"/>';
+        '<stop offset="0%" stop-color="rgba(103,232,207,0.20)"/><stop offset="100%" stop-color="rgba(103,232,207,0)"/></linearGradient></defs>';
+      inner += '<path id="scopeArea" d="" fill="url(#scopeFade)"/>';
+      series.forEach(function (s, i) {
+        inner += '<path id="scopeLine' + i + '" d="' + toPath(s.vals) + '" fill="none" stroke="' + s.color + '" stroke-width="' + s.w + '" ' +
+          (s.dash ? 'stroke-dasharray="' + s.dash + '" ' : '') + 'stroke-linecap="round"/>';
       });
-      // live dot at end of signal trace
-      inner += '<circle cx="' + sig.end[0].toFixed(1) + '" cy="' + sig.end[1].toFixed(1) + '" r="3.6" fill="var(--signal)"><animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/></circle>';
+      inner += '<circle id="scopeDot" r="3.8" fill="var(--signal)"><animate attributeName="opacity" values="1;0.25;1" dur="1.5s" repeatCount="indefinite"/></circle>';
       svg.innerHTML = inner;
 
-      if (!reduced) {
-        svg.querySelectorAll(".scope-line").forEach(function (p) {
-          var L = p.getTotalLength();
-          p.style.strokeDasharray = p.getAttribute("stroke-dasharray") ? p.getAttribute("stroke-dasharray") : L;
-          if (!p.getAttribute("stroke-dasharray") || p.dataset.idx === "2") {
-            p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
-            p.style.transition = "stroke-dashoffset 1500ms ease " + (p.dataset.idx * 180) + "ms";
-            requestAnimationFrame(function () { p.style.strokeDashoffset = 0; });
-          }
-        });
+      var area = svg.querySelector("#scopeArea"),
+          dot = svg.querySelector("#scopeDot"),
+          paths = series.map(function (_, i) { return svg.querySelector("#scopeLine" + i); });
+
+      function render() {
+        series.forEach(function (s, i) { paths[i].setAttribute("d", toPath(s.vals)); });
+        var sig = series[2].vals;
+        area.setAttribute("d", toPath(sig) + " L" + (W - pad) + " " + (H - pad) + " L" + pad + " " + (H - pad) + " Z");
+        dot.setAttribute("cx", (W - pad).toFixed(1));
+        dot.setAttribute("cy", sig[sig.length - 1].toFixed(1));
       }
+      render();
+
+      if (reduced) return;
+
+      /* intro draw-in */
+      paths.forEach(function (p, i) {
+        if (series[i].dash) return;
+        var L = p.getTotalLength();
+        p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
+        p.style.transition = "stroke-dashoffset 1600ms ease " + (i * 180) + "ms";
+        requestAnimationFrame(function () { p.style.strokeDashoffset = 0; });
+      });
+
+      /* then keep it live: shift the window every 900ms */
+      setTimeout(function () {
+        paths.forEach(function (p, i) { if (!series[i].dash) { p.style.transition = ""; p.style.strokeDasharray = ""; p.style.strokeDashoffset = ""; } });
+        setInterval(function () {
+          if (document.hidden) return;
+          series.forEach(function (s) {
+            var v = s.vals[s.vals.length - 1] + (s.vals.rnd() - 0.5) * s.amp;
+            v = Math.max(pad, Math.min(H - pad, v + (s.vals.base - v) * 0.12));
+            s.vals.push(v); s.vals.shift();
+          });
+          render();
+        }, 900);
+      }, 2100);
+    })();
+
+    /* ---------- Ambient constellation field ---------- */
+    (function () {
+      var cv = document.getElementById("field");
+      if (!cv || reduced) { if (cv) cv.style.display = "none"; return; }
+      var ctx = cv.getContext("2d"), w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var nodes = [], mouse = { x: -9999, y: -9999 };
+
+      function resize() {
+        w = cv.clientWidth; h = cv.clientHeight;
+        cv.width = w * dpr; cv.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var count = Math.min(76, Math.round(w * h / 20000));
+        nodes = [];
+        for (var i = 0; i < count; i++) {
+          nodes.push({
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
+            r: Math.random() * 1.5 + 0.7,
+            b: Math.random() > 0.62
+          });
+        }
+      }
+      window.addEventListener("resize", resize);
+      window.addEventListener("pointermove", function (e) { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+      resize();
+
+      function frame() {
+        if (document.hidden) { requestAnimationFrame(frame); return; }
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < nodes.length; i++) {
+          var n = nodes[i];
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
+          if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
+
+          var dmx = n.x - mouse.x, dmy = n.y - mouse.y;
+          var dm = Math.sqrt(dmx * dmx + dmy * dmy);
+          if (dm < 130) { n.x += dmx / dm * 0.6; n.y += dmy / dm * 0.6; }
+
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = n.b ? "rgba(167,139,250,0.55)" : "rgba(103,232,207,0.55)";
+          ctx.fill();
+
+          for (var j = i + 1; j < nodes.length; j++) {
+            var m = nodes[j], dx = n.x - m.x, dy = n.y - m.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var a = (1 - d2 / 15000) * 0.22;
+              ctx.beginPath();
+              ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+              ctx.strokeStyle = (n.b && m.b) ? "rgba(167,139,250," + a + ")" : "rgba(103,232,207," + a + ")";
+              ctx.lineWidth = 0.7;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
     })();
 
     /* ---------- Scroll-spy nav ---------- */
-    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a[href^='#']"));
     var sections = navLinks.map(function (a) { return document.querySelector(a.getAttribute("href")); });
     if ("IntersectionObserver" in window) {
       var so = new IntersectionObserver(function (entries) {
