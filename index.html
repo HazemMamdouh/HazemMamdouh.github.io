@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hazem Hassan — Senior AI/ML Engineer · Computer Vision · LLM &amp; Agentic Systems</title>
-  <meta name="description" content="Hazem Hassan — Senior ML Engineer / AI Technical Lead. 9+ years shipping production AI on two tracks: Computer Vision, OCR, video analytics and edge deployment on NVIDIA Jetson; and LLM / agentic systems with LangGraph, LlamaIndex, RAG, Ragas and LangSmith." />
+  <title>Hazem Hassan — Senior AI/ML Engineer · Computer Vision · Conversational AI</title>
+  <meta name="description" content="Hazem Hassan — Senior ML Engineer / AI Technical Lead. 9+ years shipping production AI on two tracks: Computer Vision, OCR, video analytics and edge deployment on NVIDIA Jetson; and Conversational AI — Arabic ASR at 7.5% WER, XTTS-v2 voices at 4.1 MOS, agentic LLM workflows with LangGraph, LlamaIndex, Ragas and LangSmith." />
   <meta property="og:title" content="Hazem Hassan — Senior AI/ML Engineer" />
-  <meta property="og:description" content="Two tracks, one engineer: real-time Computer Vision on the edge, and LLM / agentic systems in production. A portfolio rendered as the ML telemetry console he builds." />
+  <meta property="og:description" content="Two tracks, one engineer: real-time Computer Vision on the edge, and Conversational AI — speech, agents and RAG — in production. Filter the whole page by the track you are hiring for." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#05070A" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2305070A'/%3E%3Cpath d='M18 44V20M18 32h12M30 44V20' stroke='%2367E8CF' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M38 44V20M38 32h10M48 44V20' stroke='%23A78BFA' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
@@ -355,11 +355,9 @@
     .trace-legend span { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); display: inline-flex; align-items: center; gap: 6px; }
     .trace-legend i { width: 14px; height: 2px; border-radius: 2px; display: inline-block; }
 
-    .kpis { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
+    .kpis { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); margin: 0 -1px -1px 0; }
     .kpi { padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background 240ms ease; }
     .kpi:hover { background: rgba(255,255,255,0.025); }
-    .kpi:nth-child(2n) { border-right: none; }
-    .kpi:nth-last-child(-n+2) { border-bottom: none; }
     .kpi .num { font-family: var(--f-display); font-weight: 600; font-size: 30px; letter-spacing: -0.02em; line-height: 1; }
     .kpi .num .u { color: var(--signal); font-size: 18px; }
     .kpi .lab { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); margin-top: 8px; }
@@ -383,6 +381,8 @@
 
     /* ---------- Résumé variants ---------- */
     .resume-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    body[data-track="vision"] .resume-grid,
+    body[data-track="conv"] .resume-grid { grid-template-columns: repeat(2, 1fr); }
     .rcard {
       padding: 22px 20px 20px; display: flex; flex-direction: column; gap: 12px;
       transition: transform 300ms var(--ease), border-color 300ms ease, box-shadow 300ms ease;
@@ -396,6 +396,7 @@
     .rcard:hover { transform: translateY(-6px); border-color: var(--line-2); box-shadow: var(--shadow); }
     .rcard.vision { --accent: var(--signal); }
     .rcard.llm    { --accent: var(--sig-b); }
+    .rcard.conv   { --accent: var(--sig-b); }
     .rcard.full   { --accent: #EEF2F5; }
     .rcard .ricon {
       width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
@@ -598,6 +599,59 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 760ms var(--ease), transform 760ms var(--ease); }
     .reveal.show { opacity: 1; transform: none; }
 
+    /* ---------- Track filter bar ---------- */
+    .trackbar {
+      position: sticky; top: 65px; z-index: 88;
+      background: rgba(5,7,10,0.86);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .tb-inner { display: flex; align-items: center; gap: 14px; padding: 10px 0; flex-wrap: nowrap; }
+    .tb-lbl { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); flex: none; }
+    .segmented {
+      position: relative; display: inline-flex; padding: 4px; gap: 2px;
+      border: 1px solid var(--line-2); border-radius: 999px; background: rgba(255,255,255,0.03);
+    }
+    .seg-thumb {
+      position: absolute; top: 4px; bottom: 4px; left: 0; width: 0; border-radius: 999px;
+      background: linear-gradient(100deg, var(--signal), var(--sig-b));
+      box-shadow: 0 6px 20px -8px var(--signal-glow);
+      transition: transform 460ms var(--ease), width 460ms var(--ease), background 460ms ease;
+      pointer-events: none; z-index: 1;
+    }
+    body[data-track="vision"] .seg-thumb { background: linear-gradient(100deg, var(--signal-2), var(--signal)); }
+    body[data-track="conv"]   .seg-thumb { background: linear-gradient(100deg, var(--sig-b-2), var(--sig-b)); box-shadow: 0 6px 20px -8px var(--sig-b-glow); }
+    .seg {
+      position: relative; z-index: 2; border: 0; background: transparent; cursor: pointer;
+      font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--ink-dim); padding: 8px 15px; border-radius: 999px; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 7px; transition: color 260ms ease;
+    }
+    .seg svg { width: 14px; height: 14px; flex: none; }
+    .seg:hover { color: var(--ink); }
+    .seg:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    .seg[aria-selected="true"] { color: #05130F; font-weight: 700; }
+    .tb-note { font-family: var(--f-mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.04em; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tb-note b { color: var(--ink-dim); font-weight: 500; }
+    .tb-dl {
+      margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-dim); padding: 9px 13px; border-radius: 999px; border: 1px solid var(--line-2);
+      background: rgba(255,255,255,0.02); transition: 220ms var(--ease); white-space: nowrap;
+    }
+    .tb-dl svg { width: 14px; height: 14px; }
+    .tb-dl:hover { color: var(--signal); border-color: var(--signal-dim); transform: translateY(-2px); }
+    body[data-track="conv"] .tb-dl:hover { color: var(--sig-b); border-color: var(--sig-b-dim); }
+
+    /* the filter itself */
+    body[data-track="full"]   [data-tk]:not([data-tk~="full"]),
+    body[data-track="vision"] [data-tk]:not([data-tk~="vision"]),
+    body[data-track="conv"]   [data-tk]:not([data-tk~="conv"]) { display: none !important; }
+
+    main.swap { animation: swapIn 520ms var(--ease); }
+    @keyframes swapIn { from { opacity: 0.2; transform: translateY(10px); } }
+    section[id] { scroll-margin-top: 122px; }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 1040px) {
       .nav-links a { padding: 8px 8px; font-size: 11px; }
@@ -623,6 +677,17 @@
       .nav-cta { margin-left: 0; justify-content: center; margin-top: 8px; }
       .section-head .idx { font-size: 46px; opacity: 0.7; }
     }
+    @media (max-width: 1100px) {
+      .tb-note { display: none; }
+    }
+    @media (max-width: 660px) {
+      .tb-inner { gap: 10px; flex-wrap: wrap; }
+      .tb-lbl { display: none; }
+      .segmented { flex: 1 1 100%; justify-content: space-between; }
+      .seg { padding: 8px 9px; font-size: 10px; letter-spacing: 0.03em; gap: 5px; }
+      .tb-dl { margin-left: 0; flex: 1 1 100%; justify-content: center; }
+      section[id] { scroll-margin-top: 160px; }
+    }
     @media (max-width: 560px) {
       .matrix { grid-template-columns: 1fr; }
       .kpis { grid-template-columns: 1fr 1fr; }
@@ -646,12 +711,12 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Hazem Hassan",
-    "jobTitle": "Senior AI/ML Engineer — Computer Vision, LLM & Agentic Systems",
+    "jobTitle": "Senior AI/ML Engineer — Computer Vision, Conversational AI",
     "email": "mailto:hazem.mamdouh.fekry@gmail.com",
     "telephone": "+201000912694",
     "address": {"@type":"PostalAddress","addressCountry":"EG","addressLocality":"Cairo"},
     "alumniOf": {"@type":"CollegeOrUniversity","name":"Cairo University"},
-    "knowsAbout": ["Computer Vision","OCR","Video Analytics","Multi-Object Tracking","Edge AI","NVIDIA Jetson","TensorRT","Large Language Models","Agentic Workflows","LangGraph","LlamaIndex","Retrieval-Augmented Generation","LLM Evaluation","Diffusion Models","MLOps"],
+    "knowsAbout": ["Computer Vision","OCR","Document AI","Video Analytics","Multi-Object Tracking","Thermal Imaging","Edge AI","NVIDIA Jetson","TensorRT","Conversational AI","Speech Recognition","Speech Synthesis","Speaker Diarization","Whisper","NVIDIA NeMo","Coqui XTTS","Large Language Models","Agentic Workflows","LangGraph","LlamaIndex","Retrieval-Augmented Generation","LLM Evaluation","Diffusion Models","MLOps"],
     "sameAs": [
       "https://linkedin.com/in/hmamdouh",
       "https://github.com/hazemmamdouh",
@@ -661,7 +726,17 @@
   </script>
 </head>
 
-<body>
+<body data-track="full">
+  <script>
+    /* restore the visitor's chosen track before first paint */
+    (function () {
+      try {
+        var q = /[?&]track=(full|vision|conv)\b/.exec(location.search);
+        var t = q ? q[1] : localStorage.getItem("hh-track");
+        if (t === "vision" || t === "conv" || t === "full") document.body.setAttribute("data-track", t);
+      } catch (e) {}
+    })();
+  </script>
   <div class="progress" id="progress"></div>
   <div class="bg"><div class="aurora"></div></div>
   <canvas id="field"></canvas>
@@ -704,6 +779,35 @@
     </div>
   </header>
 
+  <!-- ================= TRACK FILTER ================= -->
+  <div class="trackbar" id="trackbar">
+    <div class="container">
+      <div class="tb-inner">
+        <span class="tb-lbl">View as ›</span>
+        <div class="segmented" role="tablist" aria-label="Filter the page by engineering track">
+          <span class="seg-thumb" id="segThumb" aria-hidden="true"></span>
+          <button class="seg" type="button" role="tab" id="segFull" data-seg="full" aria-selected="true" aria-controls="top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg>
+            Full profile
+          </button>
+          <button class="seg" type="button" role="tab" id="segVision" data-seg="vision" aria-selected="false" aria-controls="top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg>
+            Computer Vision
+          </button>
+          <button class="seg" type="button" role="tab" id="segConv" data-seg="conv" aria-selected="false" aria-controls="top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+            Conversational AI
+          </button>
+        </div>
+        <span class="tb-note" id="tbNote"></span>
+        <a class="tb-dl" id="tbDl" href="hhassan_full.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span id="tbDlLabel">Full résumé PDF</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <main id="top">
     <!-- ================= HERO ================= -->
     <section class="hero">
@@ -711,13 +815,28 @@
         <div class="hero-grid">
           <div class="reveal">
             <span class="status"><span class="beacon"></span> Available · Open to relocation</span>
-            <p class="eyebrow">Two tracks · One engineer</p>
+            <p class="eyebrow" data-tk="full">Two tracks · One engineer</p>
+            <p class="eyebrow" data-tk="vision">Track A · Computer vision &amp; the edge</p>
+            <p class="eyebrow b" data-tk="conv">Track B · Speech, agents &amp; language</p>
             <h1 data-split>Production AI, engineered for the <span class="hl">edge</span> and the <span class="hl">agent</span>.</h1>
-            <p class="lede">
+            <p class="lede" data-tk="full">
               Senior ML Engineer &amp; AI Technical Lead with <strong>9+ years</strong> shipping production systems end-to-end —
               <strong>computer vision, OCR and video analytics</strong> running on <strong>NVIDIA Jetson</strong>, and
-              <strong>LLM / agentic systems</strong> built with <strong>LangGraph, LlamaIndex and RAG</strong>, measured with a full
+              <strong>conversational AI</strong>: Arabic ASR at <strong>7.5% WER</strong>, <strong>XTTS-v2</strong> voices at
+              <strong>4.1 MOS</strong>, and agentic LLM workflows on <strong>LangGraph, LlamaIndex and RAG</strong>, measured with a full
               <strong>Ragas + LangSmith</strong> evaluation stack.
+            </p>
+            <p class="lede" data-tk="vision">
+              Senior Computer Vision Engineer with <strong>9+ years</strong> taking vision systems from research to field-deployed product —
+              <strong>multi-object tracking</strong>, <strong>thermal/IR processing</strong>, and low-latency deployment on
+              <strong>NVIDIA Jetson</strong> with <strong>TensorRT and ONNX</strong> — alongside deep document vision:
+              <strong>98% F1</strong> layout analysis, <strong>93% F1</strong> graphics understanding, and Arabic OCR in production.
+            </p>
+            <p class="lede" data-tk="conv">
+              Senior ML Engineer &amp; AI Technical Lead with <strong>9+ years</strong> building conversational and language systems end-to-end —
+              multilingual <strong>ASR on 8 kHz telephony</strong> (MSA, Egyptian, Saudi, Gulf), <strong>XTTS-v2</strong> voices at
+              <strong>4.1 MOS</strong>, diarization, VAD and keyword spotting — feeding <strong>agentic workflows on LangGraph</strong> and
+              <strong>Multi-RAG on LlamaIndex</strong>, all measured with <strong>Ragas + LangSmith</strong>.
             </p>
             <p class="rotator">
               <span class="lbl">TARGET ROLES &gt;</span>
@@ -725,13 +844,13 @@
             </p>
 
             <div class="cta">
-              <a class="btn a" href="hhassan_CV.pdf" download>
+              <a class="btn a" href="hhassan_CV.pdf" download data-tk="full vision">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
                 Computer Vision CV
               </a>
-              <a class="btn b" href="hhassan_LLM.pdf" download>
+              <a class="btn b" href="hhassan_conversational.pdf" download data-tk="full conv">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-                LLM &amp; Agentic CV
+                Conversational AI CV
               </a>
               <a class="btn primary" href="hhassan_full.pdf" download>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
@@ -760,7 +879,9 @@
               <span class="who">
                 <strong>Hazem Hassan</strong>
                 <span>Senior AI/ML Engineer</span>
-                <em>Cairo, EG · Computer Vision + LLM &amp; Agentic</em>
+                <em data-tk="full">Cairo, EG · Computer Vision + Conversational AI</em>
+                <em data-tk="vision">Cairo, EG · Computer Vision · Edge &amp; Document AI</em>
+                <em data-tk="conv">Cairo, EG · Speech · LLM &amp; Agentic Systems</em>
               </span>
             </div>
             <div class="scope">
@@ -769,15 +890,20 @@
             </div>
             <div class="ticker-line" id="bootLine"></div>
             <div class="trace-legend">
-              <span><i style="background:var(--signal)"></i>Throughput (FPS)</span>
-              <span><i style="background:var(--sig-b)"></i>Retrieval quality</span>
+              <span data-tk="full vision"><i style="background:var(--signal)"></i>Throughput (FPS)</span>
+              <span data-tk="conv"><i style="background:var(--signal)"></i>ASR accuracy</span>
+              <span data-tk="full conv"><i style="background:var(--sig-b)"></i>Retrieval quality</span>
+              <span data-tk="vision"><i style="background:var(--sig-b)"></i>Tracking stability</span>
               <span><i style="background:var(--ink-faint)"></i>Latency</span>
             </div>
             <div class="kpis">
               <div class="kpi"><div class="num"><span data-count="9">0</span><span class="u">+</span></div><div class="lab">Years in production AI</div></div>
-              <div class="kpi"><div class="num"><span data-count="35">0</span><span class="u"> fps</span></div><div class="lab">Sustained edge throughput</div></div>
-              <div class="kpi"><div class="num"><span class="u">&lt;</span><span data-count="150">0</span><span class="u"> ms</span></div><div class="lab">End-to-end edge latency</div></div>
-              <div class="kpi"><div class="num"><span class="u">&lt;</span><span data-count="5">0</span><span class="u"> s</span></div><div class="lab">RAG time-to-first-token</div></div>
+              <div class="kpi" data-tk="full vision"><div class="num"><span data-count="35">0</span><span class="u"> fps</span></div><div class="lab">Sustained edge throughput</div></div>
+              <div class="kpi" data-tk="vision"><div class="num"><span class="u">&lt;</span><span data-count="150">0</span><span class="u"> ms</span></div><div class="lab">End-to-end edge latency</div></div>
+              <div class="kpi" data-tk="full conv"><div class="num"><span data-count="7.5">0</span><span class="u">% WER</span></div><div class="lab">Arabic ASR · MSA</div></div>
+              <div class="kpi" data-tk="conv"><div class="num"><span data-count="4.1">0</span><span class="u"> MOS</span></div><div class="lab">XTTS-v2 voice quality</div></div>
+              <div class="kpi" data-tk="vision"><div class="num"><span data-count="98">0</span><span class="u">% F1</span></div><div class="lab">Document layout analysis</div></div>
+              <div class="kpi" data-tk="full conv"><div class="num"><span class="u">&lt;</span><span data-count="5">0</span><span class="u"> s</span></div><div class="lab">RAG time-to-first-token</div></div>
             </div>
           </div>
         </div>
@@ -794,43 +920,45 @@
         <div class="section-head reveal">
           <span class="idx">01</span>
           <p class="eyebrow">Download</p>
-          <h2>Three résumés, one engineer</h2>
-          <p>Same nine years, framed for the role you're hiring for. Every version is one page-dense, ATS-readable PDF — DOCX beside it if your pipeline prefers it.</p>
+          <h2>Two tracks, one engineer</h2>
+          <p data-tk="full">Same nine years, framed for the role you're hiring for — <strong>computer vision on the edge</strong> or <strong>conversational AI</strong>, with the complete record beside them. Every version is a page-dense, ATS-readable PDF, DOCX alongside it if your pipeline prefers it.</p>
+          <p data-tk="vision">The vision-track résumé: detection and tracking, thermal/IR, Jetson deployment, and document vision — with the complete record beside it if you want the whole picture.</p>
+          <p data-tk="conv">The conversational-track résumé: ASR, TTS, diarization and telephony audio feeding agentic LLM workflows and RAG — with the complete record beside it if you want the whole picture.</p>
           <div class="rule"></div>
         </div>
 
         <div class="resume-grid">
-          <div class="panel rcard vision reveal">
+          <div class="panel rcard vision reveal" data-tk="full vision">
             <span class="ricon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg>
             </span>
             <span class="rmeta">Track A · Vision</span>
             <h3>Computer Vision</h3>
-            <p>Real-time vision on the edge: detection, multi-object tracking, OCR, thermal/IR processing, and Jetson deployment tuned with TensorRT and ONNX.</p>
-            <div class="rtags"><span>Jetson</span><span>Tracking</span><span>OCR</span><span>Thermal/IR</span><span>TensorRT</span></div>
+            <p>Real-time vision on the edge: detection, multi-object tracking, thermal/IR processing and Jetson deployment tuned with TensorRT and ONNX — plus layout analysis, graphics understanding and Arabic OCR.</p>
+            <div class="rtags"><span>Jetson</span><span>Tracking</span><span>Thermal/IR</span><span>TensorRT</span><span>Document AI</span></div>
             <div class="rfoot">
               <a class="dl" href="hhassan_CV.pdf" download>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-                PDF · 114 KB
+                PDF · 140 KB
               </a>
               <a class="dl-alt" href="hhassan_CV.docx" download>DOCX</a>
             </div>
           </div>
 
-          <div class="panel rcard llm reveal">
+          <div class="panel rcard conv reveal" data-tk="full conv">
             <span class="ricon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17.5" r="2.4"/><path d="M7.9 7.3 10.6 15.5M16.6 9.1 13.4 15.8M8.4 6.2h7.2"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
             </span>
-            <span class="rmeta">Track B · Language</span>
-            <h3>LLM &amp; Agentic Systems</h3>
-            <p>Agentic workflows with LangGraph, RAG with LlamaIndex and FAISS, guardrails and escalation routing — with a real evaluation and observability stack behind it.</p>
-            <div class="rtags"><span>LangGraph</span><span>LlamaIndex</span><span>Multi-RAG</span><span>Ragas</span><span>LangSmith</span></div>
+            <span class="rmeta">Track B · Conversational</span>
+            <h3>Conversational AI</h3>
+            <p>The full voice-to-action stack: multilingual ASR and TTS, diarization, VAD and keyword spotting, wired into agentic workflows with LangGraph, Multi-RAG on LlamaIndex, guardrails and escalation routing.</p>
+            <div class="rtags"><span>Whisper</span><span>NeMo ASR</span><span>XTTS-v2</span><span>LangGraph</span><span>Multi-RAG</span></div>
             <div class="rfoot">
-              <a class="dl" href="hhassan_LLM.pdf" download>
+              <a class="dl" href="hhassan_conversational.pdf" download>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-                PDF · 129 KB
+                PDF · 136 KB
               </a>
-              <a class="dl-alt" href="hhassan_LLM.docx" download>DOCX</a>
+              <a class="dl-alt" href="hhassan_conversational.docx" download>DOCX</a>
             </div>
           </div>
 
@@ -840,12 +968,12 @@
             </span>
             <span class="rmeta">Complete · Both tracks</span>
             <h3>Full Résumé</h3>
-            <p>The whole record: vision and language side by side, plus leadership, publications, awards, and the full deployment history across four roles.</p>
-            <div class="rtags"><span>CV + LLM</span><span>Leadership</span><span>Publications</span><span>9+ years</span></div>
+            <p>The whole record: vision and conversational AI side by side, plus leadership, publications, competition wins, and the full deployment history across four roles.</p>
+            <div class="rtags"><span>Vision + Conversational</span><span>Leadership</span><span>Publications</span><span>9+ years</span></div>
             <div class="rfoot">
               <a class="dl" href="hhassan_full.pdf" download>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-                PDF · 112 KB
+                PDF · 141 KB
               </a>
               <a class="dl-alt" href="hhassan_full.docx" download>DOCX</a>
             </div>
@@ -861,7 +989,7 @@
           <span class="idx">02</span>
           <p class="eyebrow">System profile</p>
           <h2>Capabilities &amp; signal strength</h2>
-          <p>Domain focus mapped against the work I ship most. Gauges are real outcomes pulled from production deployments.</p>
+          <p>Domain focus mapped against the work I ship most — the axes and gauges follow whichever track you selected above. Gauges are real outcomes pulled from production deployments.</p>
           <div class="rule"></div>
         </div>
 
@@ -894,18 +1022,27 @@
         </div>
 
         <div class="metric-groups">
-          <div class="panel mgroup reveal">
+          <div class="panel mgroup reveal" data-tk="full vision">
             <h3>Vision &amp; Edge <span class="cnt">07</span></h3>
             <div class="meter" data-fill="94"><div class="top"><span class="name">PPE detection — precision</span><span class="val">94%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="90"><div class="top"><span class="name">PPE detection — recall</span><span class="val">90%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="94"><div class="top"><span class="name">Easier-Gates flow accuracy</span><span class="val">94%</span></div><div class="track"><div class="fill"></div></div></div>
-            <div class="meter" data-fill="84"><div class="top"><span class="name">Violence detection — F1 (10-min data)</span><span class="val">F1 84%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="14"><div class="top"><span class="name">Multi-object tracking — ID switches</span><span class="val">−14%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="43"><div class="top"><span class="name">Crowd-count error reduced (MAPE)</span><span class="val">−43%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="35"><div class="top"><span class="name">Edge latency reduced (TensorRT)</span><span class="val">−35%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="25"><div class="top"><span class="name">PPE false alarms reduced</span><span class="val">−25%</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
 
-          <div class="panel mgroup b reveal">
+          <div class="panel mgroup b reveal" data-tk="full conv">
+            <h3>Speech &amp; Voice <span class="cnt">05</span></h3>
+            <div class="meter" data-fill="92.5"><div class="top"><span class="name">Arabic ASR — MSA (100−WER)</span><span class="val">92.5%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="63"><div class="top"><span class="name">Arabic ASR — Saudi dialect (100−WER)</span><span class="val">63%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="82"><div class="top"><span class="name">XTTS-v2 voice quality (MOS 4.1/5)</span><span class="val">4.1 MOS</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="70"><div class="top"><span class="name">XTTS-v2 naturalness (MOS 3.5/5)</span><span class="val">3.5 MOS</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="64"><div class="top"><span class="name">Call-center TTS naturalness (3.2/5)</span><span class="val">3.2 MOS</span></div><div class="track"><div class="fill"></div></div></div>
+          </div>
+
+          <div class="panel mgroup b reveal" data-tk="full conv">
             <h3>LLM &amp; Agentic <span class="cnt">04</span></h3>
             <div class="meter" data-fill="30"><div class="top"><span class="name">Hallucinations reduced (Multi-RAG)</span><span class="val">−30%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="20"><div class="top"><span class="name">Multi-RAG Recall@10 ↑</span><span class="val">+20%</span></div><div class="track"><div class="fill"></div></div></div>
@@ -913,20 +1050,30 @@
             <div class="meter" data-fill="100"><div class="top"><span class="name">Eval coverage — retriever + generator</span><span class="val">Ragas + LangSmith</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
 
-          <div class="panel mgroup reveal">
-            <h3>Identity &amp; OCR <span class="cnt">05</span></h3>
+          <div class="panel mgroup reveal" data-tk="full vision">
+            <h3>Document AI &amp; OCR <span class="cnt">06</span></h3>
+            <div class="meter" data-fill="98"><div class="top"><span class="name">Arabic layout analysis — F1</span><span class="val">98%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="93"><div class="top"><span class="name">Graphics-component analysis — F1</span><span class="val">93%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="84"><div class="top"><span class="name">Graphics reasoning / understanding</span><span class="val">84%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="92"><div class="top"><span class="name">PaddleOCR Arabic — domain (100−WER)</span><span class="val">~92%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="86"><div class="top"><span class="name">PaddleOCR Arabic — general (100−WER)</span><span class="val">86%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-fill="88"><div class="top"><span class="name">Sotoor Arabic OCR (100−WER)</span><span class="val">~88%</span></div><div class="track"><div class="fill"></div></div></div>
+          </div>
+
+          <div class="panel mgroup reveal" data-tk="full vision">
+            <h3>Identity &amp; eKYC <span class="cnt">04</span></h3>
             <div class="meter" data-fill="99.9"><div class="top"><span class="name">eKYC service uptime</span><span class="val">99.9%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="96"><div class="top"><span class="name">Structured-doc recognition</span><span class="val">96%</span></div><div class="track"><div class="fill"></div></div></div>
-            <div class="meter" data-fill="88"><div class="top"><span class="name">Sotoor Arabic OCR accuracy (100−WER)</span><span class="val">~88%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="20"><div class="top"><span class="name">Verification completion ↑</span><span class="val">+20%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="25"><div class="top"><span class="name">Operational incidents ↓</span><span class="val">−25%</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
 
           <div class="panel mgroup reveal">
-            <h3>Data-centric &amp; Research <span class="cnt">05</span></h3>
+            <h3>Data-centric &amp; Research <span class="cnt" data-tk="full vision">06</span><span class="cnt" data-tk="conv">04</span></h3>
             <div class="meter" data-fill="80"><div class="top"><span class="name">Annotation time cut (semi-auto)</span><span class="val">−80%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="80"><div class="top"><span class="name">F1 on auto-labeled data</span><span class="val">F1 80%</span></div><div class="track"><div class="fill"></div></div></div>
-            <div class="meter" data-fill="60"><div class="top"><span class="name">Visual-prompt detector vs. YOLOE</span><span class="val">+3 AP</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-tk="full vision" data-fill="60"><div class="top"><span class="name">Visual-prompt detector vs. YOLOE</span><span class="val">+3 AP</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="meter" data-tk="full vision" data-fill="84"><div class="top"><span class="name">Violence detection — F1 (10-min data)</span><span class="val">F1 84%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="91"><div class="top"><span class="name">Post-op infection — specificity</span><span class="val">91%</span></div><div class="track"><div class="fill"></div></div></div>
             <div class="meter" data-fill="82"><div class="top"><span class="name">Post-op infection — sensitivity</span><span class="val">82%</span></div><div class="track"><div class="fill"></div></div></div>
           </div>
@@ -958,20 +1105,24 @@
                 </div>
                 <div class="node-where">REMOTE · EMEA</div>
                 <div class="chip-row">
-                  <span class="stat-chip">25–35 FPS edge</span>
-                  <span class="stat-chip">&lt;150 ms latency</span>
-                  <span class="stat-chip">10+ feeds / 5+ sites</span>
-                  <span class="stat-chip">+3 AP over YOLOE</span>
-                  <span class="stat-chip">F1 84% · 10-min data</span>
-                  <span class="stat-chip b">LangGraph · LlamaIndex</span>
-                  <span class="stat-chip b">FAISS RAG · TTFT &lt;5 s</span>
-                  <span class="stat-chip b">Ragas + LangSmith</span>
+                  <span class="stat-chip" data-tk="full vision">25–35 FPS edge</span>
+                  <span class="stat-chip" data-tk="full vision">&lt;150 ms latency</span>
+                  <span class="stat-chip" data-tk="full vision">10+ feeds / 5+ sites</span>
+                  <span class="stat-chip" data-tk="full vision">+3 AP over YOLOE</span>
+                  <span class="stat-chip" data-tk="vision">F1 84% · 10-min data</span>
+                  <span class="stat-chip" data-tk="full vision">98% F1 layout · 93% F1 graphics</span>
+                  <span class="stat-chip b" data-tk="full conv">Whisper · 7.5% WER MSA</span>
+                  <span class="stat-chip b" data-tk="full conv">XTTS-v2 · 4.1 MOS</span>
+                  <span class="stat-chip b" data-tk="conv">Diarization · VAD · KWS</span>
+                  <span class="stat-chip b" data-tk="full conv">LangGraph · LlamaIndex</span>
+                  <span class="stat-chip b" data-tk="full conv">FAISS RAG · TTFT &lt;5 s</span>
+                  <span class="stat-chip b" data-tk="full conv">Ragas + LangSmith</span>
                 </div>
                 <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
               </summary>
 
-              <p class="track-label b">— LLM &amp; Agentic Systems</p>
-              <ul>
+              <p class="track-label b" data-tk="full conv">— LLM &amp; Agentic Systems</p>
+              <ul data-tk="full conv">
                 <li>Built <strong>agentic LLM workflows with LangGraph</strong> — agents modeled as directed graphs with message passing, tool-calling, and execution orchestration across nodes — plus custom orchestration and RAG services on <strong>Python + FastAPI</strong>.</li>
                 <li>Developed <strong>RAG systems with LlamaIndex</strong>: embedding fine-tuning, retrieval orchestration, synthetic QA generation, and <strong>multi-modal pipelines</strong> over text, charts, and research papers, backed by a <strong>FAISS</strong> vector store.</li>
                 <li>Engineered a <strong>long-document RAG path</strong> (recursive + sequential summarization) with <strong>NeMo Guardrails</strong> intent routing between retrieval and summarization, holding <strong>time-to-first-token under 5 seconds</strong>.</li>
@@ -979,18 +1130,34 @@
                 <li>Built <strong>Multi-RAG pipelines</strong> (multi-source retrieval, hybrid search, reranking), improving <strong>Recall@10 ~20%</strong> and reducing hallucinations <strong>~30%</strong>.</li>
               </ul>
 
-              <p class="track-label a">— Computer Vision &amp; Edge</p>
-              <ul>
+              <p class="track-label b" data-tk="full conv">— Speech · ASR &amp; TTS</p>
+              <ul data-tk="full conv">
+                <li>Fine-tuned <strong>Whisper</strong> for Arabic ASR to <strong>7.5% WER</strong> on Modern Standard Arabic, then extended the model to <strong>Saudi dialect</strong> on noisy broadcast audio at <strong>37% WER</strong> — on par with the best published fine-tuned results for that dialect.</li>
+                <li>Shipped a multilingual, multi-dialect <strong>TTS voice stack on Coqui XTTS-v2</strong> — two speakers across <strong>English, Arabic MSA and Saudi</strong> — at <strong>4.1 average MOS</strong> and <strong>3.5 MOS naturalness</strong>, with a single voice identity holding across all three variants.</li>
+                <li data-tk="conv">Delivered the surrounding telephony stack for <strong>8 kHz narrowband</strong> audio: multilingual ASR on <strong>NVIDIA NeMo</strong> (Conformer/CTC) across MSA, Egyptian, Saudi and Gulf plus English, <strong>speaker diarization</strong>, <strong>VAD</strong> and noise suppression, <strong>keyword/hotword spotting</strong>, <strong>intent classification</strong> and <strong>NER</strong>.</li>
+              </ul>
+
+              <p class="track-label a" data-tk="full vision">— Computer Vision &amp; Edge</p>
+              <ul data-tk="full vision">
                 <li>Built an in-house <strong>visual-prompt detector</strong> (region-prompt contrastive alignment) that adapts to new domains from a few reference images with <strong>no re-training or re-labeling</strong> — <strong>+3 AP over YOLOE</strong>.</li>
-                <li>Fine-tuned <strong>OpenVLA</strong> for task-specific robotic manipulation and <strong>quantized</strong> the model for edge inference, cutting memory footprint and latency enough to run the policy on-device rather than off-loading to a server.</li>
+                <li>Fine-tuned and <strong>quantized OpenVLA</strong> for task-specific robotic manipulation, cutting memory footprint and latency enough to run the policy on-device rather than off-loading to a server.</li>
                 <li>Deployed real-time video analytics on <strong>NVIDIA Jetson</strong> across <strong>10+ camera feeds / 5+ sites</strong>, sustaining <strong>25–35 FPS</strong> with <strong>&lt;150 ms</strong> latency for tracking, counting, and behavior analytics.</li>
                 <li>Built <strong>PPE compliance detection</strong> (Aramco) at <strong>94% precision / 90% recall</strong>, reducing false alarms <strong>25%</strong> via post-processing and threshold calibration.</li>
-                <li>Built CCTV <strong>violence detection</strong> (spatio-temporal modeling), reaching <strong>F1 ~84%</strong> from only <strong>10 minutes</strong> of labeled data, cutting annotation time <strong>~80%</strong> via a semi-automated labeling workflow with active-learning data selection.</li>
+                <li data-tk="vision">Built CCTV <strong>violence detection</strong> (spatio-temporal modeling), reaching <strong>F1 ~84%</strong> from only <strong>10 minutes</strong> of labeled data, cutting annotation time <strong>~80%</strong> via a semi-automated labeling workflow with active-learning data selection.</li>
                 <li>Developed <strong>thermal/IR image-processing</strong> algorithms: fog dehazing/defogging to restore visibility in low-visibility conditions, and optical-flow-based detection of anomalous motion on IR feeds.</li>
                 <li>Tuned detection + multi-object tracking for <strong>“Easier Gates”</strong> flow analytics, reaching <strong>94% flow accuracy</strong> and reducing <strong>ID switches by 14%</strong>.</li>
-                <li>Optimized inference via <strong>ONNX</strong> export and <strong>TensorRT</strong> acceleration, cutting per-stream latency <strong>~35%</strong>; implemented dense-scene people counting, reducing counting error (MAPE) <strong>~43%</strong>.</li>
+                <li data-tk="vision">Optimized inference via <strong>ONNX</strong> export and <strong>TensorRT</strong> acceleration, cutting per-stream latency <strong>~35%</strong>; implemented dense-scene people counting, reducing counting error (MAPE) <strong>~43%</strong>.</li>
               </ul>
-              <p class="stack-line"><b>STACK ›</b> Python · FastAPI · PyTorch · OpenCV · NVIDIA Jetson · Docker · Kubernetes · ONNX · TensorRT · LangGraph · LlamaIndex · FAISS · Ragas · LangSmith · NeMo Guardrails · OpenVLA</p>
+
+              <p class="track-label a" data-tk="full vision">— Document AI &amp; OCR</p>
+              <ul data-tk="full vision">
+                <li>Built Arabic <strong>layout analysis</strong> and complex <strong>graphics-component analysis</strong> — <strong>98% F1</strong> on layout regions, <strong>93% F1</strong> on graphics components, and <strong>84%</strong> on graphics reasoning (chart and diagram semantics, figure–caption linkage).</li>
+                <li>Fine-tuned <strong>PaddleOCR</strong> for Arabic text recognition — <strong>14% WER</strong> general and <strong>~8% WER</strong> domain-specific — handling cursive script, ligatures, and right-to-left layout.</li>
+              </ul>
+
+              <p class="stack-line" data-tk="full"><b>STACK ›</b> Python · FastAPI · PyTorch · OpenCV · NVIDIA Jetson · ONNX · TensorRT · Docker · Kubernetes · Whisper · NVIDIA NeMo · Coqui XTTS-v2 · LangGraph · LlamaIndex · FAISS · Ragas · LangSmith · NeMo Guardrails · PaddleOCR · OpenVLA</p>
+              <p class="stack-line" data-tk="vision"><b>STACK ›</b> Python · PyTorch · OpenCV · NVIDIA Jetson · CUDA · ONNX · TensorRT · PaddleOCR · OpenVLA · FastAPI · Docker · Kubernetes</p>
+              <p class="stack-line" data-tk="conv"><b>STACK ›</b> Python · FastAPI · PyTorch · Whisper · NVIDIA NeMo · Coqui XTTS-v2 · LangGraph · LlamaIndex · FAISS · Ragas · LangSmith · NeMo Guardrails · Docker · Kubernetes</p>
             </details>
           </div>
 
@@ -1007,7 +1174,7 @@
                   <span class="stat-chip">3 production deployments</span>
                   <span class="stat-chip">Team 8–12</span>
                   <span class="stat-chip">99.9% uptime</span>
-                  <span class="stat-chip">96% doc OCR</span>
+                  <span class="stat-chip" data-tk="full vision">96% doc OCR</span>
                   <span class="stat-chip">+20% verification</span>
                 </div>
                 <span class="more-hint"><span class="txt-open">View deployment log</span><span class="txt-close">Hide details</span> <span class="chev">▾</span></span>
@@ -1085,27 +1252,38 @@
           <span class="idx">05</span>
           <p class="eyebrow">Toolchain</p>
           <h2>Tech stack matrix</h2>
-          <p>End-to-end coverage: data → training → serving → edge, on both tracks.</p>
+          <p data-tk="full">End-to-end coverage: data → training → serving → edge, across both tracks.</p>
+          <p data-tk="vision">End-to-end coverage for vision work: data → training → optimization → edge deployment.</p>
+          <p data-tk="conv">End-to-end coverage for conversational work: audio → understanding → retrieval → orchestration → evaluation.</p>
           <div class="rule"></div>
         </div>
         <div class="matrix">
           <div class="panel mcell reveal"><h4>Programming &amp; Data</h4><div class="tags">
             <span class="tag-pill">Python (expert)</span><span class="tag-pill">C/C++</span><span class="tag-pill">CUDA</span><span class="tag-pill">SQL</span><span class="tag-pill">PostgreSQL</span><span class="tag-pill">NoSQL</span><span class="tag-pill">Pandas</span><span class="tag-pill">NumPy</span><span class="tag-pill">Git</span><span class="tag-pill">Linux</span>
           </div></div>
-          <div class="panel mcell b reveal"><h4>LLM &amp; Agentic Systems</h4><div class="tags">
-            <span class="tag-pill">LangGraph</span><span class="tag-pill">LlamaIndex</span><span class="tag-pill">Multi-RAG</span><span class="tag-pill">Embeddings</span><span class="tag-pill">Reranking</span><span class="tag-pill">Chunking</span><span class="tag-pill">FAISS</span><span class="tag-pill">NeMo Guardrails</span><span class="tag-pill">Tool-calling</span><span class="tag-pill">Prompt Eng.</span>
+          <div class="panel mcell b reveal" data-tk="full conv"><h4>LLM &amp; Agentic Systems</h4><div class="tags">
+            <span class="tag-pill">LangGraph</span><span class="tag-pill">LlamaIndex</span><span class="tag-pill">Multi-RAG</span><span class="tag-pill">Embeddings</span><span class="tag-pill">Reranking</span><span class="tag-pill">Chunking</span><span class="tag-pill">FAISS</span><span class="tag-pill">NeMo Guardrails</span><span class="tag-pill">Tool-calling</span><span class="tag-pill">Escalation Routing</span><span class="tag-pill">Prompt Eng.</span>
           </div></div>
-          <div class="panel mcell b reveal"><h4>LLM Eval &amp; Observability</h4><div class="tags">
-            <span class="tag-pill">Ragas</span><span class="tag-pill">LangSmith</span><span class="tag-pill">MT-Bench</span><span class="tag-pill">AlpacaEval</span><span class="tag-pill">LM-Eval Harness</span><span class="tag-pill">Elo Rating</span><span class="tag-pill">Perplexity</span><span class="tag-pill">Latency Benchmarking</span>
+          <div class="panel mcell b reveal" data-tk="full conv"><h4>Speech &amp; Conversational</h4><div class="tags">
+            <span class="tag-pill">Whisper (LoRA / full FT)</span><span class="tag-pill">NVIDIA NeMo</span><span class="tag-pill">Conformer / CTC</span><span class="tag-pill">Coqui XTTS-v2</span><span class="tag-pill">Speaker Diarization</span><span class="tag-pill">VAD</span><span class="tag-pill">Noise Suppression</span><span class="tag-pill">Keyword Spotting</span><span class="tag-pill">8 kHz Telephony</span><span class="tag-pill">Intent + NER</span><span class="tag-pill">Diacritization</span><span class="tag-pill">Arabic Dialects</span>
           </div></div>
-          <div class="panel mcell reveal"><h4>Computer Vision &amp; NLP</h4><div class="tags">
-            <span class="tag-pill">Object Detection</span><span class="tag-pill">Segmentation</span><span class="tag-pill">OCR</span><span class="tag-pill">Video Analytics</span><span class="tag-pill">Multi-Object Tracking</span><span class="tag-pill">Action Recognition</span><span class="tag-pill">Anomaly Detection</span><span class="tag-pill">Face Recognition</span><span class="tag-pill">Liveness</span><span class="tag-pill">Optical Flow</span><span class="tag-pill">Diffusion Models</span>
+          <div class="panel mcell b reveal" data-tk="full conv"><h4>Eval &amp; Observability</h4><div class="tags">
+            <span class="tag-pill">Ragas</span><span class="tag-pill">LangSmith</span><span class="tag-pill">MT-Bench</span><span class="tag-pill">AlpacaEval</span><span class="tag-pill">LM-Eval Harness</span><span class="tag-pill">Elo Rating</span><span class="tag-pill">Perplexity</span><span class="tag-pill">WER / CER</span><span class="tag-pill">MOS Listening Tests</span><span class="tag-pill">Latency Benchmarking</span>
+          </div></div>
+          <div class="panel mcell reveal" data-tk="full vision"><h4>Computer Vision</h4><div class="tags">
+            <span class="tag-pill">Object Detection</span><span class="tag-pill">Segmentation</span><span class="tag-pill">Multi-Object Tracking</span><span class="tag-pill">Video Analytics</span><span class="tag-pill">Action Recognition</span><span class="tag-pill">Anomaly Detection</span><span class="tag-pill">Face Recognition</span><span class="tag-pill">Liveness</span><span class="tag-pill">Optical Flow</span><span class="tag-pill">Thermal / IR</span><span class="tag-pill">Defogging &amp; Denoising</span><span class="tag-pill">Diffusion Models</span>
+          </div></div>
+          <div class="panel mcell reveal" data-tk="full vision"><h4>Document AI &amp; OCR</h4><div class="tags">
+            <span class="tag-pill">Layout Analysis</span><span class="tag-pill">Graphics Understanding</span><span class="tag-pill">PaddleOCR (Arabic FT)</span><span class="tag-pill">Text Detection</span><span class="tag-pill">Table &amp; Figure Parsing</span><span class="tag-pill">Denoising</span><span class="tag-pill">Post-Correction</span><span class="tag-pill">K2 Toolkit</span>
           </div></div>
           <div class="panel mcell reveal"><h4>ML / Deep Learning</h4><div class="tags">
-            <span class="tag-pill">PyTorch</span><span class="tag-pill">TensorFlow</span><span class="tag-pill">Scikit-learn</span><span class="tag-pill">Fine-Tuning</span><span class="tag-pill">Hyperparameter Tuning</span><span class="tag-pill">Custom Loss</span><span class="tag-pill">Evaluation Metrics</span><span class="tag-pill">Error Analysis</span>
+            <span class="tag-pill">PyTorch</span><span class="tag-pill">TensorFlow</span><span class="tag-pill">Scikit-learn</span><span class="tag-pill">Fine-Tuning</span><span class="tag-pill">Hyperparameter Tuning</span><span class="tag-pill">Custom Loss</span><span class="tag-pill">Active Learning</span><span class="tag-pill">Weak Supervision</span><span class="tag-pill">Error Analysis</span>
           </div></div>
           <div class="panel mcell reveal"><h4>Serving, Cloud &amp; Edge</h4><div class="tags">
-            <span class="tag-pill">FastAPI</span><span class="tag-pill">REST APIs</span><span class="tag-pill">Docker</span><span class="tag-pill">Kubernetes</span><span class="tag-pill">CI/CD</span><span class="tag-pill">ONNX</span><span class="tag-pill">TensorRT</span><span class="tag-pill">GCP Vertex AI</span><span class="tag-pill">AWS SageMaker</span><span class="tag-pill">Ground Truth</span><span class="tag-pill">NVIDIA Jetson</span>
+            <span class="tag-pill">FastAPI</span><span class="tag-pill">REST APIs</span><span class="tag-pill">Docker</span><span class="tag-pill">Kubernetes</span><span class="tag-pill">CI/CD</span><span class="tag-pill">ONNX</span><span class="tag-pill">TensorRT</span><span class="tag-pill">Quantization</span><span class="tag-pill">GCP Vertex AI</span><span class="tag-pill">AWS SageMaker</span><span class="tag-pill">NVIDIA Jetson</span>
+          </div></div>
+          <div class="panel mcell reveal"><h4>Leadership</h4><div class="tags">
+            <span class="tag-pill">Technical Leadership</span><span class="tag-pill">System Design</span><span class="tag-pill">Mentoring</span><span class="tag-pill">Code Reviews</span><span class="tag-pill">Cross-functional Collaboration</span>
           </div></div>
         </div>
       </div>
@@ -1121,13 +1299,14 @@
           <div class="rule"></div>
         </div>
         <div class="cards">
-          <div class="panel pcard b reveal">
+          <div class="panel pcard b reveal" data-tk="full conv">
             <span class="ptag">Agentic · Co-Founder · 2025–Present</span>
             <h3>Agentic AI Call-Center Assistant</h3>
             <ul>
               <li>Agentic assistant automating support via LLM <strong>tool-calling</strong> and <strong>Multi-RAG</strong> retrieval over policies, FAQs, and internal docs.</li>
               <li>Intent handling, answer generation, and CRM/ticketing actions driven end-to-end — task completion, not just Q&amp;A.</li>
               <li>Reliable conversation orchestration with <strong>guardrails</strong>, escalation-to-human routing, PII masking, and scoped tool permissions.</li>
+              <li>Full supporting speech stack: multilingual <strong>NeMo ASR</strong> (MSA, Egyptian, Saudi, Gulf + English) on <strong>8 kHz telephony</strong>, <strong>4 TTS voices</strong> (2 male / 2 female) at <strong>3.2 MOS</strong> naturalness, diarization, VAD + noise suppression, keyword spotting, intent classification and NER.</li>
               <li>Quality evaluation loop — groundedness checks, citation validation, regression testing — plus telemetry for latency and tool-call success.</li>
             </ul>
           </div>
@@ -1143,7 +1322,7 @@
             </ul>
           </div>
 
-          <div class="panel pcard reveal">
+          <div class="panel pcard reveal" data-tk="full vision">
             <span class="ptag">Real-time CV · 2022</span>
             <h3>Valorant Esports Overlay</h3>
             <p class="summary">Real-time multi-threaded system extracting gameplay data from Valorant for esports competition overlays — object detection, pattern recognition, and color analysis at <strong>50–72 ms</strong> response latency.</p>
@@ -1198,7 +1377,9 @@
           <span class="idx">08</span>
           <p class="eyebrow b">Connect</p>
           <h2>Let's build something measurable.</h2>
-          <p>Cairo, Egypt · Open to relocation · Available for Senior ML Engineer, AI Technical Lead, Computer Vision, and LLM / Agentic Systems roles.</p>
+          <p data-tk="full">Cairo, Egypt · Open to relocation · Available for Senior ML Engineer, AI Technical Lead, Senior Computer Vision Engineer, Conversational AI and LLM / Agentic Systems roles.</p>
+          <p data-tk="vision">Cairo, Egypt · Open to relocation · Available for Senior Computer Vision Engineer, Edge AI, and AI Technical Lead roles.</p>
+          <p data-tk="conv">Cairo, Egypt · Open to relocation · Available for Conversational AI, Speech / ASR, LLM &amp; Agentic Systems, and AI Technical Lead roles.</p>
           <div class="rule"></div>
         </div>
         <div class="panel" style="padding:20px;">
@@ -1219,9 +1400,9 @@
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
               github/hazemmamdouh
             </a>
-            <a href="hhassan_full.pdf" download>
+            <a href="hhassan_full.pdf" download id="contactDl">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
-              Full résumé (PDF)
+              <span id="contactDlLabel">Full résumé (PDF)</span>
             </a>
           </div>
         </div>
@@ -1244,11 +1425,125 @@
   <script>
   (function () {
     "use strict";
+
+    /* =======================================================================
+       TRACK CONFIG — every track-dependent piece of the console lives here.
+       "full" is the default; "vision" and "conv" narrow the page down.
+       ======================================================================= */
+    var TRACK = "full";
+    var TRACKS = {
+      full: {
+        title: "Hazem Hassan — Senior AI/ML Engineer · Computer Vision · Conversational AI",
+        note: 'Showing <b>both tracks</b>',
+        pdf: "hhassan_full.pdf", pdfLabel: "Full résumé PDF", contactLabel: "Full résumé (PDF)",
+        headline: 'Production AI, engineered for the <span class="hl">edge</span> and the <span class="hl">agent</span>.',
+        roles: [
+          ["Senior ML Engineer", false],
+          ["Senior Computer Vision Engineer", false],
+          ["Conversational AI Engineer", true],
+          ["LLM / Agentic Systems Engineer", true],
+          ["AI Technical Lead", false]
+        ],
+        boot: [
+          "> jetson.stream[10] · 32 fps · 128 ms",
+          "> tracker.id_switches ↓ 14% · flow 94%",
+          "> asr.whisper · 7.5% WER · msa",
+          "> tts.xtts_v2 · mos 4.1 · naturalness 3.5",
+          "> rag.query · ttft 4.2s · recall@10 ↑ 20%",
+          "> layout.analyze · f1 98% · graphics f1 93%"
+        ],
+        marquee: ["Computer Vision", "Whisper", "NVIDIA Jetson", "LangGraph", "TensorRT", "Coqui XTTS-v2", "Multi-Object Tracking", "LlamaIndex", "PaddleOCR", "NVIDIA NeMo", "ONNX", "Multi-RAG", "Thermal / IR", "Speaker Diarization", "FAISS", "Ragas", "Layout Analysis", "LangSmith", "OpenVLA", "NeMo Guardrails"],
+        radar: [
+          { label: "Computer Vision", v: 96 },
+          { label: "Edge & Real-time", v: 92 },
+          { label: "OCR / Doc AI", v: 92 },
+          { label: "Speech / ASR · TTS", v: 90 },
+          { label: "LLM / Agentic", v: 88 },
+          { label: "MLOps / Deploy", v: 88 }
+        ],
+        gauges: [
+          { arc: 94, val: 94, unit: "%", label: "PPE precision", sub: "Aramco safety" },
+          { arc: 98, val: 98, unit: "%", label: "Layout analysis F1", sub: "Arabic document AI" },
+          { arc: 92.5, val: 92.5, dec: 1, unit: "%", label: "Arabic ASR accuracy", sub: "7.5% WER · MSA", b: true },
+          { arc: 20, val: 20, pre: "+", unit: "%", label: "Recall@10 ↑", sub: "Multi-RAG retrieval", b: true }
+        ]
+      },
+      vision: {
+        title: "Hazem Hassan — Senior Computer Vision Engineer · Edge AI · Document AI",
+        note: 'Filtered to <b>computer vision</b>',
+        pdf: "hhassan_CV.pdf", pdfLabel: "Computer Vision CV", contactLabel: "Computer Vision CV (PDF)",
+        headline: 'Real-time <span class="hl">computer vision</span>, engineered for the <span class="hl">edge</span>.',
+        roles: [
+          ["Senior Computer Vision Engineer", false],
+          ["Senior ML Engineer (Vision)", false],
+          ["Edge AI / Embedded Vision Engineer", false],
+          ["AI Technical Lead (Computer Vision)", false]
+        ],
+        boot: [
+          "> jetson.stream[10] · 32 fps · 128 ms",
+          "> tracker.id_switches ↓ 14% · flow 94%",
+          "> ppe.detect · P 94% / R 90% · alarms ↓ 25%",
+          "> thermal.defog · optical_flow anomaly ✓",
+          "> layout.analyze · f1 98% · graphics f1 93%",
+          "> vprompt.detect · +3 AP vs YOLOE · 0 relabels"
+        ],
+        marquee: ["Object Detection", "Multi-Object Tracking", "NVIDIA Jetson", "TensorRT", "ONNX", "Thermal / IR", "Optical Flow", "Action Recognition", "Anomaly Detection", "PaddleOCR", "Layout Analysis", "Video Analytics", "CUDA", "OpenVLA", "Active Learning", "Diffusion Models"],
+        radar: [
+          { label: "Detection & Segmentation", v: 95 },
+          { label: "Tracking & Video", v: 93 },
+          { label: "Edge & Real-time", v: 92 },
+          { label: "Thermal / IR", v: 86 },
+          { label: "OCR / Doc AI", v: 92 },
+          { label: "Data-centric AI", v: 90 }
+        ],
+        gauges: [
+          { arc: 94, val: 94, unit: "%", label: "PPE precision", sub: "Aramco safety" },
+          { arc: 98, val: 98, unit: "%", label: "Layout analysis F1", sub: "Arabic documents" },
+          { arc: 94, val: 94, unit: "%", label: "Flow accuracy", sub: "Easier Gates · MOT" },
+          { arc: 80, val: 80, pre: "−", unit: "%", label: "Annotation time", sub: "semi-auto + active learning" }
+        ]
+      },
+      conv: {
+        title: "Hazem Hassan — Conversational AI Engineer · Speech · LLM & Agentic Systems",
+        note: 'Filtered to <b>conversational AI</b>',
+        pdf: "hhassan_conversational.pdf", pdfLabel: "Conversational AI CV", contactLabel: "Conversational AI CV (PDF)",
+        headline: '<span class="hl">Conversational AI</span> that listens, reasons and <span class="hl">acts</span>.',
+        roles: [
+          ["Conversational AI Engineer", true],
+          ["Speech / ASR Engineer", true],
+          ["LLM / Agentic Systems Engineer", true],
+          ["AI Technical Lead (Conversational AI)", true]
+        ],
+        boot: [
+          "> asr.whisper · 7.5% WER · msa",
+          "> asr.nemo · 8 khz telephony · msa/eg/sa/gulf",
+          "> tts.xtts_v2 · mos 4.1 · naturalness 3.5",
+          "> diarize + vad + kws · stream ok",
+          "> rag.query · ttft 4.2s · recall@10 ↑ 20%",
+          "> eval.ragas · faithfulness ok · langsmith trace ✓"
+        ],
+        marquee: ["Whisper", "NVIDIA NeMo", "Coqui XTTS-v2", "Speaker Diarization", "VAD", "Keyword Spotting", "8 kHz Telephony", "Intent + NER", "LangGraph", "LlamaIndex", "Multi-RAG", "FAISS", "NeMo Guardrails", "Ragas", "LangSmith", "Arabic Dialects"],
+        radar: [
+          { label: "ASR / Speech", v: 93 },
+          { label: "TTS / Voice", v: 88 },
+          { label: "RAG / Retrieval", v: 92 },
+          { label: "LLM / Agentic", v: 90 },
+          { label: "Eval & Observability", v: 90 },
+          { label: "MLOps / Deploy", v: 88 }
+        ],
+        gauges: [
+          { arc: 92.5, val: 92.5, dec: 1, unit: "%", label: "Arabic ASR accuracy", sub: "7.5% WER · MSA", b: true },
+          { arc: 82, val: 4.1, dec: 1, unit: " MOS", label: "XTTS-v2 voice quality", sub: "EN · MSA · Saudi", b: true },
+          { arc: 20, val: 20, pre: "+", unit: "%", label: "Recall@10 ↑", sub: "Multi-RAG retrieval", b: true },
+          { arc: 30, val: 30, pre: "−", unit: "%", label: "Hallucinations ↓", sub: "hybrid search + rerank", b: true }
+        ]
+      }
+    };
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.getElementById("y").textContent = new Date().getFullYear();
 
     /* ---------- Hero headline: split into animated words ---------- */
-    (function () {
+    function splitHeadline() {
       var h = document.querySelector("h1[data-split]");
       if (!h) return;
       var i = 0;
@@ -1272,7 +1567,7 @@
         });
       }
       walk(h);
-    })();
+    }
 
     /* ---------- Scroll progress + header state + back-to-top ---------- */
     var progress = document.getElementById("progress"),
@@ -1354,29 +1649,24 @@
     }
 
     /* ---------- Marquee ---------- */
-    (function () {
-      var items = ["Computer Vision", "LangGraph", "NVIDIA Jetson", "LlamaIndex", "TensorRT", "Multi-RAG", "Multi-Object Tracking", "Ragas", "OCR", "LangSmith", "ONNX", "FAISS", "Action Recognition", "NeMo Guardrails", "FastAPI", "Diffusion Models", "Kubernetes", "OpenVLA", "Thermal / IR", "Prompt Engineering"];
+    function renderMarquee() {
       var t = document.getElementById("mqTrack");
       if (!t) return;
-      var half = items.map(function (s) { return "<b>" + s + "</b>"; }).join("");
+      var half = TRACKS[TRACK].marquee.map(function (s) { return "<b>" + s + "</b>"; }).join("");
       t.innerHTML = half + half;
-    })();
+    }
 
     /* ---------- Boot / telemetry log line ---------- */
-    (function () {
+    var bootGen = 0;
+    function startBoot() {
       var el = document.getElementById("bootLine");
       if (!el) return;
-      var lines = [
-        "> jetson.stream[10] · 32 fps · 128 ms",
-        "> tracker.id_switches ↓ 14% · flow 94%",
-        "> ppe.detect · P 94% / R 90% · alarms ↓ 25%",
-        "> rag.query · ttft 4.2s · recall@10 ↑ 20%",
-        "> eval.ragas · faithfulness ok · langsmith trace ✓",
-        "> vprompt.detect · +3 AP vs YOLOE · 0 relabels"
-      ];
+      var lines = TRACKS[TRACK].boot;
+      var gen = ++bootGen;
       if (reduced) { el.textContent = lines[0]; return; }
       var li = 0, ci = 0, del = false;
       function tick() {
+        if (gen !== bootGen) return;
         var s = lines[li];
         el.textContent = s.slice(0, ci) + (ci < s.length ? "▌" : "");
         if (!del) {
@@ -1390,21 +1680,19 @@
         }
       }
       tick();
-    })();
+    }
 
     /* ---------- Rotating target roles ---------- */
-    (function () {
+    var roleGen = 0;
+    function startRoles() {
       var slot = document.getElementById("roleSlot"), caret = document.getElementById("roleCaret");
       if (!slot) return;
-      var roles = [
-        ["Senior ML Engineer", false],
-        ["Senior Computer Vision Engineer", false],
-        ["LLM / Agentic Systems Engineer", true],
-        ["AI Technical Lead (Edge AI)", false]
-      ];
+      var roles = TRACKS[TRACK].roles;
+      var gen = ++roleGen;
       if (reduced) { slot.textContent = roles.map(function (r) { return r[0]; }).join(" · "); caret.style.display = "none"; return; }
       var i = 0, c = 0, del = false;
       function tick() {
+        if (gen !== roleGen) return;
         var r = roles[i], s = r[0];
         slot.classList.toggle("b", !!r[1]);
         caret.style.background = r[1] ? "var(--sig-b)" : "var(--signal)";
@@ -1420,7 +1708,7 @@
         }
       }
       tick();
-    })();
+    }
 
     /* ---------- Count-up KPIs ---------- */
     function countUp(el) {
@@ -1437,18 +1725,28 @@
       }
       requestAnimationFrame(step);
     }
-    var counters = document.querySelectorAll("[data-count]");
-    if ("IntersectionObserver" in window) {
-      var co = new IntersectionObserver(function (entries) {
+    var co = null;
+    function runCounters() {
+      var counters = document.querySelectorAll("[data-count]");
+      if (co) co.disconnect();
+      if (!("IntersectionObserver" in window)) { counters.forEach(countUp); return; }
+      co = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); } });
       }, { threshold: 0.6 });
-      counters.forEach(function (el) { co.observe(el); });
-    } else { counters.forEach(countUp); }
+      counters.forEach(function (el) { el.textContent = "0"; co.observe(el); });
+    }
+    runCounters();
 
     /* ---------- Meter bars ---------- */
-    var meters = document.querySelectorAll(".meter");
-    if ("IntersectionObserver" in window) {
-      var mo = new IntersectionObserver(function (entries) {
+    var mo = null;
+    function runMeters() {
+      var meters = document.querySelectorAll(".meter");
+      if (mo) mo.disconnect();
+      if (!("IntersectionObserver" in window)) {
+        meters.forEach(function (m) { m.querySelector(".fill").style.width = m.getAttribute("data-fill") + "%"; });
+        return;
+      }
+      mo = new IntersectionObserver(function (entries) {
         entries.forEach(function (e, k) {
           if (e.isIntersecting) {
             var f = e.target.querySelector(".fill");
@@ -1458,71 +1756,68 @@
           }
         });
       }, { threshold: 0.3 });
-      meters.forEach(function (m) { mo.observe(m); });
-    } else {
-      meters.forEach(function (m) { m.querySelector(".fill").style.width = m.getAttribute("data-fill") + "%"; });
+      meters.forEach(function (m) { m.querySelector(".fill").style.width = "0%"; mo.observe(m); });
     }
+    runMeters();
 
     /* ---------- Radial gauges ---------- */
-    var gaugeData = [
-      { v: 94, label: "PPE precision", sub: "Aramco safety", b: false },
-      { v: 84, label: "Violence F1", sub: "from 10-min data", b: false },
-      { v: 80, label: "Annotation cut", sub: "semi-auto + active learning", b: false },
-      { v: 20, label: "Recall@10 ↑", sub: "Multi-RAG retrieval", b: true }
-    ];
     var gWrap = document.getElementById("gauges");
-    var R = 46, C = 2 * Math.PI * R;
-    gaugeData.forEach(function (g, gi) {
-      var cell = document.createElement("div");
-      cell.className = "gauge";
-      var gid = "gg" + gi;
-      cell.innerHTML =
-        '<svg viewBox="0 0 120 120">' +
-          '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="1" y2="1">' +
-            '<stop offset="0%" stop-color="' + (g.b ? "var(--sig-b-2)" : "var(--signal-2)") + '"/>' +
-            '<stop offset="100%" stop-color="' + (g.b ? "var(--sig-b)" : "var(--signal)") + '"/>' +
-          '</linearGradient></defs>' +
-          '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="9"/>' +
-          '<circle class="arc" cx="60" cy="60" r="' + R + '" fill="none" stroke="url(#' + gid + ')" stroke-width="9" stroke-linecap="round" ' +
-          'transform="rotate(-90 60 60)" stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '"/>' +
-          '<text class="gv" x="60" y="66" text-anchor="middle">0%</text>' +
-        '</svg>' +
-        '<div class="glabel">' + g.label + '<div class="gsub">' + g.sub + '</div></div>';
-      gWrap.appendChild(cell);
-      var arc = cell.querySelector(".arc");
-      var txt = cell.querySelector(".gv");
-      function animate() {
-        var off = C * (1 - g.v / 100);
-        if (reduced) { arc.style.strokeDashoffset = off; txt.textContent = (g.b ? "+" : "") + g.v + "%"; return; }
-        arc.style.transition = "stroke-dashoffset 1400ms cubic-bezier(0.22,1,0.36,1)";
-        requestAnimationFrame(function () { arc.style.strokeDashoffset = off; });
-        var start = null, dur = 1400;
-        function tick(ts) {
-          if (!start) start = ts;
-          var p = Math.min((ts - start) / dur, 1);
-          txt.textContent = (g.b ? "+" : "") + Math.round(g.v * (1 - Math.pow(1 - p, 3))) + "%";
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { animate(); io.disconnect(); } }); }, { threshold: 0.5 });
-        io.observe(cell);
-      } else { animate(); }
-    });
+    var gaugeIO = null;
+    function renderGauges() {
+      if (!gWrap) return;
+      if (gaugeIO) { gaugeIO.disconnect(); gaugeIO = null; }
+      gWrap.innerHTML = "";
+      var R = 46, C = 2 * Math.PI * R;
+      var cells = [];
+      TRACKS[TRACK].gauges.forEach(function (g, gi) {
+        var pre = g.pre || "", unit = g.unit || "%", dec = g.dec || 0;
+        var cell = document.createElement("div");
+        cell.className = "gauge";
+        var gid = "gg" + TRACK + gi;
+        cell.innerHTML =
+          '<svg viewBox="0 0 120 120">' +
+            '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="1" y2="1">' +
+              '<stop offset="0%" stop-color="' + (g.b ? "var(--sig-b-2)" : "var(--signal-2)") + '"/>' +
+              '<stop offset="100%" stop-color="' + (g.b ? "var(--sig-b)" : "var(--signal)") + '"/>' +
+            '</linearGradient></defs>' +
+            '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="9"/>' +
+            '<circle class="arc" cx="60" cy="60" r="' + R + '" fill="none" stroke="url(#' + gid + ')" stroke-width="9" stroke-linecap="round" ' +
+            'transform="rotate(-90 60 60)" stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '"/>' +
+            '<text class="gv" x="60" y="66" text-anchor="middle">' + pre + (0).toFixed(dec) + unit + '</text>' +
+          '</svg>' +
+          '<div class="glabel">' + g.label + '<div class="gsub">' + g.sub + '</div></div>';
+        gWrap.appendChild(cell);
+        var arc = cell.querySelector(".arc"), txt = cell.querySelector(".gv");
+        cell._animate = function () {
+          var off = C * (1 - g.arc / 100);
+          if (reduced) { arc.style.strokeDashoffset = off; txt.textContent = pre + g.val.toFixed(dec) + unit; return; }
+          arc.style.transition = "stroke-dashoffset 1400ms cubic-bezier(0.22,1,0.36,1)";
+          requestAnimationFrame(function () { arc.style.strokeDashoffset = off; });
+          var start = null, dur = 1400;
+          function tick(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            txt.textContent = pre + (g.val * (1 - Math.pow(1 - p, 3))).toFixed(dec) + unit;
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        };
+        cells.push(cell);
+      });
+      if (!("IntersectionObserver" in window)) { cells.forEach(function (c) { c._animate(); }); return; }
+      gaugeIO = new IntersectionObserver(function (en) {
+        en.forEach(function (e) { if (e.isIntersecting) { e.target._animate(); gaugeIO.unobserve(e.target); } });
+      }, { threshold: 0.4 });
+      cells.forEach(function (c) { gaugeIO.observe(c); });
+    }
 
     /* ---------- Capability radar ---------- */
-    (function () {
-      var axes = [
-        { label: "Computer Vision", v: 96 },
-        { label: "Edge & Real-time", v: 92 },
-        { label: "OCR / Doc AI", v: 92 },
-        { label: "LLM / Agentic", v: 88 },
-        { label: "MLOps / Deploy", v: 88 },
-        { label: "Data-centric AI", v: 90 }
-      ];
+    var radarIO = null;
+    function renderRadar() {
       var svg = document.getElementById("radar");
       if (!svg) return;
+      if (radarIO) { radarIO.disconnect(); radarIO = null; }
+      var axes = TRACKS[TRACK].radar;
       var cx = 210, cy = 170, rad = 120, n = axes.length;
       function pt(i, r) {
         var ang = -Math.PI / 2 + i * (2 * Math.PI / n);
@@ -1566,6 +1861,8 @@
         '<path id="radarPoly" d="' + dpath + '" fill="url(#radFill)" stroke="url(#radStroke)" stroke-width="2" ' +
         'style="opacity:' + (reduced ? 1 : 0) + ';transform-origin:' + cx + 'px ' + cy + 'px;transform:scale(' + (reduced ? 1 : 0.2) + ');"/>' +
         '<g id="radarDots" style="opacity:' + (reduced ? 1 : 0) + '">' + dots + '</g>';
+      var foot = document.querySelector(".radar-foot");
+      if (foot) foot.textContent = n + " axes · 0–100 emphasis scale";
       var poly = svg.querySelector("#radarPoly"), dg = svg.querySelector("#radarDots");
       function grow() {
         if (reduced) return;
@@ -1573,11 +1870,12 @@
         dg.style.transition = "opacity 700ms ease 320ms";
         requestAnimationFrame(function () { poly.style.opacity = 1; poly.style.transform = "scale(1)"; dg.style.opacity = 1; });
       }
-      if ("IntersectionObserver" in window) {
-        var io2 = new IntersectionObserver(function (en) { en.forEach(function (ev) { if (ev.isIntersecting) { grow(); io2.disconnect(); } }); }, { threshold: 0.4 });
-        io2.observe(svg);
-      } else { grow(); }
-    })();
+      if (!("IntersectionObserver" in window)) { grow(); return; }
+      radarIO = new IntersectionObserver(function (en) {
+        en.forEach(function (ev) { if (ev.isIntersecting) { grow(); radarIO.disconnect(); radarIO = null; } });
+      }, { threshold: 0.4 });
+      radarIO.observe(svg);
+    }
 
     /* ---------- Hero telemetry scope (live, animated) ---------- */
     (function () {
@@ -1738,6 +2036,95 @@
       }, { rootMargin: "-45% 0px -50% 0px" });
       sections.forEach(function (s) { if (s) so.observe(s); });
     }
+
+    /* ---------- Track filter controller ---------- */
+    (function () {
+      var body = document.body;
+      var thumb = document.getElementById("segThumb");
+      var segWrap = thumb ? thumb.parentNode : null;
+      var segs = Array.prototype.slice.call(document.querySelectorAll(".seg"));
+      var note = document.getElementById("tbNote");
+      var dl = document.getElementById("tbDl"), dlLabel = document.getElementById("tbDlLabel");
+      var cdl = document.getElementById("contactDl"), cdlLabel = document.getElementById("contactDlLabel");
+      var mainEl = document.getElementById("top");
+
+      function moveThumb(animate) {
+        if (!thumb || !segWrap) return;
+        var btn = segWrap.querySelector('.seg[aria-selected="true"]');
+        if (!btn) return;
+        var sr = segWrap.getBoundingClientRect(), br = btn.getBoundingClientRect();
+        if (!br.width) return;
+        if (!animate) thumb.style.transition = "none";
+        thumb.style.width = br.width + "px";
+        thumb.style.transform = "translateX(" + (br.left - sr.left - 1) + "px)";
+        if (!animate) requestAnimationFrame(function () { thumb.style.transition = ""; });
+      }
+
+      /* elements that were hidden when the reveal observer ran still need showing */
+      function syncReveals() {
+        Array.prototype.slice.call(document.querySelectorAll(".reveal:not(.show)")).forEach(function (el) {
+          if (el.offsetParent === null) return;
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.94) el.classList.add("show");
+        });
+      }
+
+      function setTrack(t, first) {
+        if (!TRACKS[t]) t = "full";
+        TRACK = t;
+        var cfg = TRACKS[t];
+
+        body.setAttribute("data-track", t);
+        segs.forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-seg") === t ? "true" : "false"); });
+        if (note) note.innerHTML = cfg.note;
+        if (dl) { dl.setAttribute("href", cfg.pdf); if (dlLabel) dlLabel.textContent = cfg.pdfLabel; }
+        if (cdl) { cdl.setAttribute("href", cfg.pdf); if (cdlLabel) cdlLabel.textContent = cfg.contactLabel; }
+        document.title = cfg.title;
+
+        var h = document.querySelector("h1[data-split]");
+        if (h) { h.innerHTML = cfg.headline; splitHeadline(); }
+
+        renderMarquee();
+        startBoot();
+        startRoles();
+        renderRadar();
+        renderGauges();
+        runCounters();
+        runMeters();
+        moveThumb(!first);
+        syncReveals();
+        onScroll();
+
+        if (first) return;
+        try { localStorage.setItem("hh-track", t); } catch (e) {}
+        try {
+          var u = new URL(window.location.href);
+          if (t === "full") u.searchParams.delete("track"); else u.searchParams.set("track", t);
+          history.replaceState(null, "", u.pathname + u.search + u.hash);
+        } catch (e) {}
+        if (mainEl && !reduced) {
+          mainEl.classList.remove("swap");
+          void mainEl.offsetWidth;
+          mainEl.classList.add("swap");
+        }
+      }
+
+      segs.forEach(function (b, i) {
+        b.addEventListener("click", function () { setTrack(b.getAttribute("data-seg")); });
+        b.addEventListener("keydown", function (e) {
+          var d = e.key === "ArrowRight" ? 1 : (e.key === "ArrowLeft" ? -1 : 0);
+          if (!d) return;
+          e.preventDefault();
+          var next = segs[(i + d + segs.length) % segs.length];
+          next.focus();
+          setTrack(next.getAttribute("data-seg"));
+        });
+      });
+
+      window.addEventListener("resize", function () { moveThumb(false); });
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { moveThumb(false); }); }
+
+      setTrack(body.getAttribute("data-track") || "full", true);
+    })();
   })();
   </script>
 </body>
